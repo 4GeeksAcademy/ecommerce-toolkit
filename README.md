@@ -1,5 +1,8 @@
 # WebApp boilerplate with React JS and Flask API
 
+Sitemap - https://www.figma.com/file/UPpkjl40sF54ywNMUQDHLM/Store-Toolkit?type=whiteboard&node-id=1%3A2312&t=RvXAaWZSrfVKSCw5-1
+Views - https://balsamiq.cloud/sxioahp/ppf5ird/r936C
+
 Build web applications using React.js for the front end and python/flask for your backend API.
 
 - Documentation can be found here: https://start.4geeksacademy.com/starters/react-flask
