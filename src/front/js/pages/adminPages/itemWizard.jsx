@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 export const CreateItem = () => {
     const [name, setName] = useState("");
@@ -7,19 +7,41 @@ export const CreateItem = () => {
     const [price, setPrice] = useState("");
     const [stock, setStock] = useState("");
     const [imageUrl, setImageUrl] = useState("");
-    const [isVisibile, setIsVisible] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(name, category, description, price, stock, imageUrl, isVisibile)
-      // TODO: Handle form submission
+        let body = {
+            name: name,
+            category: category,
+            description: description,
+            price: price,
+            stock: stock,
+            imageUrl: imageUrl,
+            isVisible: isVisible
+        }
+        console.log(JSON.stringify(body));
+        console.log(process.env.BACKEND_URL + "api/newitem");
+        fetch(process.env.BACKEND_URL + "api/newitem", {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+            body: JSON.stringify(body)
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+                alert("Item created successfully");
+            }
+            )
     };
 
     return (
         <div className="container">
             <h2 className="mt-3">Create item</h2>
             <form onSubmit={handleSubmit}>
-                
+
                 <div className="mb-3">
                     <label className="form-label"> Name: </label>
                     <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} />
