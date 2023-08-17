@@ -9,5 +9,8 @@
     },
     "cSpell.words": [
         "backref"
-    ]
+    ],
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    }
 }

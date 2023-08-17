@@ -8,6 +8,7 @@ import { Signin } from "./pages/signin.jsx";
 import { CreateAccount } from "./pages/createAccount.jsx";
 
 import { CreateItem } from "./pages/adminPages/itemWizard.jsx";
+import { CreateUser } from "./pages/adminPages/userWizard.jsx";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -37,6 +38,7 @@ const Layout = () => {
                         <Route element={<CreateAccount />} path="/createaccount" />
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<CreateItem />} path="admin/item/wizard" />
+                        <Route element={<CreateUser />} path="admin/user/wizard" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
