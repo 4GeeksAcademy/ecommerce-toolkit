@@ -7,6 +7,8 @@ import { Home } from "./pages/home";
 import { Signin } from "./pages/signin.jsx";
 import { CreateAccount } from "./pages/createAccount.jsx";
 import { Checkout } from "./pages/checkout.jsx";
+import { CreateItem } from "./pages/adminPages/itemWizard.jsx";
+import { CreateUser } from "./pages/adminPages/userWizard.jsx";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -18,7 +20,7 @@ const Layout = () => {
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";
 
-    if(!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL/ >;
+    if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
     return (
         <div>
@@ -36,6 +38,8 @@ const Layout = () => {
                         <Route element={<Checkout/>} path="/checkout" />
                         <Route element={<CreateAccount />} path="/createaccount" />
                         <Route element={<h1>Not found!</h1>} />
+                        <Route element={<CreateItem />} path="admin/item/wizard" />
+                        <Route element={<CreateUser />} path="admin/user/wizard" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
