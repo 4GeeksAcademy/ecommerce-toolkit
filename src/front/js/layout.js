@@ -5,6 +5,7 @@ import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
 import { Signin } from "./pages/signin.jsx";
+import { CreateAccount } from "./pages/createAccount.jsx";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -31,7 +32,7 @@ const Layout = () => {
                         <Route element={<Signin />} path="/signin" />
                         <Route element={<h1>This is Sign Out</h1>} path="/signout" />
                         <Route element={<h1>This is shopingcart</h1>} path="/cart" />
-                        <Route element={<h1>This is Create Account</h1>} path="/createaccount" />
+                        <Route element={<CreateAccount />} path="/createaccount" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
