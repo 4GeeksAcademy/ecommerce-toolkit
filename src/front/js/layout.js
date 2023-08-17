@@ -6,7 +6,7 @@ import { BackendURL } from "./component/backendURL";
 import { Home } from "./pages/home";
 import { Signin } from "./pages/signin.jsx";
 import { CreateAccount } from "./pages/createAccount.jsx";
-
+import { Checkout } from "./pages/checkout.jsx";
 import { CreateItem } from "./pages/adminPages/itemWizard.jsx";
 import { CreateUser } from "./pages/adminPages/userWizard.jsx";
 import injectContext from "./store/appContext";
@@ -35,6 +35,7 @@ const Layout = () => {
                         <Route element={<Signin />} path="/signin" />
                         <Route element={<h1>This is Sign Out</h1>} path="/signout" />
                         <Route element={<h1>This is shopingcart</h1>} path="/cart" />
+                        <Route element={<Checkout/>} path="/checkout" />
                         <Route element={<CreateAccount />} path="/createaccount" />
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<CreateItem />} path="admin/item/wizard" />
