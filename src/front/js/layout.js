@@ -12,6 +12,7 @@ import { CreateUser } from "./pages/adminPages/userWizard.jsx";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
+import { AdminNavtabs } from "./component/adminNavtabs.jsx";
 import { Footer } from "./component/footer";
 
 //create your first component
@@ -35,11 +36,15 @@ const Layout = () => {
                         <Route element={<Signin />} path="/signin" />
                         <Route element={<h1>This is Sign Out</h1>} path="/signout" />
                         <Route element={<h1>This is shopingcart</h1>} path="/cart" />
-                        <Route element={<Checkout/>} path="/checkout" />
+                        <Route element={<Checkout />} path="/checkout" />
                         <Route element={<CreateAccount />} path="/createaccount" />
                         <Route element={<h1>Not found!</h1>} />
+                        <Route element={<><AdminNavtabs /> <h1>This is the items module</h1></>} path="admin/item" />
                         <Route element={<CreateItem />} path="admin/item/wizard" />
-                        <Route element={<CreateUser />} path="admin/user/wizard" />
+                        <Route element={<><AdminNavtabs /> <h1>This is the costumers module</h1></>} path="admin/costumers" />
+                        <Route element={<CreateUser />} path="admin/costumers/wizard" />
+                        <Route element={<><AdminNavtabs /> <h1>This is the sales module</h1></>} path="admin/sales" />
+                        <Route element={<><AdminNavtabs /> <h1>This is the todo module</h1></>} path="admin/todo" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
