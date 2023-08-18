@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export const Checkout = () => {
@@ -16,16 +16,16 @@ export const Checkout = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-      // TODO: Handle form submission
+        // TODO: Handle form submission
     };
 
     return (
-        <div className="container">
+        <div className="container my-3">
             <form onSubmit={handleSubmit}>
                 <div className="row gx-5">
                     <div className="col-md-7">
-                        <div className="row mb-4"> 
-                            <h4 className="mt-3">Delivery Information</h4>                                              
+                        <div className="row mb-4">
+                            <h4 className="mt-3">Delivery Information</h4>
                             <div>
                                 <div className="row">
                                     <div className="col-md-6">
@@ -60,19 +60,19 @@ export const Checkout = () => {
                                         <label className="form-label"> ZIP: </label>
                                         <input type="text" className="form-control" value={zip} onChange={(e) => setZip(e.target.value)} />
                                     </div>
-                                </div>                                                   
-                            </div>                            
-                        </div>  
-                        <hr className="mt-0 line"></hr> 
-                        <div className="row mb-3"> 
-                            <h4 className="mt-3">Payment Detail</h4>                                              
+                                </div>
+                            </div>
+                        </div>
+                        <hr className="mt-0 line"></hr>
+                        <div className="row mb-3">
+                            <h4 className="mt-3">Payment Detail</h4>
                             <div>
                                 <div className="row">
                                     <div className="col">
                                         <label className="form-label"> Email: </label>
                                         <input type="text" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} />
                                     </div>
-                                    
+
                                 </div>
                                 <div className="row">
                                     <div className="col">
@@ -81,9 +81,9 @@ export const Checkout = () => {
                                             <span className="input-group-text"><i className="fa fa-credit-card"></i></span>
                                             <input type="text" className="form-control" value={cardNumber} placeholder="0000 0000 0000 0000" onChange={(e) => setCardNumber(e.target.value)} />
                                         </div>
-                                        
+
                                     </div>
-                                    
+
                                 </div>
                                 <div className="row">
                                     <div className="col-md-6">
@@ -100,43 +100,70 @@ export const Checkout = () => {
                                             <input type="text" className="form-control" value={cvv} placeholder="000" onChange={(e) => setCvv(e.target.value)} />
                                         </div>
                                     </div>
-                                    
-                                </div>                                                   
+
+                                </div>
                             </div>
-                        </div> 
-                        
+                        </div>
+
                     </div>
                     <div className="col-md-5">
-                        <h4 className="mt-3">Order Summary</h4> 
-                        <div className="row">
-                            <div className="col-sm-4">
-                                <img className="img-fluid" src="//c1.staticflickr.com/1/466/19681864394_c332ae87df_t.jpg"/>
+                        <h4 className="mt-3">Order Summary</h4>
+                        <div className="row mx-2 mb-2 align-items-center">
+                            <div className="col-xl-3 text-center">
+                                <img className="img-fluid" src="//c1.staticflickr.com/1/466/19681864394_c332ae87df_t.jpg" />
                             </div>
-                            <div className="col-sm-8">
-                                <div className="row">
-                                    <div className="col-sm-5">
-                                        <div className="col-xs-12">Product name</div>
-                                        <div className="col-xs-12 text-secondary"><h6><span>$</span>00.00</h6></div>
+                            <div className="col-xl-7">
+                                <div className="row mt-3 align-items-center">
+                                    <div className="col-lg-7">
+                                        <div className="col-lg-12 text-wrap">Product name xxxxxxxxxxxxxxxxxx xxxxxxxxxx xxxxxxxxxx</div>
+                                        <div className="col-12 text-primary text-opacity-50"><h6><span>$</span>00.00</h6></div>
                                     </div>
-                                    <div className="col-sm-4 text-right">
-                                        <h6><span>$</span>25.00</h6>
-                                    </div>   
-                                    <div className="col-sm-3">
-                                    <i class="fa-solid fa-trash fa-xl"></i>
-                                    </div>   
-                                </div>                                                
+                                    <div className="col-xl-5">
+                                        <div className="form-outline" >
+                                            <input min="0" type="number" id="typeNumber" className="form-control text-center" />
+
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
-                            
-                           
+                            <div className="col-xl-2 text-center">
+                                <button type="button" className="btn btn-outline ">
+                                    <i className="fa-solid fa-trash fa-xl"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <hr></hr>
+                        <div className="row mx-2">
+                            <div className="col-6">
+                                <strong>Subtotal</strong>
+                                <br></br>
+                                <small >Shipping</small>
+
+                            </div>
+                            <div className="col-6">
+                                <div className="text-end"><span>$</span><span>00.00</span></div>
+                                <div className="text-end"><span>-</span></div>
+                            </div>
+                        </div>
+                        <hr ></hr>
+                        <div className="row mx-2">
+                            <div className="col-6">
+                                <strong>Order Total</strong>
+                            </div>
+                            <div className="col-6">
+                                <div className="text-end text-primary text-opacity-50 fw-bold"><span>$</span><span>00.00</span></div>
+                            </div>
+                        </div>
+                        <div className="container d-flex justify-content-center my-3">
+                            <button type="submit" className="btn bg-primary-subtle">Confirm Order</button>
                         </div>
                     </div>
-                </div>  
-                <div className="container d-flex justify-content-center mb-3">
-                                <button type="submit" className="btn bg-primary-subtle">Create account</button>
-                </div>    
+                </div>
+
             </form>
-            
-          
+
+
         </div>
 
     );
