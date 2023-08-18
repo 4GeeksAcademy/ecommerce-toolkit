@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
@@ -39,12 +39,16 @@ const Layout = () => {
                         <Route element={<Checkout />} path="/checkout" />
                         <Route element={<CreateAccount />} path="/createaccount" />
                         <Route element={<h1>Not found!</h1>} />
-                        <Route element={<><AdminNavtabs /> <h1>This is the items module</h1></>} path="admin/item" />
-                        <Route element={<CreateItem />} path="admin/item/wizard" />
-                        <Route element={<><AdminNavtabs /> <h1>This is the costumers module</h1></>} path="admin/costumers" />
-                        <Route element={<CreateUser />} path="admin/costumers/wizard" />
-                        <Route element={<><AdminNavtabs /> <h1>This is the sales module</h1></>} path="admin/sales" />
-                        <Route element={<><AdminNavtabs /> <h1>This is the todo module</h1></>} path="admin/todo" />
+
+                        <Route path="/admin/" element={<> <AdminNavtabs /> <Outlet /> </>}>
+                            <Route element={<h1>This is the items module</h1>} path="item" />
+                            <Route element={<CreateItem />} path="item/wizard" />
+                            <Route element={<h1>This is the costumers module</h1>} path="costumers" />
+                            <Route element={<CreateUser />} path="costumers/wizard" />
+                            <Route element={<h1>This is the sales module</h1>} path="sales" />
+                            <Route element={<h1>This is the todo module</h1>} path="todo" />
+                        </Route>
+
                     </Routes>
                     <Footer />
                 </ScrollToTop>
