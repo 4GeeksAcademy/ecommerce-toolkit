@@ -9,6 +9,7 @@ import { CreateAccount } from "./pages/createAccount.jsx";
 import { Checkout } from "./pages/checkout.jsx";
 import { CreateItem } from "./pages/adminPages/itemWizard.jsx";
 import { CreateUser } from "./pages/adminPages/userWizard.jsx";
+import { Cart } from "./pages/cart.jsx";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -35,7 +36,7 @@ const Layout = () => {
                         <Route element={<h1>This is search</h1>} path="/search" />
                         <Route element={<Signin />} path="/signin" />
                         <Route element={<h1>This is Sign Out</h1>} path="/signout" />
-                        <Route element={<h1>This is shopingcart</h1>} path="/cart" />
+                        <Route element={<Cart/>} path="/cart" />
                         <Route element={<Checkout />} path="/checkout" />
                         <Route element={<CreateAccount />} path="/createaccount" />
                         <Route element={<h1>Not found!</h1>} />

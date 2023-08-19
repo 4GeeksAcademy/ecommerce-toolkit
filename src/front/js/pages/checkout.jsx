@@ -19,6 +19,7 @@ export const Checkout = () => {
         // TODO: Handle form submission
     };
 
+    //logic get number of items from flux
     return (
         <div className="container my-3">
             <form onSubmit={handleSubmit}>
@@ -155,7 +156,7 @@ export const Checkout = () => {
                                 <div className="text-end text-primary text-opacity-50 fw-bold"><span>$</span><span>00.00</span></div>
                             </div>
                         </div>
-                        <div className="container d-flex justify-content-center my-3">
+                        <div className="d-grid my-3">
                             <button type="submit" className="btn bg-primary-subtle">Confirm Order</button>
                         </div>
                     </div>
