@@ -25,7 +25,7 @@ export const ItemList = () => {
                         <th scope="col">Description</th>
                         <th scope="col">Price</th>
                         <th scope="col">Stock</th>
-                        <th scope="col">Image URL</th>
+                        <th scope="col">Image</th>
                         <th scope="col">Visible</th>
                     </tr>
                 </thead>
@@ -38,7 +38,7 @@ export const ItemList = () => {
                             <td>{item.description}</td>
                             <td>{item.price}</td>
                             <td>{item.stock}</td>
-                            <td>{item.image_url}</td>
+                            <td><img src={item.image_url} width={"50px"} className="img-thumbnail" /></td>
                             <td>{String(item.visible)}</td>
                         </tr>
                     ))}
