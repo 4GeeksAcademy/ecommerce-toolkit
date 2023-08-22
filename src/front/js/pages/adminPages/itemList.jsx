@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export const ItemList = () => {
 
@@ -15,7 +16,16 @@ export const ItemList = () => {
 
     return (
         <div className="container">
-            <h2 className="mt-3">Item list</h2>
+            <div className="row">
+                <div className="col-6">
+                    <h2 className="mt-3">Item list</h2>
+                </div>
+                <div className="col-6 d-flex justify-content-end align-items-center">
+                    <button type="button" className="btn btn-primary">
+                        <Link to={"/admin/item/wizard"} className="text-light text-decoration-none fw-bold">Create Item</Link>
+                    </button>
+                </div>
+            </div>
             <table className="table table-striped">
                 <thead>
                     <tr>
