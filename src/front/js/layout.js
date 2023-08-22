@@ -10,6 +10,7 @@ import { Checkout } from "./pages/checkout.jsx";
 import { CreateItem } from "./pages/adminPages/itemWizard.jsx";
 import { CreateUser } from "./pages/adminPages/userWizard.jsx";
 import { Cart } from "./pages/cart.jsx";
+import { Wishlist } from "./pages/wishlist.jsx";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -32,7 +33,7 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<h1>This is category</h1>} path="/category" />
-                        <Route element={<h1>This is wishlist</h1>} path="/wishlist" />
+                        <Route element={<Wishlist/>} path="/wishlist" />
                         <Route element={<h1>This is search</h1>} path="/search" />
                         <Route element={<Signin />} path="/signin" />
                         <Route element={<h1>This is Sign Out</h1>} path="/signout" />
