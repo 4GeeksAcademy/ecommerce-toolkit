@@ -34,3 +34,9 @@ def handle_items():
     items = Item.query.all()
     items = list(map(lambda x: x.serialize(), items))
     return jsonify(items), 200
+
+
+@api.route('/item/<int:id>', methods=['GET'])
+def handle_item(id):
+    item = Item.query.get(id)
+    return jsonify(item.serialize()), 200
