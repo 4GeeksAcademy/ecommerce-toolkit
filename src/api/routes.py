@@ -17,11 +17,20 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
+
 @api.route('/newitem', methods=['POST'])
 def handle_newitem():
     body = request.get_json()
-    new_item = Item(name=body["name"], category=body["category"], description=body["description"], price=body["price"], stock=body["stock"], image_url=body["imageUrl"], visible=body["isVisible"])
+    new_item = Item(name=body["name"], category=body["category"], description=body["description"],
+                    price=body["price"], stock=body["stock"], image_url=body["imageUrl"], visible=body["isVisible"])
     db.session.add(new_item)
     db.session.commit()
     print(body)
     return jsonify("The new item was added"), 200
+
+
+@api.route('/items', methods=['GET'])
+def handle_items():
+    items = Item.query.all()
+    items = list(map(lambda x: x.serialize(), items))
+    return jsonify(items), 200

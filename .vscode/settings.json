@@ -12,5 +12,8 @@
     ],
     "[javascriptreact]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
     }
 }

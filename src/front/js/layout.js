@@ -7,6 +7,7 @@ import { Home } from "./pages/home";
 import { Signin } from "./pages/signin.jsx";
 import { CreateAccount } from "./pages/createAccount.jsx";
 import { Checkout } from "./pages/checkout.jsx";
+import { ItemList } from "./pages/adminPages/itemList.jsx";
 import { CreateItem } from "./pages/adminPages/itemWizard.jsx";
 import { CreateUser } from "./pages/adminPages/userWizard.jsx";
 import { Cart } from "./pages/cart.jsx";
@@ -37,13 +38,13 @@ const Layout = () => {
                         <Route element={<h1>This is search</h1>} path="/search" />
                         <Route element={<Signin />} path="/signin" />
                         <Route element={<h1>This is Sign Out</h1>} path="/signout" />
-                        <Route element={<Cart/>} path="/cart" />
+                        <Route element={<Cart />} path="/cart" />
                         <Route element={<Checkout />} path="/checkout" />
                         <Route element={<CreateAccount />} path="/createaccount" />
                         <Route element={<h1>Not found!</h1>} />
 
                         <Route path="/admin/" element={<> <AdminNavtabs /> <Outlet /> </>}>
-                            <Route element={<h1>This is the items module</h1>} path="item" />
+                            <Route element={<ItemList />} path="item" />
                             <Route element={<CreateItem />} path="item/wizard" />
                             <Route element={<h1>This is the costumers module</h1>} path="costumers" />
                             <Route element={<CreateUser />} path="costumers/wizard" />
