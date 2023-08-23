@@ -9,6 +9,7 @@ import { CreateAccount } from "./pages/createAccount.jsx";
 import { Checkout } from "./pages/checkout.jsx";
 import { ItemList } from "./pages/adminPages/itemList.jsx";
 import { CreateItem } from "./pages/adminPages/itemWizard.jsx";
+import { ModifyItem } from "./pages/adminPages/modifyWizard.jsx";
 import { CreateUser } from "./pages/adminPages/userWizard.jsx";
 import { Cart } from "./pages/cart.jsx";
 import { Wishlist } from "./pages/wishlist.jsx";
@@ -34,7 +35,7 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<h1>This is category</h1>} path="/category" />
-                        <Route element={<Wishlist/>} path="/wishlist" />
+                        <Route element={<Wishlist />} path="/wishlist" />
                         <Route element={<h1>This is search</h1>} path="/search" />
                         <Route element={<Signin />} path="/signin" />
                         <Route element={<h1>This is Sign Out</h1>} path="/signout" />
@@ -46,6 +47,7 @@ const Layout = () => {
                         <Route path="/admin/" element={<> <AdminNavtabs /> <Outlet /> </>}>
                             <Route element={<ItemList />} path="item" />
                             <Route element={<CreateItem />} path="item/wizard" />
+                            <Route element={<ModifyItem />} path="item/modify/:itemId" />
                             <Route element={<h1>This is the costumers module</h1>} path="costumers" />
                             <Route element={<CreateUser />} path="costumers/wizard" />
                             <Route element={<h1>This is the sales module</h1>} path="sales" />

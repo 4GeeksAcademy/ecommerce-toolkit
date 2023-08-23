@@ -40,3 +40,17 @@ def handle_items():
 def handle_item(id):
     item = Item.query.get(id)
     return jsonify(item.serialize()), 200
+
+
+@api.route('/item/<int:id>', methods=['PUT'])
+def handle_update_item(id):
+    body = request.get_json()
+    item = Item.query.get(id)
+    item.name = body["name"]
+    item.category = body["category"]
+    item.description = body["description"]
+    item.price = body["price"]
+    item.stock = body["stock"]
+    item.visible = body["isVisible"]
+    db.session.commit()
+    return jsonify("The item was updated"), 200
