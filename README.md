@@ -1,8 +1,17 @@
 # WebApp boilerplate with React JS and Flask API
 
--Sitemap - https://www.figma.com/file/UPpkjl40sF54ywNMUQDHLM/Store-Toolkit?type=whiteboard&node-id=1%3A2312&t=RvXAaWZSrfVKSCw5-1
--Views - https://balsamiq.cloud/sxioahp/ppf5ird/r936C
--Database Schema - https://dbdiagram.io/d/64dd6ca902bd1c4a5ee75c9b
+- Sitemap https://www.figma.com/file/UPpkjl40sF54ywNMUQDHLM/Store-Toolkit?type=whiteboard&node-id=1%3A2312&t=RvXAaWZSrfVKSCw5-1
+- Views https://balsamiq.cloud/sxioahp/ppf5ird/r936C
+- Database Schema https://dbdiagram.io/d/64dd6ca902bd1c4a5ee75c9b
+
+API Routes
+- '/newitem', method: POST, body: item info, action: create new item
+- '/items', method: GET, action: get list of all items
+- '/item/item_id', methods: 'GET', action: get specific item by id
+- '/item/item_id', methods: 'PUT', body: item info, action: modify item
+
+Flask commands
+- "flask insert-items", action: inserts predefined items
 
 Build web applications using React.js for the front end and python/flask for your backend API.
 
