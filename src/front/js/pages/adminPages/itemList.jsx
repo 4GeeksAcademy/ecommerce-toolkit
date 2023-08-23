@@ -37,6 +37,7 @@ export const ItemList = () => {
                         <th scope="col">Stock</th>
                         <th scope="col">Image</th>
                         <th scope="col">Visible</th>
+                        <th scope="col">Modify</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,6 +51,7 @@ export const ItemList = () => {
                             <td>{item.stock}</td>
                             <td><img src={item.image_url} width={"50px"} className="img-thumbnail" /></td>
                             <td>{String(item.visible)}</td>
+                            <td><Link to={"/admin/item/modify/:" + item.id} className="text-decoration-none"><i className="bi bi-pencil-fill" style={{ fontSize: "1.5rem" }}></i></Link></td>
                         </tr>
                     ))}
                 </tbody>
