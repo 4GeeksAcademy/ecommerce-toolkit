@@ -10,37 +10,72 @@ export const ModifyItem = () => {
     const [imageUrl, setImageUrl] = useState("");
     const [isVisible, setIsVisible] = useState(false);
 
-    let { id } = useParams();
+    let params = useParams();
+    let itemId = params.itemId.substring(1);
     useEffect(() => {
-
+        fetchData();
     }, []);
+
+    const fetchData = async () => {
+        let url = process.env.BACKEND_URL + "api/item/" + itemId;
+        console.log("url", url);
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data.visible);
+                setName(data.name);
+                setCategory(data.category);
+                const selectCategory = document.getElementById("selectCategory");
+                if (data.category === "Books") {
+                    selectCategory.selectedIndex = 0;
+                } else if (data.category === "Toys") {
+                    selectCategory.selectedIndex = 1;
+                } else if (data.category === "Music") {
+                    selectCategory.selectedIndex = 2;
+                }
+                setDescription(data.description);
+                setPrice(data.price);
+                setStock(data.stock);
+                setImageUrl(data.imageUrl);
+                setIsVisible(data.visible);
+                const checkBox = document.getElementById("visibleCheck");
+                if (data.visible) {
+                    checkBox.checked = true;
+                } else {
+                    checkBox.checked = false;
+                }
+            });
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        let body = {
+        const url = process.env.BACKEND_URL + "api/item/" + itemId;
+        const headers = {
+            "Content-Type": "application/json",
+        };
+        const body = {
             name: name,
             category: category,
             description: description,
             price: price,
             stock: stock,
-            imageUrl: imageUrl,
-            isVisible: isVisible
-        }
-        console.log(JSON.stringify(body));
-        console.log(process.env.BACKEND_URL + "api/newitem");
-        fetch(process.env.BACKEND_URL + "api/newitem", {
-            headers: {
-                "Content-Type": "application/json"
-            },
-            method: "POST",
-            body: JSON.stringify(body)
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("Success:", data);
-                alert("Item created successfully");
+            isVisible: isVisible,
+        };
+        const options = {
+            method: "PUT",
+            headers,
+            body: JSON.stringify(body),
+        };
+
+        fetch(url, options)
+            .then((response) => {
+                if (response.status === 200) {
+                    alert("Item modified successfully");
+                } else {
+                    alert("Error modifying item");
+                }
             }
-            )
+            );
     };
 
     return (
@@ -55,8 +90,8 @@ export const ModifyItem = () => {
 
                 <div className="mb-3">
                     <label className="form-label"> Category: </label>
-                    <select className="form-select" aria-label="Default select example" onChange={(e) => setCategory(e.target.value)}>
-                        <option defaultValue="Books">Books</option>
+                    <select className="form-select" id="selectCategory" aria-label="Default select example" onChange={(e) => setCategory(e.target.value)}>
+                        <option value="Books">Books</option>
                         <option value="Toys">Toys</option>
                         <option value="Music">Music</option>
                     </select>
@@ -79,11 +114,11 @@ export const ModifyItem = () => {
 
                 <div className="mb-3 form-check">
                     <label className="form-check-label"> Is Visible </label>
-                    <input type="checkbox" className="form-check-input" onChange={(e) => setIsVisible(e.target.checked)} />
+                    <input id="visibleCheck" type="checkbox" className="form-check-input" onChange={(e) => setIsVisible(e.target.checked)} />
                 </div>
 
                 <div className="container d-flex justify-content-center mb-3">
-                    <button type="submit" className="btn bg-primary-subtle">Create item</button>
+                    <button type="submit" className="btn bg-primary-subtle">Modify item</button>
                 </div>
 
             </form>
