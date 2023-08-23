@@ -11,6 +11,7 @@ import { CreateItem } from "./pages/adminPages/itemWizard.jsx";
 import { CreateUser } from "./pages/adminPages/userWizard.jsx";
 import { Cart } from "./pages/cart.jsx";
 import { Wishlist } from "./pages/wishlist.jsx";
+import { Product } from "./pages/product.jsx";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -32,6 +33,7 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
+                        <Route element={<Product/>} path="/product" />
                         <Route element={<h1>This is category</h1>} path="/category" />
                         <Route element={<Wishlist/>} path="/wishlist" />
                         <Route element={<h1>This is search</h1>} path="/search" />
