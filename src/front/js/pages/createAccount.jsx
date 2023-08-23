@@ -1,5 +1,4 @@
-import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 
 export const CreateAccount = () => {
     const [name, setName] = useState("");
@@ -9,14 +8,40 @@ export const CreateAccount = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-      // TODO: Handle form submission
+        if (password != confirmPassword) {
+            alert("Passwords don't match");
+            return;
+        }
+        const data = {
+            name: name,
+            email: email,
+            password: password
+        };
+        let url = String(process.env.BACKEND_URL + "api/newcostumer");
+        let options = {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        };
+        fetch(url, options)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+                alert("Account created successfully");
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                alert("Error creating account");
+            });
     };
 
     return (
         <div className="container">
             <h2 className="mt-3">Create account</h2>
             <form onSubmit={handleSubmit}>
-                
+
                 <div className="mb-3">
                     <label className="form-label"> Name: </label>
                     <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} />
@@ -26,7 +51,7 @@ export const CreateAccount = () => {
                     <label className="form-label"> Email: </label>
                     <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} />
                 </div>
-                
+
                 <div className="mb-3">
                     <label className="form-label"> Password: </label>
                     <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} />
@@ -36,7 +61,7 @@ export const CreateAccount = () => {
                     <label className="form-label"> Confirm Password: </label>
                     <input type="password" className="form-control" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                 </div>
-                
+
                 <div className="container d-flex justify-content-center mb-3">
                     <button type="submit" className="btn bg-primary-subtle">Create account</button>
                 </div>
