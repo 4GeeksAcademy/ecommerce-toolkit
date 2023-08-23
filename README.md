@@ -9,6 +9,7 @@ API Routes
 - '/items', method: GET, action: get list of all items
 - '/item/item_id', methods: 'GET', action: get specific item by id
 - '/item/item_id', methods: 'PUT', body: item info, action: modify item
+- '/newcostumer', methods: 'POST', body: customer info, action: create new costumer
 
 Flask commands
 - "flask insert-items", action: inserts predefined items
