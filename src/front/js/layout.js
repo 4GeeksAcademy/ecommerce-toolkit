@@ -44,7 +44,7 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
-                        <Route element={<Product />} path="/product/:theid" />
+                        <Route element={<Product />} path="/product/:itemId" />
                         <Route element={<h1>This is category</h1>} path="/category" />
                         <Route element={<h1>This is search</h1>} path="/search" />
                         <Route element={<Signin />} path="/signin" />
