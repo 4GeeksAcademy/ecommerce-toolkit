@@ -31,6 +31,18 @@ def handle_newcostumer():
     print(body)
     return jsonify("The new costumer was added"), 200
 
+@api.route('/costumers', methods=['GET'])
+def handle_costumers():
+    costumers = Costumer.query.all()
+    costumers = list(map(lambda x: x.serialize(), costumers))
+    return jsonify(costumers), 200
+
+@api.route('/costumeradmin/<int:id>', methods=['PUT'])
+def handle_costumer_admin(id):
+    costumer = Costumer.query.get(id)
+    costumer.is_admin = True
+    db.session.commit()
+    return jsonify("The costumer was updated"), 200
 
 @api.route('/signin', methods=['POST'])
 def handle_signin():
