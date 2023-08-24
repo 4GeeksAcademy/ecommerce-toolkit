@@ -2,10 +2,31 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 	const user = store.user;
+	const navigate = useNavigate();
+
+	function handleLogout() {
+		actions.logout();
+		if (user !== null) {
+			alert("You have been logged out.");
+			navigate("/");
+		} else {
+			alert("You are not logged in.");
+		}
+	}
+
+	function handleSignin() {
+		if (user === null) {
+			navigate("/signin");
+		} else {
+			alert("You are already logged in.");
+		}
+	}
+
 	return (
 		<nav className="navbar navbar-expand-lg bg-primary-subtle">
 			<div className="container-fluid">
@@ -28,13 +49,13 @@ export const Navbar = () => {
 							<Link className="nav-link" to={"/cart"}>Shopping Cart</Link>
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link text-success" to={"/signin"}>Sign In</Link>
+							<button type="button" className="btn btn-success ms-2" onClick={handleSignin}>Sign In</button>
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link text-danger" to={"/signout"}>Sign Out</Link>
+							<button type="button" className="btn btn-danger ms-2" onClick={handleLogout}>Sign Out</button>
 						</li>
 						<li className="d-flex align-items-center">
-							{user === null ? "" : <i className="fas fa-user-circle fa-2x text-success"></i>}
+							{user === null ? "" : <i className="fas fa-user-circle fa-2x text-success ms-2"></i>}
 						</li>
 					</ul>
 				</div>

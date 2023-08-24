@@ -51,6 +51,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			setUser: (userValue, adminValue) => {
 				setStore({ user: userValue, admin: adminValue })
+			},
+			logout: () => {
+				setStore({ user: null, admin: false })
 			}
 		}
 	};
