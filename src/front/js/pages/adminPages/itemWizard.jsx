@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export const CreateItem = () => {
     const [name, setName] = useState("");
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState("Books");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [stock, setStock] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        let url = "https://random.imagecdn.app/300/300";
+        fetch(url)
+            .then((response) => String(response.url))
+            .then((data) => {
+                setImageUrl(String(data));
+            });
+    }, []);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -50,9 +59,9 @@ export const CreateItem = () => {
                 <div className="mb-3">
                     <label className="form-label"> Category: </label>
                     <select className="form-select" aria-label="Default select example" onChange={(e) => setCategory(e.target.value)}>
-                        <option selected value="first category">One</option>
-                        <option value="second category">Two</option>
-                        <option value="Third category">Three</option>
+                        <option defaultValue="Books">Books</option>
+                        <option value="Toys">Toys</option>
+                        <option value="Music">Music</option>
                     </select>
                 </div>
 
@@ -69,11 +78,6 @@ export const CreateItem = () => {
                 <div className="mb-3">
                     <label className="form-label"> Stock: </label>
                     <input type="number" className="form-control" value={stock} onChange={(e) => setStock(e.target.value)} />
-                </div>
-
-                <div className="mb-3">
-                    <label className="form-label"> Image URL: </label>
-                    <input type="text" className="form-control" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
                 </div>
 
                 <div className="mb-3 form-check">
