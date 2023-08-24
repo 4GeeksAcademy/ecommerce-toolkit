@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
+import { AuthProvider } from "./component/authProvider";
 import { Signin } from "./pages/signin.jsx";
 import { CreateAccount } from "./pages/createAccount.jsx";
 import { Checkout } from "./pages/checkout.jsx";
@@ -14,6 +15,7 @@ import { CreateUser } from "./pages/adminPages/userWizard.jsx";
 import { Cart } from "./pages/cart.jsx";
 import { Wishlist } from "./pages/wishlist.jsx";
 import injectContext from "./store/appContext";
+import { Context } from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { AdminNavtabs } from "./component/adminNavtabs.jsx";
@@ -27,6 +29,11 @@ const Layout = () => {
 
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
+    const { store, actions } = useContext(Context);
+    const [user, setUser] = useState(store.user);
+    const [admin, setAdmin] = useState(store.admin);
+    console.log(user);
+
     return (
         <div>
             <BrowserRouter basename={basename}>
@@ -35,7 +42,7 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<h1>This is category</h1>} path="/category" />
-                        <Route element={<Wishlist />} path="/wishlist" />
+                        <Route element={<AuthProvider> <Wishlist /> </AuthProvider>} path="/wishlist" />
                         <Route element={<h1>This is search</h1>} path="/search" />
                         <Route element={<Signin />} path="/signin" />
                         <Route element={<h1>This is Sign Out</h1>} path="/signout" />
