@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Context } from "../store/appContext";
 
 export const Navbar = () => {
+	const { store, actions } = useContext(Context);
+	const user = store.user;
 	return (
 		<nav className="navbar navbar-expand-lg bg-primary-subtle">
 			<div className="container-fluid">
@@ -29,7 +33,9 @@ export const Navbar = () => {
 						<li className="nav-item">
 							<Link className="nav-link text-danger" to={"/signout"}>Sign Out</Link>
 						</li>
-
+						<li className="d-flex align-items-center">
+							{user === null ? "" : <i className="fas fa-user-circle fa-2x text-success"></i>}
+						</li>
 					</ul>
 				</div>
 			</div>

@@ -20,13 +20,29 @@ def handle_hello():
 
 @api.route('/newcostumer', methods=['POST'])
 def handle_newcostumer():
+    from app import bcrypt
     body = request.get_json()
+    password_hash = bcrypt.generate_password_hash(
+        body["password"]).decode("utf-8")
     new_costumer = Costumer(name=body["name"], email=body["email"],
-                            password=body["password"], is_admin=False)
+                            password=password_hash, is_admin=False)
     db.session.add(new_costumer)
     db.session.commit()
     print(body)
     return jsonify("The new costumer was added"), 200
+
+
+@api.route('/signin', methods=['POST'])
+def handle_signin():
+    from app import bcrypt
+    body = request.get_json()
+    costumer = Costumer.query.filter_by(email=body["email"]).first()
+    if costumer is None:
+        return jsonify("The email doesn't exist"), 400
+    if bcrypt.check_password_hash(costumer.password, body["password"]):
+        return jsonify(costumer.serialize()), 200
+    else:
+        return jsonify("The password is incorrect"), 400
 
 
 @api.route('/newitem', methods=['POST'])
