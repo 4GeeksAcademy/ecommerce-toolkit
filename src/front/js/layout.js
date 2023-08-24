@@ -8,6 +8,7 @@ import { AuthProvider } from "./component/authProvider";
 import { Signin } from "./pages/signin.jsx";
 import { CreateAccount } from "./pages/createAccount.jsx";
 import { Checkout } from "./pages/checkout.jsx";
+import { AdminAuthProvider } from "./component/adminAuthProvider";
 import { ItemList } from "./pages/adminPages/itemList.jsx";
 import { CreateItem } from "./pages/adminPages/itemWizard.jsx";
 import { ModifyItem } from "./pages/adminPages/modifyWizard.jsx";
@@ -42,18 +43,19 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
-                        <Route element={<Product/>} path="/product/:theid" />
+                        <Route element={<Product />} path="/product/:theid" />
                         <Route element={<h1>This is category</h1>} path="/category" />
-                        <Route element={<AuthProvider> <Wishlist /> </AuthProvider>} path="/wishlist" />
                         <Route element={<h1>This is search</h1>} path="/search" />
                         <Route element={<Signin />} path="/signin" />
-                        <Route element={<h1>This is Sign Out</h1>} path="/signout" />
-                        <Route element={<Cart />} path="/cart" />
-                        <Route element={<Checkout />} path="/checkout" />
                         <Route element={<CreateAccount />} path="/createaccount" />
+
+                        <Route element={<AuthProvider> <Wishlist /> </AuthProvider>} path="/wishlist" />
+                        <Route element={<AuthProvider> <Cart /> </AuthProvider>} path="/cart" />
+                        <Route element={<AuthProvider> <Checkout /> </AuthProvider>} path="/checkout" />
+
                         <Route element={<h1>Not found!</h1>} />
 
-                        <Route path="/admin/" element={<> <AdminNavtabs /> <Outlet /> </>}>
+                        <Route path="/admin/" element={<AdminAuthProvider> <AdminNavtabs /> <Outlet /> </AdminAuthProvider>}>
                             <Route element={<ItemList />} path="item" />
                             <Route element={<CreateItem />} path="item/wizard" />
                             <Route element={<ModifyItem />} path="item/modify/:itemId" />

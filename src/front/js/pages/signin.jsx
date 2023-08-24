@@ -30,7 +30,7 @@ export const Signin = () => {
                 if (typeof (data) == "string")
                     alert(data);
                 else {
-                    actions.setUser(data.id, data.admin);
+                    actions.setUser(data.id, data.is_admin);
                     alert("Sign in successful");
                     return navigate("/");
                 }

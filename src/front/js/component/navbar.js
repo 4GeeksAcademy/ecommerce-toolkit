@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 	const user = store.user;
+	const admin = store.admin;
+	console.log(admin);
 	const navigate = useNavigate();
 
 	function handleLogout() {
@@ -24,6 +26,14 @@ export const Navbar = () => {
 			navigate("/signin");
 		} else {
 			alert("You are already logged in.");
+		}
+	}
+
+	function handleAdmin() {
+		if (admin == true) {
+			navigate("/admin");
+		} else {
+			alert("You not logged in as admin.");
 		}
 	}
 
@@ -56,6 +66,9 @@ export const Navbar = () => {
 						</li>
 						<li className="d-flex align-items-center">
 							{user === null ? "" : <i className="fas fa-user-circle fa-2x text-success ms-2"></i>}
+						</li>
+						<li className="d-flex align-items-center">
+							{!admin ? "" : <button type="button" className="btn btn-secondary ms-2" onClick={handleAdmin}>Admin</button>}
 						</li>
 					</ul>
 				</div>
