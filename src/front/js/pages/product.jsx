@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { RelatedProducts } from "../component/relatedProducts.jsx";
+import { Context } from "../store/appContext";
 
 export const Product = () => {
     const [name, setName] = useState("");
@@ -10,7 +12,9 @@ export const Product = () => {
     const [stock, setStock] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const itemId = useParams().itemId.substring(1);
-    console.log("image url", imageUrl);
+    const [quantity, setQuantity] = useState(1);
+    const { store, actions } = useContext(Context);
+    const user = store.user;
 
     useEffect(() => {
         fetchData();
@@ -31,9 +35,31 @@ export const Product = () => {
             });
     };
 
-    const handleAddToCart = (event) => {
-
-        // TODO: Handle add to cart
+    const addToCart = () => {
+        if (user == null) {
+            alert("Please login to add items to cart");
+            return;
+        }
+        let url = process.env.BACKEND_URL + "api/addcartitem";
+        let data = {
+            itemId: itemId,
+            quantity: quantity,
+            costumerId: user
+        };
+        let options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        };
+        fetch(url, options)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+                alert("Item added to cart");
+            }
+            );
     };
 
 
@@ -74,10 +100,16 @@ export const Product = () => {
                             <p>{description}</p>
 
                         </div>
+                        <div className="col-md-12 d-flex flex-row mb-3">
+
+                            <p className="my-auto mx-2">Qty:</p>
+                            <input type="number" className="form-control" min="1" max={stock} value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+
+                        </div>
 
                         <div className="row p-4">
                             <div className="col-md-9 px-5 d-grid">
-                                <button type="button" className="btn bg-primary-subtle " >
+                                <button type="button" className="btn bg-primary-subtle " onClick={addToCart}>
                                     <i className="fa-solid fa-cart-shopping me-1"></i>
                                     Add to cart
                                 </button>

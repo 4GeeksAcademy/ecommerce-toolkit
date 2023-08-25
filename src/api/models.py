@@ -108,12 +108,14 @@ class ShoppingCartItem(db.Model):
     costumer_id = db.Column(db.Integer, db.ForeignKey(
         'costumer.id'), nullable=False)
     item_id = db.Column(db.Integer, db.ForeignKey('item.id'), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
 
     def serialize(self):
         return {
             "id": self.id,
             "costumer_id": self.costumer_id,
             "item_id": self.item_id,
+            "quantity": self.quantity
         }
 
 
