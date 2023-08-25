@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import { cart } from "../pages/cart.jsx";
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
