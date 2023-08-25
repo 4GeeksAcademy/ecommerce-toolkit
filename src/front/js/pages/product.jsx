@@ -61,7 +61,10 @@ export const Product = () => {
             }
             );
     };
-
+    const handleLike = (event) => {
+        
+        // TODO: Handle like
+      };
 
     return (
 
@@ -109,14 +112,18 @@ export const Product = () => {
 
                         <div className="row p-4">
                             <div className="col-md-9 px-5 d-grid">
+
                                 <button type="button" className="btn bg-primary-subtle " onClick={addToCart}>
                                     <i className="fa-solid fa-cart-shopping me-1"></i>
+
                                     Add to cart
                                 </button>
                             </div>
                             <div className="col-md-3 text-center">
+
                                 <button type="button" className="btn btn-outline ">
                                     <i className="fa-regular fa-heart fa-lg"></i>
+
                                 </button>
                             </div>
                         </div>

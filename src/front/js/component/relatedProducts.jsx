@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export const RelatedProducts = () => {
-    //logic 
+    const handleDetails = (event) => {
+        
+        // TODO: Handle view Details
+      };
 
+    const handleLike = (event) => {
+        
+        // TODO: Handle like
+      };
 
     return (
         <div className="px-4 mt-5">
@@ -25,9 +32,9 @@ export const RelatedProducts = () => {
                         <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <div className="text-center">
                                 <Link to={"/product/theid"}>
-                                    <button type="button" className="btn bg-primary-subtle mt-auto me-3">View Details</button>
+                                    <button type="button" className="btn bg-primary-subtle mt-auto me-3" onClick={(e) => handleDetails()}>View Details</button>
                                 </Link>
-                                <button type="button" className="btn btn-outline mt-auto">
+                                <button type="button" className="btn btn-outline mt-auto" onClick={(e) => handleLike()}>
                                     <i className="fa-regular fa-heart fa-lg"></i>
                                 </button>
                             </div>
@@ -51,9 +58,9 @@ export const RelatedProducts = () => {
                         <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <div className="text-center">
                                 <Link to={"/product/theid"}>
-                                    <button type="button" className="btn bg-primary-subtle mt-auto me-3">View Details</button>
+                                    <button type="button" className="btn bg-primary-subtle mt-auto me-3" onClick={(e) => handleDetails()}>View Details</button>
                                 </Link>
-                                <button type="button" className="btn btn-outline mt-auto">
+                                <button type="button" className="btn btn-outline mt-auto" onClick={(e) => handleLike()}>
                                     <i className="fa-regular fa-heart fa-lg"></i>
                                 </button>
                             </div>
@@ -80,9 +87,9 @@ export const RelatedProducts = () => {
                         <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <div className="text-center">
                                 <Link to={"/product/theid"}>
-                                    <button type="button" className="btn bg-primary-subtle mt-auto me-3">View Details</button>
+                                    <button type="button" className="btn bg-primary-subtle mt-auto me-3" onClick={(e) => handleDetails()}>View Details</button>
                                 </Link>
-                                <button type="button" className="btn btn-outline mt-auto">
+                                <button type="button" className="btn btn-outline mt-auto" onClick={(e) => handleLike()}>
                                     <i className="fa-regular fa-heart fa-lg"></i>
                                 </button>
                             </div>
@@ -106,9 +113,9 @@ export const RelatedProducts = () => {
                         <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <div className="text-center">
                                 <Link to={"/product/theid"} >
-                                    <button type="button" className="btn bg-primary-subtle mt-auto me-3">View Details</button>
+                                    <button type="button" className="btn bg-primary-subtle mt-auto me-3" onClick={(e) => handleDetails()}>View Details</button>
                                 </Link>
-                                <button type="button" className="btn btn-outline mt-auto">
+                                <button type="button" className="btn btn-outline mt-auto" onClick={(e) => handleLike()}>
                                     <i className="fa-regular fa-heart fa-lg"></i>
                                 </button>
                             </div>                                                                    
