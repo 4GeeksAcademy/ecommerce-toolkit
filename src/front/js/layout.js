@@ -24,6 +24,7 @@ import { Navbar } from "./component/navbar";
 import { AdminNavtabs } from "./component/adminNavtabs.jsx";
 import { Footer } from "./component/footer";
 
+
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -42,6 +43,7 @@ const Layout = () => {
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />
+                    
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Product />} path="/product/:theid" />
