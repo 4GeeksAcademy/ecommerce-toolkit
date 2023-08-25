@@ -7,7 +7,10 @@ export const Product = () => {
         
       // TODO: Handle add to cart
     };
-
+    const handleLike = (event) => {
+        
+        // TODO: Handle like
+      };
 
     return (
         
@@ -83,13 +86,13 @@ export const Product = () => {
                                                     
                         <div className="row p-4">
                             <div className="col-md-9 px-5 d-grid">
-                                <button type="button" className="btn bg-primary-subtle " >
+                                <button type="button" className="btn bg-primary-subtle "onClick={(e) => handleAddToCart()}>
                                     <i class="fa-solid fa-cart-shopping me-1"></i>
                                     Add to cart
                                 </button>
                             </div> 
                             <div className="col-md-3 text-center">
-                                <button type="button" className="btn btn-outline ">
+                                <button type="button" className="btn btn-outline " onClick={(e) => handleLike()}>
                                 <i className="fa-regular fa-heart fa-lg"></i>
                                 </button>
                             </div>
