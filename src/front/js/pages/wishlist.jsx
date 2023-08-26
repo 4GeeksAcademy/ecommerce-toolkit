@@ -41,12 +41,67 @@ export const Wishlist = () => {
 
     const handleAddToCart = (event) => {
         //add to cart
-        const item_id = event.target.id;
-        const user_id = user;
+        const itemId = event.target.id;
+        const userId = user;
+        const quantity = 1;
+        const url = process.env.BACKEND_URL + "api/addcartitem";
+        const body = {
+            itemId: itemId,
+            costumerId: userId,
+            quantity: quantity
+        }
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+        };
+        fetch(url, options)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+                alert("Item added to cart");
+            }
+            );
     };
 
     const handleRemoveFromWishlist = (event) => {
-
+        //remove from wishlist
+        const itemId = event.target.id;
+        const userId = user;
+        const url = process.env.BACKEND_URL + "api/removewishlisitem";
+        const body = {
+            itemId: itemId,
+            costumerId: userId
+        }
+        const options = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+        };
+        console.log(options.body);
+        fetch(url, options)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+                alert("Item removed from wishlist");
+                for (let i = 0; i < stockItems.length; i++) {
+                    if (stockItems[i].id == itemId) {
+                        stockItems.splice(i, 1);
+                        setStockItems(stockItems => [...stockItems]);
+                    }
+                }
+                for (let i = 0; i < outOfStockItems.length; i++) {
+                    if (outOfStockItems[i].id == itemId) {
+                        outOfStockItems.splice(i, 1);
+                        setOutOfStockItems(outOfStockItems => [...outOfStockItems]);
+                    }
+                }
+            }
+            );
     };
 
 
@@ -79,9 +134,7 @@ export const Wishlist = () => {
                                     <button type="button" id={item.id} className="btn bg-primary-subtle" onClick={handleAddToCart}>Add to cart</button>
                                 </div>
                                 <div className="col-md-2 text-center">
-                                    <button type="button" className="btn btn-outline">
-                                        <i className="fa-solid fa-trash fa-xl" onClick={handleRemoveFromWishlist}></i>
-                                    </button>
+                                    <button type="button" className="btn btn-danger" onClick={handleRemoveFromWishlist} id={item.id}>Remove</button>
                                 </div>
                             </div>
                         </div>
@@ -110,15 +163,19 @@ export const Wishlist = () => {
                                     <button type="button" className="btn bg-primary-subtle" disabled>Add to cart</button>
                                 </div>
                                 <div className="col-md-2 text-center">
-                                    <button type="button" className="btn btn-outline" onClick={handleRemoveFromWishlist}>
-                                        <i className="fa-solid fa-trash fa-xl"></i>
-                                    </button>
+                                    <button type="button" className="btn btn-danger" onClick={handleRemoveFromWishlist} id={item.id}>Remove</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             ))}
+            {/* If no items in wishlist */}
+            {stockItems.length == 0 && outOfStockItems.length == 0 &&
+                <div className="container d-flex justify-content-center">
+                    <h3 className="mt-5">No items in wishlist</h3>
+                </div>
+            }
         </div>
     );
 };
