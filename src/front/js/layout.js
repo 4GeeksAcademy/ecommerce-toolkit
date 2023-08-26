@@ -43,7 +43,7 @@ const Layout = () => {
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />
-                    
+
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Product />} path="/product/:itemId" />
