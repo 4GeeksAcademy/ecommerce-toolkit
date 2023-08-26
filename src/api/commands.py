@@ -1,6 +1,6 @@
 
 import click
-from api.models import db, Item, Costumer, ShoppingCartItem
+from api.models import db, Item, Costumer, ShoppingCartItem, WishlistItem
 
 """
 In this file, you can add as many commands as you want using the @app.cli.command decorator
@@ -236,3 +236,26 @@ def setup_commands(app):
             db.session.add(new_cart_item)
             db.session.commit()
             print("Cart item: ", new_cart_item.id, " created.")
+
+    @app.cli.command("insert-wishlist-items")
+    def insert_wishlist_items_data():
+        wishes = [
+            {"costumer_id": 1, "item_id": 1},
+            {"costumer_id": 2, "item_id": 3},
+            {"costumer_id": 3, "item_id": 2},
+            {"costumer_id": 4, "item_id": 4},
+            {"costumer_id": 1, "item_id": 5},
+            {"costumer_id": 2, "item_id": 6},
+            {"costumer_id": 3, "item_id": 8},
+            {"costumer_id": 4, "item_id": 7},
+            {"costumer_id": 1, "item_id": 9},
+            {"costumer_id": 2, "item_id": 1}
+        ]
+
+        for wish in wishes:
+            new_wish = WishlistItem()
+            new_wish.costumer_id = wish["costumer_id"]
+            new_wish.item_id = wish["item_id"]
+            db.session.add(new_wish)
+            db.session.commit()
+            print("Wish: ", new_wish.id, " created.")

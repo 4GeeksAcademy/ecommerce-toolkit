@@ -13,11 +13,14 @@ export const Product = () => {
     const [imageUrl, setImageUrl] = useState("");
     const itemId = useParams().itemId.substring(1);
     const [quantity, setQuantity] = useState(1);
+    const [change, setChange] = useState(0);
     const { store, actions } = useContext(Context);
     const user = store.user;
+    const [classWishList, setClassWishList] = useState("fa-regular fa-heart fa-lg");
 
     useEffect(() => {
         fetchData();
+        fetchWhishList();
     }, []);
 
     const fetchData = async () => {
@@ -32,6 +35,21 @@ export const Product = () => {
                 setPrice(data.price);
                 setStock(data.stock);
                 setImageUrl(data.image_url);
+            });
+    };
+
+    const fetchWhishList = async () => {
+        let url = process.env.BACKEND_URL + "api/getwishlist/" + user;
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+                console.log("data", data);
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].item_id == itemId) {
+                        setClassWishList("fa-solid fa-heart fa-lg");
+                    }
+                }
             });
     };
 
@@ -61,10 +79,52 @@ export const Product = () => {
             }
             );
     };
-    const handleLike = (event) => {
-        
-        // TODO: Handle like
-      };
+
+    const handleAddWhish = () => {
+        if (user == null) {
+            alert("Please login to add items to wishlist");
+            return;
+        }
+
+        //Check if item is already in wishlist
+        let url = process.env.BACKEND_URL + "api/getwishlist/" + user;
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+                console.log("data", data);
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].item_id == itemId) {
+                        alert("Item already in wishlist");
+                        return;
+                    }
+                }
+                addToWishList();
+            });
+
+        const addToWishList = () => {
+            url = process.env.BACKEND_URL + "api/addwishlist";
+            let data = {
+                itemId: itemId,
+                costumerId: user
+            };
+            let options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            };
+            fetch(url, options)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Success:", data);
+                    alert("Item added to wishlist");
+                    setClassWishList("fa-solid fa-heart fa-lg");
+                })
+        };
+
+    };
 
     return (
 
@@ -121,8 +181,8 @@ export const Product = () => {
                             </div>
                             <div className="col-md-3 text-center">
 
-                                <button type="button" className="btn btn-outline ">
-                                    <i className="fa-regular fa-heart fa-lg"></i>
+                                <button type="button" className="btn btn-outline " onClick={handleAddWhish}>
+                                    <i id="whishItem" className={classWishList}></i>
 
                                 </button>
                             </div>

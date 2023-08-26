@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Item, Costumer, ShoppingCartItem
+from api.models import db, Item, Costumer, ShoppingCartItem, WishlistItem
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -106,3 +106,20 @@ def handle_add_cart_item():
     db.session.add(new_cart_item)
     db.session.commit()
     return jsonify("The new item was added to the shopping cart"), 200
+
+
+@api.route('/addwishlist', methods=['POST'])
+def handle_add_wishlist():
+    body = request.get_json()
+    new_wishlist_item = WishlistItem(
+        costumer_id=body["costumerId"], item_id=body["itemId"])
+    db.session.add(new_wishlist_item)
+    db.session.commit()
+    return jsonify("The new item was added to the wishlist"), 200
+
+
+@api.route('/getwishlist/<int:id>', methods=['GET'])
+def handle_get_wishlist(id):
+    wishlist = WishlistItem.query.filter_by(costumer_id=id).all()
+    wishlist = list(map(lambda x: x.serialize(), wishlist))
+    return jsonify(wishlist), 200
