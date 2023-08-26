@@ -14,7 +14,7 @@ export const CostumersList = () => {
                 console.log("Success:", data);
                 setAllCostumers(data);
             })
-    });
+    }, [change]);
 
     function makeAdmin(event) {
         let id = event.target.id;
@@ -54,6 +54,8 @@ export const CostumersList = () => {
                             <td>{costumer.email}</td>
                             <td>{String(costumer.is_admin)}</td>
                             <td><button type="button" id={costumer.id} className="btn btn-success btn-sm" onClick={makeAdmin} >X</button></td>
+                            {/*Link to email customers*/}
+                            <td><a href={"mailto:" + costumer.email + "?subject=Alo%20from%20ecommerce%20toolkit"} className="btn btn-primary btn-sm">Send Email</a></td>
                         </tr>
                     ))}
                 </tbody>
