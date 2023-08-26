@@ -108,6 +108,16 @@ def handle_add_cart_item():
     return jsonify("The new item was added to the shopping cart"), 200
 
 
+@api.route('/checkcartitem', methods=['POST'])
+def handle_check_cart_item():
+    body = request.get_json()
+    cart_item = ShoppingCartItem.query.filter_by(
+        costumer_id=body["costumerId"], item_id=body["itemId"]).first()
+    if cart_item is None:
+        return jsonify(False), 200
+    return jsonify(cart_item.serialize()), 200
+
+
 @api.route('/addwishlist', methods=['POST'])
 def handle_add_wishlist():
     body = request.get_json()

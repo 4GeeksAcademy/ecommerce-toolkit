@@ -44,13 +44,13 @@ export const Wishlist = () => {
         const itemId = event.target.id;
         const userId = user;
         const quantity = 1;
-        const url = process.env.BACKEND_URL + "api/addcartitem";
-        const body = {
+        //check if item is already in cart
+        let url = process.env.BACKEND_URL + "api/checkcartitem";
+        let body = {
             itemId: itemId,
-            costumerId: userId,
-            quantity: quantity
-        }
-        const options = {
+            costumerId: userId
+        };
+        let options = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -61,7 +61,31 @@ export const Wishlist = () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log("Success:", data);
-                alert("Item added to cart");
+                if (data != false) {
+                    alert("Item already in cart");
+                    return;
+                } else {
+                    url = process.env.BACKEND_URL + "api/addcartitem";
+                    body = {
+                        itemId: itemId,
+                        quantity: quantity,
+                        costumerId: user
+                    };
+                    let options = {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(body),
+                    };
+                    fetch(url, options)
+                        .then((response) => response.json())
+                        .then((data) => {
+                            console.log("Success:", data);
+                            alert("Item added to cart");
+                        }
+                        );
+                }
             }
             );
     };
