@@ -1,6 +1,6 @@
 
 import click
-from api.models import db, Item
+from api.models import db, Item, Costumer, ShoppingCartItem
 
 """
 In this file, you can add as many commands as you want using the @app.cli.command decorator
@@ -137,3 +137,82 @@ def setup_commands(app):
             db.session.add(new_item)
             db.session.commit()
             print("Item: ", new_item.name, " created.")
+
+    @app.cli.command("insert-costumers")
+    def insert_costumers_data():
+        costumers = [
+            {
+                "name": "John Doe",
+                "email": "john@doe.com",
+                "password": "$2y$10$ILsnuwcNhB9oMo4/BFKiiukjcjuvliXE4WSEfe3x2SwpdFAL3HP9q",
+                "is_admin": False
+            },
+            {
+                "name": "Jane Smith",
+                "email": "jane@example.com",
+                "password": "$2y$10$d1NSFyZ0T6nh6SfAvf51YuQWDY0Pge41.GbZGZYbmuqB0j4KQUZ4u",
+                "is_admin": False
+            },
+            {
+                "name": "Michael Johnson",
+                "email": "michael@email.net",
+                "password": "$2y$10$40E/wNQ1atMEyOYgyNQ1IOLcRIaTS4kpJ7wauKPD7/Yk0NH8F1OKK",
+                "is_admin": False
+            },
+            {
+                "name": "Emily Brown",
+                "email": "emily123@gmail.com",
+                "password": "$2y$10$CRG5w4azhpXvtKK5MNY3j.Dwo7/UlBGwPjd6CeZh2JJL34jUCYY8G",
+                "is_admin": False
+            },
+            {
+                "name": "Daniel Wilson",
+                "email": "danielw@website.com",
+                "password": "$2y$10$MeWG6GI6GPxkx6drCY2oUeYKMTWVSp6WS69sbpPH2o/7n71pmQlty",
+                "is_admin": False
+            },
+            {
+                "name": "Sophia Miller",
+                "email": "sophiam@somemail.org",
+                "password": "$2y$10$BxgfXbeArprYhGDqEEnXzeD7Bu8ScZecHSnGV6Q8TeMKewH.kCSKe",
+                "is_admin": False
+            },
+            {
+                "name": "Matthew Taylor",
+                "email": "mattaylor@emailprovider.com",
+                "password": "$2y$10$a1K7B32MKQGUwE1neLV9UeJNVCGInn825IymeF44Gaj5stx/U1.NK",
+                "is_admin": False
+            },
+            {
+                "name": "Olivia Martinez",
+                "email": "oliviam@fakemail.net",
+                "password": "$2y$10$HLg5gvo7fhLGcuqkrHilMOe02uGft4DqxuwN8gsZsPaP.0f56OuNO",
+                "is_admin": False
+            },
+            {
+                "name": "William Anderson",
+                "email": "will.anderson@examplemail.com",
+                "password": "$2y$10$VJMZB3XqBA9UmEbJAezcRejE751B17l0YjRAmx8NR4WiVntyV.tRi",
+                "is_admin": False
+            },
+            {
+                "name": "Ava Thomas",
+                "email": "ava.t@example.org",
+                "password": "$2y$10$VQ.BaALHLS.csT8UmaM8reC9yPbcB1wMXNdyxAny9t6CkCbFImzcm",
+                "is_admin": False
+            }
+        ]
+
+        for costumer in costumers:
+            new_costumer = Costumer()
+            new_costumer.name = costumer["name"]
+            new_costumer.email = costumer["email"]
+            new_costumer.password = costumer["password"]
+            new_costumer.is_admin = costumer["is_admin"]
+            db.session.add(new_costumer)
+            db.session.commit()
+            print("Costumer: ", new_costumer.name, " created.")
+    
+    @app.cli.command("insert-cart-items")
+    def insert_cart_items_data():
+        pass
