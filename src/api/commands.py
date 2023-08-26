@@ -212,7 +212,27 @@ def setup_commands(app):
             db.session.add(new_costumer)
             db.session.commit()
             print("Costumer: ", new_costumer.name, " created.")
-    
+
     @app.cli.command("insert-cart-items")
     def insert_cart_items_data():
-        pass
+        cart_items = [
+            {"costumer_id": 1, "item_id": 1, "quantity": 1},
+            {"costumer_id": 2, "item_id": 3, "quantity": 5},
+            {"costumer_id": 3, "item_id": 2, "quantity": 2},
+            {"costumer_id": 4, "item_id": 4, "quantity": 3},
+            {"costumer_id": 1, "item_id": 5, "quantity": 7},
+            {"costumer_id": 2, "item_id": 6, "quantity": 1},
+            {"costumer_id": 3, "item_id": 8, "quantity": 4},
+            {"costumer_id": 4, "item_id": 7, "quantity": 2},
+            {"costumer_id": 1, "item_id": 9, "quantity": 3},
+            {"costumer_id": 2, "item_id": 1, "quantity": 2}
+        ]
+
+        for cart_item in cart_items:
+            new_cart_item = ShoppingCartItem()
+            new_cart_item.costumer_id = cart_item["costumer_id"]
+            new_cart_item.item_id = cart_item["item_id"]
+            new_cart_item.quantity = cart_item["quantity"]
+            db.session.add(new_cart_item)
+            db.session.commit()
+            print("Cart item: ", new_cart_item.id, " created.")
