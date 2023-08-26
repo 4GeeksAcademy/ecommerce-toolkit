@@ -17,6 +17,7 @@ import { CreateUser } from "./pages/adminPages/userWizard.jsx";
 import { Cart } from "./pages/cart.jsx";
 import { Wishlist } from "./pages/wishlist.jsx";
 import { Product } from "./pages/product.jsx";
+import { BooksCategory } from "./pages/booksCategory.jsx";
 import injectContext from "./store/appContext";
 import { Context } from "./store/appContext";
 
@@ -47,7 +48,7 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Product />} path="/product/:theid" />
-                        <Route element={<h1>This is category</h1>} path="/category" />
+                        <Route element={<BooksCategory/>} path="/books" />
                         <Route element={<h1>This is search</h1>} path="/search" />
                         <Route element={<Signin />} path="/signin" />
                         <Route element={<CreateAccount />} path="/createaccount" />

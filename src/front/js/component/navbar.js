@@ -40,15 +40,32 @@ export const Navbar = () => {
 	return (
 		<nav className="navbar navbar-expand-lg bg-primary-subtle">
 			<div className="container-fluid">
-				<Link className="navbar-brand ms-3" to={"/"}><i class="fa fa-home" aria-hidden="true"/> Vendemos Ropita Nueva</Link>
+				<Link className="navbar-brand ms-3 fw-bold" to={"/"}><i class="fa fa-home" aria-hidden="true"/> VRN </Link>
 				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 					<span className="navbar-toggler-icon"></span>
 				</button>
 				<div className="collapse navbar-collapse" id="navbarNav">
 					<ul className="navbar-nav">
-						<li className="nav-item">
-							<Link className="nav-link" to={"/category"}>Shop By Category</Link>
+						
+						<li className="nav-item dropdown">
+							<button className="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+								Shop By Category
+							</button>
+							<ul className="dropdown-menu bg-light">
+								<li>
+									<Link className="dropdown-item" to={"/books"}>Books</Link>									
+								</li>
+								<li>
+									<Link className="dropdown-item" to={"/books"}>Music</Link>	
+								</li>
+								<li>
+									<Link className="dropdown-item" to={"/books"}>Toys</Link>	
+								</li>
+								
+								
+							</ul>
 						</li>
+						
 						<li className="nav-item">
 							<Link className="nav-link" to={"/wishlist"}>Wish List</Link>
 						</li>
