@@ -58,10 +58,10 @@ export const Product = () => {
             alert("Please login to add items to cart");
             return;
         }
-        let url = process.env.BACKEND_URL + "api/addcartitem";
-        let data = {
+        //check if item is already in cart
+        let url = process.env.BACKEND_URL + "api/checkcartitem";
+        let body = {
             itemId: itemId,
-            quantity: quantity,
             costumerId: user
         };
         let options = {
@@ -69,13 +69,37 @@ export const Product = () => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(body),
         };
         fetch(url, options)
             .then((response) => response.json())
             .then((data) => {
-                console.log("Success:", data);
-                alert("Item added to cart");
+                console.log("data", data);
+                if (data != false) {
+                    alert("Item already in cart");
+                    return;
+                } else {
+                    url = process.env.BACKEND_URL + "api/addcartitem";
+                    body = {
+                        itemId: itemId,
+                        quantity: quantity,
+                        costumerId: user
+                    };
+                    let options = {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(body),
+                    };
+                    fetch(url, options)
+                        .then((response) => response.json())
+                        .then((data) => {
+                            console.log("Success:", data);
+                            alert("Item added to cart");
+                        }
+                        );
+                }
             }
             );
     };
@@ -173,11 +197,19 @@ export const Product = () => {
                         <div className="row p-4">
                             <div className="col-md-9 px-5 d-grid">
 
-                                <button type="button" className="btn bg-primary-subtle " onClick={addToCart}>
-                                    <i className="fa-solid fa-cart-shopping me-1"></i>
+                                {stock > 0 &&
+                                    <button type="button" className="btn bg-primary-subtle " onClick={addToCart}>
+                                        <i className="fa-solid fa-cart-shopping me-1"></i>
 
-                                    Add to cart
-                                </button>
+                                        Add to cart
+                                    </button>
+                                }
+                                {/*add button for when stock is none*/}
+                                {stock == 0 &&
+                                    <button type="button" className="btn bg-danger-subtle " disabled>
+                                        Item out of stock
+                                    </button>
+                                }
                             </div>
                             <div className="col-md-3 text-center">
 
