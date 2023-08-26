@@ -123,3 +123,15 @@ def handle_get_wishlist(id):
     wishlist = WishlistItem.query.filter_by(costumer_id=id).all()
     wishlist = list(map(lambda x: x.serialize(), wishlist))
     return jsonify(wishlist), 200
+
+
+@api.route('/removewishlisitem', methods=['DELETE'])
+def handle_remove_wishlist_item():
+    body = request.get_json()
+    item_id = body["itemId"]
+    costumer_id = body["costumerId"]
+    wishlist_item = WishlistItem.query.filter_by(
+        item_id=item_id, costumer_id=costumer_id).first()
+    db.session.delete(wishlist_item)
+    db.session.commit()
+    return jsonify("The item was removed from the wishlist"), 200
