@@ -51,8 +51,8 @@ const Layout = () => {
                         <Route element={<CreateAccount />} path="/createaccount" />
 
                         <Route element={<AuthProvider> <Wishlist /> </AuthProvider>} path="/wishlist" />
-                        <Route element={<AuthProvider> <Cart /> </AuthProvider>} path="/cart" />
-                        <Route element={<AuthProvider> <Checkout /> </AuthProvider>} path="/checkout" />
+                        <Route element={<Cart /> } path="/cart" />
+                        <Route element={<Checkout /> } path="/checkout" />
 
                         <Route element={<h1>Not found!</h1>} />
 
