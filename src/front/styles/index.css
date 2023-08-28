@@ -3,4 +3,6 @@
 */
 #downArrow[aria-expanded=false] .rotate-icon {
     transform: rotate(180deg);
-  }
+};
+
+

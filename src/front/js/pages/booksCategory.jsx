@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { RelatedProducts } from "../component/relatedProducts.jsx";
+import "../../styles/categories.css";
 
 export const BooksCategory = () => {
 
@@ -12,24 +13,26 @@ export const BooksCategory = () => {
             <div className="row">
                 <div className="col-auto col-sm-3 col-xl-2 px-2 px-0 bg-light">
                     <div className="d-flex flex-column flex-shrink-0 p-3">
-                        <ul class="list-unstyled ps-0">
-                            <li class="mb-2" >
-                                <button id="downArrow" class="btn btn-toggle align-items-center rounded collapsed text-secondary p-0 mb-2" data-bs-toggle="collapse" data-bs-target="#price-collapse" aria-expanded="true">
-                                    <span><i class="fa-solid fa-chevron-down rotate-icon"></i> </span>
-                                    <span className="ps-2 ">Sort By</span>
-                                </button>
-                                <div class="collapse show" id="price-collapse">
-                                    <div class="btn-toggle-nav list-unstyled fw-normal pb-1 ">
+                        <ul className="list-unstyled ps-0">
+                            <li className="mb-2" >
+                                <div className="d-grid">
+                                    <button id="downArrow" className="btn btn-toggle align-items-center rounded collapsed text-secondary p-0 text-start" data-bs-toggle="collapse" data-bs-target="#price-collapse" aria-expanded="true">
+                                        <span><i className="fa-solid fa-chevron-down rotate-icon"></i> </span>
+                                        <span className="ps-2 ">Sort By</span>
+                                    </button>
+                                </div>                                
+                                <div className="collapse show" id="price-collapse">
+                                    <div className="btn-toggle-nav list-unstyled fw-normal pb-1 ">
 
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="price" id="lowToHigh" value="option1" />
-                                            <label class="form-check-label fs-6 fw-light" for="lowToHigh">
+                                        <div className="form-check">
+                                            <input className="form-check-input" type="radio" name="price" id="lowToHigh" value="option1" />
+                                            <label className="form-check-label fs-6 fw-light" htmlFor="lowToHigh">
                                                 Price: Low to High
                                             </label>
                                         </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="price" id="highToLow" value="option2" />
-                                            <label class="form-check-label fs-6 fw-light" for="highToLow">
+                                        <div className="form-check">
+                                            <input className="form-check-input" type="radio" name="price" id="highToLow" value="option2" />
+                                            <label className="form-check-label fs-6 fw-light" htmlFor="highToLow">
                                                 Price: High to Low
                                             </label>
                                         </div>
@@ -38,23 +41,22 @@ export const BooksCategory = () => {
                                     </div>
                                 </div>
                             </li>
-                            <li class="mb-2">
-                                <div class="d-grid">
-                                    <button id="downArrow" class="btn btn-toggle align-items-center rounded collapsed text-secondary p-0 mb-2" data-bs-toggle="collapse" data-bs-target="#priceRange-collapse" aria-expanded="true">
-                                        <span >Price Range</span>
-                                        <span ><i class="fa-solid fa-chevron-down rotate-icon"></i> </span>
-                                        
+                            <li className="mb-2">
+                                <div className="d-grid">
+                                    <button id="downArrow" className="btn btn-toggle align-items-center rounded collapsed text-secondary p-0 text-start" data-bs-toggle="collapse" data-bs-target="#priceRange-collapse" aria-expanded="true">                                        
+                                        <span ><i className="fa-solid fa-chevron-down rotate-icon"></i> </span>
+                                        <span className="ms-2">Price Range</span>                                       
                                     </button>
                                 </div>
                                 
-                                <div class="collapse show" id="priceRange-collapse" >
-                                    <div class="btn-toggle-nav list-unstyled row ">
+                                <div className="collapse show" id="priceRange-collapse" >
+                                    <div className="btn-toggle-nav list-unstyled row ">
                                         
-                                            <div class="col m-0 p-1">
-                                                <input type="text" class="form-control fs-6 fw-light" placeholder="Min Price" aria-label="Min Price"/>
+                                            <div className="col m-0 p-1">
+                                                <input type="text" className="form-control fs-6 fw-light" placeholder="Min Price" aria-label="Min Price"/>
                                             </div>
-                                            <div class="col m-0 p-1">
-                                                <input type="text" class="form-control fs-6 fw-light" placeholder="Max Price" aria-label="Max Price"/>
+                                            <div className="col m-0 p-1">
+                                                <input type="text" className="form-control fs-6 fw-light" placeholder="Max Price" aria-label="Max Price"/>
                                             </div>
                                         
                                     </div>
@@ -67,9 +69,13 @@ export const BooksCategory = () => {
                     </div>
                 </div>
                 <div className="col py-3">
-                    <div className="mt-3 ms-4">
-
-                        <h3 className="fw-bolder mb-4">Books</h3>
+                    <div className="mt-3 mx-3">
+                        <div id="title-image" className="d-flex align-content-center flex-wrap mb-3">                                                                                   
+                            
+                            <h2 className="text-light mx-auto text-center">Books</h2>
+                            
+                        </div>
+                        
                         <div className="row">
                             <div className="col-md-3 mb-5">
                                 <div className="card h-100">
@@ -151,8 +157,33 @@ export const BooksCategory = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <div className="col-md-3 mb-5">
+                                <div className="card h-100">
 
+                                    <img className="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+
+                                    <div className="card-body p-4">
+                                        <div className="text-center">
+
+                                            <h6 className="fw-bolder">Product Name</h6>
+                                            $00.00
+                                        </div>
+                                    </div>
+
+                                    <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <div className="text-center">
+                                            <Link to={"/product/theid"}>
+                                                <button type="button" className="btn bg-primary-subtle mt-auto me-3" onClick={(e) => handleDetails()}>View Details</button>
+                                            </Link>
+                                            <button type="button" className="btn btn-outline mt-auto" onClick={(e) => handleLike()}>
+                                                <i className="fa-regular fa-heart fa-lg"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
                     </div>
 
                 </div>
