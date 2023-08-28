@@ -13,6 +13,7 @@ export const Checkout = () => {
     const [cardNumber, setCardNumber] = useState("");
     const [date, setDate] = useState("");
     const [cvv, setCvv] = useState("");
+    const [promo, setPromo] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -70,6 +71,27 @@ export const Checkout = () => {
                             <div>
                                 <div className="row">
                                     <div className="col">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" />
+                                        <label class="form-check-label" for="gridRadios1">
+                                        Credit Card
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2"/>
+                                        <label class="form-check-label" for="gridRadios2">
+                                        Debit Card
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" />
+                                        <label class="form-check-label" for="gridRadios3">
+                                        Paypal
+                                        </label>
+                                    </div>
+                                    </div>
+                                    <div className="row">
+                                    <div className="col">
                                         <label className="form-label"> Email: </label>
                                         <input type="text" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} />
                                     </div>
@@ -105,6 +127,8 @@ export const Checkout = () => {
                                 </div>
                             </div>
                         </div>
+                                    </div>
+                                    
 
                     </div>
                     <div className="col-md-5">
@@ -142,11 +166,24 @@ export const Checkout = () => {
                                 <small >Shipping</small>
 
                             </div>
+                           
                             <div className="col-6">
                                 <div className="text-end"><span>$</span><span>00.00</span></div>
                                 <div className="text-end"><span>-</span></div>
                             </div>
                         </div>
+                        <hr ></hr>
+                        <div className="row">
+                                    <div className="col">
+                                        <label className="form-label"></label>
+                                        <div className="input-group">
+                                            <input type="text" className="form-control" value={cardNumber} placeholder="Promo Code" onChange={(e) => setPromo(e.target.value)} />
+                                            <button className="btn btn-secondary">Redeem</button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
                         <hr ></hr>
                         <div className="row mx-2">
                             <div className="col-6">
