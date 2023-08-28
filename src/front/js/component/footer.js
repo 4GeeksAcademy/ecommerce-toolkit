@@ -1,10 +1,9 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export const Footer = () => (
 
-	<div class="container">
-
-
+	<div class="container border-top ms-5 p-0">
 		<div class="row align-items-center m-2">
 			<div class="col">
 				<h6 className="fw-bold">FIND US ON</h6>
@@ -37,15 +36,31 @@ export const Footer = () => (
 				</div>
 			</div>
 			<div class="col">
+				<div className="row">
 				<div class="col">
-					<p>Home</p>
+					<div>
+						<Link className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to={"/"}>Home</Link>
+					</div>
+					<div>
+						<Link className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to={"/aboutus"}>About us</Link>	
+					</div>
+					<div>
+						<Link className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to={"/sales"}>Sales</Link>
+					</div>										
 				</div>
-				<div class="col"></div>
-				<div class="col"></div>
-				
+				<div class="col">
+					<div>
+						<Link className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to={"/books"}>Books</Link>
+					</div>
+					<div>
+						<Link className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to={"/music"}>Music</Link>
+					</div>
+					<div>
+						<Link className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to={"/toys"}>Toys</Link>
+					</div>
+				</div>
+				</div>			
 			</div>
 		</div>
-
-
 	</div>
 );
