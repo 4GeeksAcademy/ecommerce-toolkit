@@ -46,13 +46,14 @@ const Layout = () => {
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />
-                    
+
                     <Routes>
-                        <Route element={<Home />} path="/" />
-                        <Route element={<Product />} path="/product/:theid" />
+                        <Route element={<Home />} path="/" />                     
+                        <Route element={<Product />} path="/product/:itemId" />
                         <Route element={<BooksCategory/>} path="/books" />
                         <Route element={<ToysCategory/>} path="/toys" />
                         <Route element={<MusicCategory/>} path="/music" />
+                        <Route element={<h1>This is category</h1>} path="/category" />
                         <Route element={<h1>This is search</h1>} path="/search" />
                         <Route element={<Signin />} path="/signin" />
                         <Route element={<CreateAccount />} path="/createaccount" />

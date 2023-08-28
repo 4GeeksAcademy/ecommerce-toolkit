@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Item, Costumer
+from api.models import db, Item, Costumer, ShoppingCartItem, WishlistItem
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -31,11 +31,13 @@ def handle_newcostumer():
     print(body)
     return jsonify("The new costumer was added"), 200
 
+
 @api.route('/costumers', methods=['GET'])
 def handle_costumers():
     costumers = Costumer.query.all()
     costumers = list(map(lambda x: x.serialize(), costumers))
     return jsonify(costumers), 200
+
 
 @api.route('/costumeradmin/<int:id>', methods=['PUT'])
 def handle_costumer_admin(id):
@@ -43,6 +45,7 @@ def handle_costumer_admin(id):
     costumer.is_admin = True
     db.session.commit()
     return jsonify("The costumer was updated"), 200
+
 
 @api.route('/signin', methods=['POST'])
 def handle_signin():
@@ -93,3 +96,52 @@ def handle_update_item(id):
     item.visible = body["isVisible"]
     db.session.commit()
     return jsonify("The item was updated"), 200
+
+
+@api.route('/addcartitem', methods=['POST'])
+def handle_add_cart_item():
+    body = request.get_json()
+    new_cart_item = ShoppingCartItem(
+        costumer_id=body["costumerId"], item_id=body["itemId"], quantity=body["quantity"])
+    db.session.add(new_cart_item)
+    db.session.commit()
+    return jsonify("The new item was added to the shopping cart"), 200
+
+
+@api.route('/checkcartitem', methods=['POST'])
+def handle_check_cart_item():
+    body = request.get_json()
+    cart_item = ShoppingCartItem.query.filter_by(
+        costumer_id=body["costumerId"], item_id=body["itemId"]).first()
+    if cart_item is None:
+        return jsonify(False), 200
+    return jsonify(cart_item.serialize()), 200
+
+
+@api.route('/addwishlist', methods=['POST'])
+def handle_add_wishlist():
+    body = request.get_json()
+    new_wishlist_item = WishlistItem(
+        costumer_id=body["costumerId"], item_id=body["itemId"])
+    db.session.add(new_wishlist_item)
+    db.session.commit()
+    return jsonify("The new item was added to the wishlist"), 200
+
+
+@api.route('/getwishlist/<int:id>', methods=['GET'])
+def handle_get_wishlist(id):
+    wishlist = WishlistItem.query.filter_by(costumer_id=id).all()
+    wishlist = list(map(lambda x: x.serialize(), wishlist))
+    return jsonify(wishlist), 200
+
+
+@api.route('/removewishlisitem', methods=['DELETE'])
+def handle_remove_wishlist_item():
+    body = request.get_json()
+    item_id = body["itemId"]
+    costumer_id = body["costumerId"]
+    wishlist_item = WishlistItem.query.filter_by(
+        item_id=item_id, costumer_id=costumer_id).first()
+    db.session.delete(wishlist_item)
+    db.session.commit()
+    return jsonify("The item was removed from the wishlist"), 200

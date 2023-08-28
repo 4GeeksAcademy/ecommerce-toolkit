@@ -7,12 +7,18 @@
 API Routes
 - '/newitem', method: POST, body: item info, action: create new item
 - '/items', method: GET, action: get list of all items
-- '/item/item_id', methods: 'GET', action: get specific item by id
-- '/item/item_id', methods: 'PUT', body: item info, action: modify item
-- '/newcostumer', methods: 'POST', body: customer info, action: create new costumer
+- '/item/item_id', method: 'GET', action: get specific item by id
+- '/item/item_id', method: 'PUT', body: item info, action: modify item
+- '/newcostumer', method: 'POST', body: customer info, action: create new costumer
+- '/costumers', method: 'GET', action: get list of all costumers
+- '/costumeradmin/costumer_id', method: 'PUT', action: give admin status to costumer
+- '/signin', method:'POST', body: email & password, action: check if info is correct to sign in
+- '/addcartitem', method:'POST', body: item and costumer info, action: creates a cart item
 
 Flask commands
 - "flask insert-items", action: inserts predefined items
+- "flask insert-costumers", action: inserts predefined costumers
+- "flask insert-cart-items", action: inserts predefined cart items
 
 Build web applications using React.js for the front end and python/flask for your backend API.
 
