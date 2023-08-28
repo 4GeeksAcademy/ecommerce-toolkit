@@ -1,8 +1,6 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
-#downArrow[aria-expanded=false] .rotate-icon {
-    transform: rotate(180deg);
-};
+
 
 

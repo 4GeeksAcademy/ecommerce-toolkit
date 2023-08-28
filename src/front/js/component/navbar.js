@@ -56,10 +56,10 @@ export const Navbar = () => {
 									<Link className="dropdown-item" to={"/books"}>Books</Link>									
 								</li>
 								<li>
-									<Link className="dropdown-item" to={"/books"}>Music</Link>	
+									<Link className="dropdown-item" to={"/music"}>Music</Link>	
 								</li>
 								<li>
-									<Link className="dropdown-item" to={"/books"}>Toys</Link>	
+									<Link className="dropdown-item" to={"/toys"}>Toys</Link>	
 								</li>
 								
 								

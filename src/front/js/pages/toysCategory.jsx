@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { RelatedProducts } from "../component/relatedProducts.jsx";
-import "../../styles/booksCategory.css";
+import "../../styles/toysCategory.css";
 
-export const BooksCategory = () => {
+export const ToysCategory = () => {
 
 
     return (
@@ -70,9 +70,9 @@ export const BooksCategory = () => {
                 </div>
                 <div className="col py-3">
                     <div className="mt-3 mx-3">
-                        <div id="title-image-books" className="d-flex align-content-center flex-wrap mb-3">                                                                                   
+                        <div id="title-image-toys" className="d-flex align-content-center flex-wrap mb-3">                                                                                   
                             
-                            <h2 className="text-light mx-auto text-center">Books</h2>
+                            <h2 className="text-light mx-auto text-center">Toys</h2>
                             
                         </div>
                         
