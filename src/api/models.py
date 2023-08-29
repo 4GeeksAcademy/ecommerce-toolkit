@@ -29,6 +29,7 @@ class Item(db.Model):
             "category": self.category,
             "description": self.description,
             "price": self.price,
+            "sale_price": self.sale_price,
             "stock": self.stock,
             "image_url": self.image_url,
             "visible": self.visible

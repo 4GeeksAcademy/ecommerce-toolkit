@@ -144,6 +144,7 @@ def setup_commands(app):
             new_item.stock = item["stock"]
             new_item.image_url = item["image_url"]
             new_item.visible = item["visible"]
+            new_item.sale_price = item["sale_price"]
             db.session.add(new_item)
             db.session.commit()
             print("Item: ", new_item.name, " created.")
