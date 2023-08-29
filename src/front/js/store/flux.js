@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			relatedProduct: [],
 			
 			message: null,
 			demo: [
@@ -55,7 +56,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			logout: () => {
 				setStore({ user: null, admin: false })
-			}
+			},
+
+			obtenerProductoSimilar: async() => {
+				try{
+					const response = await fetch("")
+					const data = await response.json()
+					console.log(data)
+					setStore({
+						relatedProduct: data.results
+					})
+
+				}catch(error){
+					console.log(error)
+				}
+			},
+
 		}
 	};
 };
