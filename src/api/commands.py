@@ -41,7 +41,8 @@ def setup_commands(app):
                 "price": 12.99,
                 "stock": 5,
                 "image_url": "https://images.unsplash.com/photo-1690274302746-dd28a19967c5?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5MjgxMDk0Mw&ixlib=rb-4.0.3&q=80&w=300",
-                "visible": True
+                "visible": True,
+                "sale_price": 10.99
             },
             {
                 "name": "Adventures in Wonderland",
@@ -50,7 +51,8 @@ def setup_commands(app):
                 "price": 9.99,
                 "stock": 3,
                 "image_url": "https://images.unsplash.com/photo-1691853533232-78d352cf6d25?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5MjgxMDQzMQ&ixlib=rb-4.0.3&q=80&w=300",
-                "visible": True
+                "visible": True,
+                "sale_price": 7.99
             },
             {
                 "name": "Robot Friend Toy",
@@ -59,7 +61,8 @@ def setup_commands(app):
                 "price": 29.95,
                 "stock": 11,
                 "image_url": "https://images.unsplash.com/photo-1691689761201-4fe4388438b6?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5MjgxMTAyMQ&ixlib=rb-4.0.3&q=80&w=300",
-                "visible": True
+                "visible": True,
+                "sale_price": None
             },
             {
                 "name": "Musical Melodies",
@@ -68,7 +71,8 @@ def setup_commands(app):
                 "price": 8.49,
                 "stock": 10,
                 "image_url": "https://images.unsplash.com/photo-1691913865582-785ace732c29?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5MjgxMTAzNA&ixlib=rb-4.0.3&q=80&w=300",
-                "visible": True
+                "visible": True,
+                "sale_price": 5.99
             },
             {
                 "name": "Secrets of the Universe",
@@ -77,7 +81,8 @@ def setup_commands(app):
                 "price": 14.99,
                 "stock": 5,
                 "image_url": "https://images.unsplash.com/photo-1612161689049-5d7b9ae3dce6?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5MjgxMTA0MA&ixlib=rb-4.0.3&q=80&w=300",
-                "visible": True
+                "visible": True,
+                "sale_price": None
             },
             {
                 "name": "Adventure Explorer Kit",
@@ -86,7 +91,8 @@ def setup_commands(app):
                 "price": 21.95,
                 "stock": 1,
                 "image_url": "https://images.unsplash.com/photo-1692566755886-f1f3ed3d9182?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5MjgxMTA2OQ&ixlib=rb-4.0.3&q=80&w=300",
-                "visible": True
+                "visible": True,
+                "sale_price": None
             },
             {
                 "name": "Rhythms of the Rainforest",
@@ -95,7 +101,8 @@ def setup_commands(app):
                 "price": 10.99,
                 "stock": 25,
                 "image_url": "https://plus.unsplash.com/premium_photo-1673264932910-7d8a6a3a46ee?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5MjgxMTA2Nw&ixlib=rb-4.0.3&q=80&w=300",
-                "visible": False
+                "visible": False,
+                "sale_price": 7.49
             },
             {
                 "name": "Mind-Bending Puzzles",
@@ -104,7 +111,8 @@ def setup_commands(app):
                 "price": 18.95,
                 "stock": 20,
                 "image_url": "https://images.unsplash.com/photo-1690812099637-803c65c8e495?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5MjgxMTA3NA&ixlib=rb-4.0.3&q=80&w=300",
-                "visible": True
+                "visible": True,
+                "sale_price": None
             },
             {
                 "name": "Art of Nature",
@@ -113,7 +121,8 @@ def setup_commands(app):
                 "price": 11.49,
                 "stock": 14,
                 "image_url": "https://plus.unsplash.com/premium_photo-1670793631242-4813c0dbe5ac?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5MjgxMTA2Nw&ixlib=rb-4.0.3&q=80&w=300",
-                "visible": False
+                "visible": False,
+                "sale_price": None
             },
             {
                 "name": "Symphony Classics",
@@ -122,7 +131,8 @@ def setup_commands(app):
                 "price": 13.99,
                 "stock": 7,
                 "image_url": "https://images.unsplash.com/photo-1568201402596-ececfcf0ce4a?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5MjgxMTA4NA&ixlib=rb-4.0.3&q=80&w=300",
-                "visible": True
+                "visible": True,
+                "sale_price": 8.99
             }]
 
         for item in items:

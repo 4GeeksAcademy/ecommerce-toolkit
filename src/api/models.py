@@ -17,6 +17,7 @@ class Item(db.Model):
     shopping_cart = db.relationship(
         'ShoppingCartItem', backref='item', lazy=True)
     todo_list = db.relationship('TodoList', backref='item', lazy=True)
+    sale_price = db.Column(db.Float, nullable=True, default=None)
 
     def __repr__(self):
         return f'<Model {self.name}>'
