@@ -22,7 +22,7 @@ export const Checkout = () => {
 
     //logic get number of items from flux
     return (
-        <div className="container my-3">
+        <div className="container my-5">
             <form onSubmit={handleSubmit}>
                 <div className="row gx-5">
                     <div className="col-md-7">

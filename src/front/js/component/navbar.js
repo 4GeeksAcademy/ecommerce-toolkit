@@ -38,7 +38,7 @@ export const Navbar = () => {
 	}
 
 	return (
-		<nav className="navbar navbar-expand-lg bg-primary-subtle">
+		<nav className="navbar navbar-expand-lg bg-primary-subtle py-3">
 			<div className="container-fluid">
 				<Link className="navbar-brand ms-3 fw-bold" to={"/"}><i class="fa fa-home" aria-hidden="true"/> VRN </Link>
 				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,6 +68,9 @@ export const Navbar = () => {
 						
 						<li className="nav-item">
 							<Link className="nav-link" to={"/wishlist"}>Wish List</Link>
+						</li>
+						<li className="nav-item">
+							<Link className="nav-link" to={"/aboutUs"}>About Us</Link>
 						</li>
 						<li className="nav-item">
 							<Link className="nav-link" to={"/search"}>Search</Link>

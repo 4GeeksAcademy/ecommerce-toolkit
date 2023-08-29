@@ -6,10 +6,10 @@ export const Cart = () => {
 
 
     return (
-        <div className="container">
-            <h2 className="my-3">Shopping Cart</h2>
+        <div className="container py-5">
+            <h2>Shopping Cart</h2>
             <div className="mt-5">
-                <div className="row mx-2 mb-2 align-items-center">
+                <div className="row mx-2 mb-3 align-items-center">
                     <div className="col-md-3 text-center">
                         <img className="img-fluid" src="//c1.staticflickr.com/1/466/19681864394_c332ae87df_t.jpg" />
                     </div>
@@ -56,7 +56,7 @@ export const Cart = () => {
                         <div className="text-end text-primary text-opacity-50 fw-bold"><span>$</span><span>00.00</span></div>
                     </div>
                 </div>
-                <div className="container d-flex justify-content-center my-3">
+                <div className="container d-flex justify-content-center mt-3">
                     <button className="btn bg-primary-subtle ">
                         <Link className="text-dark link-underline link-underline-opacity-0" to="/checkout">Checkout</Link>
                     </button>

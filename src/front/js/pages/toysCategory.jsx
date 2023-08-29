@@ -7,20 +7,18 @@ export const ToysCategory = () => {
 
 
     return (
-
-        <div className="container-fluid">
-
+        <div className="container-fluid mb-0">
             <div className="row">
-                <div className="col-auto col-sm-3 col-xl-2 px-2 px-0 bg-light">
-                    <div className="d-flex flex-column flex-shrink-0 p-3">
+                <div className="col-auto col-sm-3 col-xl-2 px-2 py-4 bg-light">
+                    <div className="d-flex flex-column flex-shrink-0 px-3">
                         <ul className="list-unstyled ps-0">
                             <li className="mb-2" >
-                                <div className="d-grid">
+                                <div className="d-grid pb-2">
                                     <button id="downArrow" className="btn btn-toggle align-items-center rounded collapsed text-secondary p-0 text-start" data-bs-toggle="collapse" data-bs-target="#price-collapse" aria-expanded="true">
                                         <span><i className="fa-solid fa-chevron-down rotate-icon"></i> </span>
-                                        <span className="ps-2 ">Sort By</span>
+                                        <span className="ps-2">Sort By</span>
                                     </button>
-                                </div>                                
+                                </div>
                                 <div className="collapse show" id="price-collapse">
                                     <div className="btn-toggle-nav list-unstyled fw-normal pb-1 ">
 
@@ -42,23 +40,23 @@ export const ToysCategory = () => {
                                 </div>
                             </li>
                             <li className="mb-2">
-                                <div className="d-grid">
-                                    <button id="downArrow" className="btn btn-toggle align-items-center rounded collapsed text-secondary p-0 text-start" data-bs-toggle="collapse" data-bs-target="#priceRange-collapse" aria-expanded="true">                                        
+                                <div className="d-grid pb-2">
+                                    <button id="downArrow" className="btn btn-toggle align-items-center rounded collapsed text-secondary p-0 text-start" data-bs-toggle="collapse" data-bs-target="#priceRange-collapse" aria-expanded="true">
                                         <span ><i className="fa-solid fa-chevron-down rotate-icon"></i> </span>
-                                        <span className="ms-2">Price Range</span>                                       
+                                        <span className="ms-2">Price Range</span>
                                     </button>
                                 </div>
-                                
+
                                 <div className="collapse show" id="priceRange-collapse" >
                                     <div className="btn-toggle-nav list-unstyled row ">
-                                        
-                                            <div className="col m-0 p-1">
-                                                <input type="text" className="form-control fs-6 fw-light" placeholder="Min Price" aria-label="Min Price"/>
-                                            </div>
-                                            <div className="col m-0 p-1">
-                                                <input type="text" className="form-control fs-6 fw-light" placeholder="Max Price" aria-label="Max Price"/>
-                                            </div>
-                                        
+
+                                        <div className="col m-0 p-1">
+                                            <input type="text" className="form-control fs-6 fw-light" placeholder="Min Price" aria-label="Min Price" />
+                                        </div>
+                                        <div className="col m-0 p-1">
+                                            <input type="text" className="form-control fs-6 fw-light" placeholder="Max Price" aria-label="Max Price" />
+                                        </div>
+
                                     </div>
                                 </div>
                             </li>
@@ -68,14 +66,14 @@ export const ToysCategory = () => {
 
                     </div>
                 </div>
-                <div className="col py-3">
-                    <div className="mt-3 mx-3">
-                        <div id="title-image-toys" className="d-flex align-content-center flex-wrap mb-3">                                                                                   
+                <div className="col py-4">
+                    <div className="mx-3 mt-2">
+                        <div id="title-image-toys" className="d-flex align-content-center flex-wrap mb-4">                                                                                   
                             
                             <h2 className="text-light mx-auto text-center">Toys</h2>
                             
                         </div>
-                        
+
                         <div className="row">
                             <div className="col-md-3 mb-5">
                                 <div className="card h-100">
@@ -183,20 +181,12 @@ export const ToysCategory = () => {
                                 </div>
                             </div>
                         </div>
-                    
+
                     </div>
 
                 </div>
             </div>
-
-
-
-
-
-        </div>
-
-
-
+        </div>     
 
     );
 };
