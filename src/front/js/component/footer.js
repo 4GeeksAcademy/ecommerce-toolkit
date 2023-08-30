@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => (
 
-	<div class="container border-top ms-5 p-0">
+	<div class="container-fluid border-top pt-1" id="footer">
 		<div class="row align-items-center m-2">
 			<div class="col">
 				<h6 className="fw-bold">FIND US ON</h6>

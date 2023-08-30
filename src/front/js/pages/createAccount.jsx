@@ -38,8 +38,8 @@ export const CreateAccount = () => {
     };
 
     return (
-        <div className="container">
-            <h2 className="mt-3">Create account</h2>
+        <div className="container my-5">
+            <h2>Create account</h2>
             <form onSubmit={handleSubmit}>
 
                 <div className="mb-3">
