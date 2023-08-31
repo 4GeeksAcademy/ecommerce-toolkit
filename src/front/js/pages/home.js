@@ -18,7 +18,7 @@ export const Home = () => {
 
 			<div id="carouselExample" className="carousel slide">
 				<div class="carousel-indicators">
-					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
 					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
 					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
 				</div>
@@ -42,18 +42,18 @@ export const Home = () => {
 					<span className="visually-hidden">Next</span>
 				</button>
 			</div>
-			<ul class="nav justify-content-center nav-tabs" id="myTab" role="tablist" style={{ paddingTop: "30px" }}>
-				<li class="nav-item" role="presentation">
-					<a class="nav-link active" id="popular-tab" data-bs-toggle="tab" data-bs-target="#popular-tab-pane" type="a" role="tab" aria-controls="popular-tab-pane" aria-selected="true">Popular</a>
+			<ul className="nav justify-content-center nav-tabs" id="myTab" role="tablist" style={{ paddingTop: "30px" }}>
+				<li className="nav-item" role="presentation">
+					<a className="nav-link active" id="popular-tab" data-bs-toggle="tab" data-bs-target="#popular-tab-pane" type="a" role="tab" aria-controls="popular-tab-pane" aria-selected="true">Popular</a>
 				</li>
-				<li class="nav-item" role="presentation">
-					<a class="nav-link" id="nuevo-tab" data-bs-toggle="tab" data-bs-target="#nuevo-tab-pane" type="a" role="tab" aria-controls="nuevo-tab-pane" aria-selected="false">New</a>
+				<li className="nav-item" role="presentation">
+					<a className="nav-link" id="nuevo-tab" data-bs-toggle="tab" data-bs-target="#nuevo-tab-pane" type="a" role="tab" aria-controls="nuevo-tab-pane" aria-selected="false">New</a>
 				</li>
-				<li class="nav-item" role="presentation">
-					<a class="nav-link" id="lastU-tab" data-bs-toggle="tab" data-bs-target="#lastU-tab-pane" type="a" role="tab" aria-controls="lastU-tab-pane" aria-selected="false">Last Unites</a>
+				<li className="nav-item" role="presentation">
+					<a className="nav-link" id="lastU-tab" data-bs-toggle="tab" data-bs-target="#lastU-tab-pane" type="a" role="tab" aria-controls="lastU-tab-pane" aria-selected="false">Last Unites</a>
 				</li>
-				<li class="nav-item" role="presentation">
-					<a class="nav-link" id="promo-tab" data-bs-toggle="tab" data-bs-target="#promo-tab-pane" type="a" role="tab" aria-controls="promo-tab-pane" aria-selected="false">Promotion</a>
+				<li className="nav-item" role="presentation">
+					<a className="nav-link" id="promo-tab" data-bs-toggle="tab" data-bs-target="#promo-tab-pane" type="a" role="tab" aria-controls="promo-tab-pane" aria-selected="false">Promotion</a>
 				</li>
 			</ul>
 

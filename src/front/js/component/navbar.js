@@ -40,32 +40,32 @@ export const Navbar = () => {
 	return (
 		<nav className="navbar navbar-expand-lg bg-primary-subtle">
 			<div className="container-fluid">
-				<Link className="navbar-brand ms-3 fw-bold" to={"/"}><i class="fa fa-home" aria-hidden="true"/> VRN </Link>
+				<Link className="navbar-brand ms-3 fw-bold" to={"/"}><i className="fa fa-home" aria-hidden="true" /> VRN </Link>
 				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 					<span className="navbar-toggler-icon"></span>
 				</button>
 				<div className="collapse navbar-collapse" id="navbarNav">
 					<ul className="navbar-nav">
-						
+
 						<li className="nav-item dropdown">
 							<button className="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
 								Shop By Category
 							</button>
 							<ul className="dropdown-menu bg-light">
 								<li>
-									<Link className="dropdown-item" to={"/books"}>Books</Link>									
+									<Link className="dropdown-item" to={"/books"}>Books</Link>
 								</li>
 								<li>
-									<Link className="dropdown-item" to={"/music"}>Music</Link>	
+									<Link className="dropdown-item" to={"/music"}>Music</Link>
 								</li>
 								<li>
-									<Link className="dropdown-item" to={"/toys"}>Toys</Link>	
+									<Link className="dropdown-item" to={"/toys"}>Toys</Link>
 								</li>
-								
-								
+
+
 							</ul>
 						</li>
-						
+
 						<li className="nav-item">
 							<Link className="nav-link" to={"/wishlist"}>Wish List</Link>
 						</li>
@@ -73,7 +73,7 @@ export const Navbar = () => {
 							<Link className="nav-link" to={"/search"}>Search</Link>
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link" to={"/cart"}><i class="fa fa-shopping-cart" aria-hidden="true"/></Link>
+							<Link className="nav-link" to={"/cart"}><i className="fa fa-shopping-cart" aria-hidden="true" /></Link>
 						</li>
 						<li className="nav-item">
 							<button type="button" className="btn btn-success ms-2" onClick={handleSignin}>Sign In</button>
