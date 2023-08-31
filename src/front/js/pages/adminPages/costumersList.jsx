@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export const CostumersList = () => {
     const [sortMethod, setSortMethod] = useState("id");
@@ -69,6 +70,7 @@ export const CostumersList = () => {
                         <th scope="col">Is Admin</th>
                         <th scope="col">Make Admin</th>
                         <th scope="col">Send Message</th>
+                        <th scope="col">Todo</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -81,6 +83,7 @@ export const CostumersList = () => {
                             <td><button type="button" id={costumer.id} className="btn btn-success btn-sm" onClick={makeAdmin} >X</button></td>
                             {/*Link to email customers*/}
                             <td><a href={"mailto:" + costumer.email + "?subject=Alo%20from%20ecommerce%20toolkit"} className="btn btn-primary btn-sm">Send Email</a></td>
+                            <td><Link to={"/admin/usertodo/:" + costumer.id} className="text-decoration-none"><i className="bi bi-list-task" style={{ fontSize: "1.5rem" }}></i></Link></td>
                         </tr>
                     ))}
                 </tbody>

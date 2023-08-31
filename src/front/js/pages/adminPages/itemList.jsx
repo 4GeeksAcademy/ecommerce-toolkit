@@ -78,7 +78,7 @@ export const ItemList = () => {
                             <td><img src={item.image_url} width={"50px"} className="img-thumbnail" /></td>
                             <td>{String(item.visible)}</td>
                             <td><Link to={"/admin/item/modify/:" + item.id} className="text-decoration-none"><i className="bi bi-pencil-fill" style={{ fontSize: "1.5rem" }}></i></Link></td>
-                            <td><Link to={"/admin/itemTodo/:" + item.id} className="text-decoration-none"><i className="bi bi-list-task" style={{ fontSize: "1.5rem" }}></i></Link></td>
+                            <td><Link to={"/admin/itemtodo/:" + item.id} className="text-decoration-none"><i className="bi bi-list-task" style={{ fontSize: "1.5rem" }}></i></Link></td>
                         </tr>
                     ))}
                 </tbody>
