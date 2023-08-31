@@ -9,6 +9,7 @@ export const ModifyItem = () => {
     const [stock, setStock] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const [isVisible, setIsVisible] = useState(false);
+    const [salePrice, setSalePrice] = useState("");
 
     let params = useParams();
     let itemId = params.itemId.substring(1);
@@ -22,7 +23,7 @@ export const ModifyItem = () => {
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
-                console.log("Success:", data.visible);
+                console.log("Success:", data);
                 setName(data.name);
                 setCategory(data.category);
                 const selectCategory = document.getElementById("selectCategory");
@@ -38,6 +39,10 @@ export const ModifyItem = () => {
                 setStock(data.stock);
                 setImageUrl(data.imageUrl);
                 setIsVisible(data.visible);
+                if (data.sale_price == null) {
+                    data.sale_price = 0;
+                }
+                setSalePrice(data.sale_price);
                 const checkBox = document.getElementById("visibleCheck");
                 if (data.visible) {
                     checkBox.checked = true;
@@ -49,6 +54,10 @@ export const ModifyItem = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        let finalSalePrice = salePrice;
+        if (finalSalePrice == 0) {
+            finalSalePrice = null;
+        }
         const url = process.env.BACKEND_URL + "api/item/" + itemId;
         const headers = {
             "Content-Type": "application/json",
@@ -60,6 +69,7 @@ export const ModifyItem = () => {
             price: price,
             stock: stock,
             isVisible: isVisible,
+            salePrice: finalSalePrice,
         };
         const options = {
             method: "PUT",
@@ -80,7 +90,7 @@ export const ModifyItem = () => {
 
     return (
         <div className="container">
-            <h2 className="mt-3">Create item</h2>
+            <h2 className="mt-3">Modify Item</h2>
             <form onSubmit={handleSubmit}>
 
                 <div className="mb-3">
@@ -105,6 +115,12 @@ export const ModifyItem = () => {
                 <div className="mb-3">
                     <label className="form-label"> Price: </label>
                     <input type="number" className="form-control" value={price} onChange={(e) => setPrice(e.target.value)} />
+                </div>
+
+                <div className="mb-3">
+                    <label className="form-label"> Sale Price: </label>
+                    <input type="number" className="form-control" value={salePrice} onChange={(e) => setSalePrice(e.target.value)} />
+                    <label className="form-label"> Use a value of 0 for no sale </label>
                 </div>
 
                 <div className="mb-3">

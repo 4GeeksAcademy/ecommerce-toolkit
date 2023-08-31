@@ -64,7 +64,7 @@ def handle_signin():
 def handle_newitem():
     body = request.get_json()
     new_item = Item(name=body["name"], category=body["category"], description=body["description"],
-                    price=body["price"], stock=body["stock"], image_url=body["imageUrl"], visible=body["isVisible"])
+                    price=body["price"], stock=body["stock"], image_url=body["imageUrl"], visible=body["isVisible"], sale_price=body["salePrice"])
     db.session.add(new_item)
     db.session.commit()
     print(body)
@@ -94,6 +94,7 @@ def handle_update_item(id):
     item.price = body["price"]
     item.stock = body["stock"]
     item.visible = body["isVisible"]
+    item.sale_price = body["salePrice"]
     db.session.commit()
     return jsonify("The item was updated"), 200
 
