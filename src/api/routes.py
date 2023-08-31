@@ -118,6 +118,35 @@ def handle_check_cart_item():
     return jsonify(cart_item.serialize()), 200
 
 
+@api.route('/updatecartitem', methods=['PUT'])
+def handle_update_cart_item():
+    body = request.get_json()
+    cart_item = ShoppingCartItem.query.filter_by(
+        costumer_id=body["costumerId"], item_id=body["itemId"]).first()
+    cart_item.quantity = body["quantity"]
+    db.session.commit()
+    return jsonify("The item was updated"), 200
+
+
+@api.route('/removecartitem', methods=['PUT'])
+def handle_remove_cart_item():
+    body = request.get_json()
+    item_id = body["itemId"]
+    costumer_id = body["costumerId"]
+    cart_item = ShoppingCartItem.query.filter_by(
+        item_id=item_id, costumer_id=costumer_id).first()
+    db.session.delete(cart_item)
+    db.session.commit()
+    return jsonify("The item was removed from the shopping cart"), 200
+
+
+@api.route('/getcart/<int:id>', methods=['GET'])
+def handle_get_cart(id):
+    cart = ShoppingCartItem.query.filter_by(costumer_id=id).all()
+    cart = list(map(lambda x: x.serialize(), cart))
+    return jsonify(cart), 200
+
+
 @api.route('/addwishlist', methods=['POST'])
 def handle_add_wishlist():
     body = request.get_json()
