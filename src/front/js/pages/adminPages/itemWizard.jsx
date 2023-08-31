@@ -8,6 +8,7 @@ export const CreateItem = () => {
     const [stock, setStock] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const [isVisible, setIsVisible] = useState(false);
+    const [salePrice, setSalePrice] = useState(null);
 
     useEffect(() => {
         let url = "https://random.imagecdn.app/300/300";
@@ -27,7 +28,8 @@ export const CreateItem = () => {
             price: price,
             stock: stock,
             imageUrl: imageUrl,
-            isVisible: isVisible
+            isVisible: isVisible,
+            salePrice: salePrice
         }
         console.log(JSON.stringify(body));
         console.log(process.env.BACKEND_URL + "api/newitem");
@@ -73,6 +75,11 @@ export const CreateItem = () => {
                 <div className="mb-3">
                     <label className="form-label"> Price: </label>
                     <input type="number" className="form-control" value={price} onChange={(e) => setPrice(e.target.value)} />
+                </div>
+
+                <div className="mb-3">
+                    <label className="form-label"> Sale Price: </label>
+                    <input type="number" className="form-control" value={salePrice} onChange={(e) => setSalePrice(e.target.value)} />
                 </div>
 
                 <div className="mb-3">
