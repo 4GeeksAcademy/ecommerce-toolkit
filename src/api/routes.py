@@ -39,6 +39,12 @@ def handle_costumers():
     return jsonify(costumers), 200
 
 
+@api.route('/costumer/<int:id>', methods=['GET'])
+def handle_costumer(id):
+    costumer = Costumer.query.get(id)
+    return jsonify(costumer.serialize()), 200
+
+
 @api.route('/costumeradmin/<int:id>', methods=['PUT'])
 def handle_costumer_admin(id):
     costumer = Costumer.query.get(id)
