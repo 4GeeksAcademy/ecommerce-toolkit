@@ -20,6 +20,7 @@ import { Product } from "./pages/product.jsx";
 import { BooksCategory } from "./pages/booksCategory.jsx";
 import { ToysCategory } from "./pages/toysCategory.jsx";
 import { MusicCategory } from "./pages/musicCategory.jsx";
+import { AboutUs } from "./pages/aboutUs.jsx";
 import injectContext from "./store/appContext";
 import { Context } from "./store/appContext";
 
@@ -42,18 +43,18 @@ const Layout = () => {
     console.log(user);
 
     return (
-        <div>
+        <div id="main">
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />
 
-                    <Routes>
+                    <Routes >
                         <Route element={<Home />} path="/" />                     
                         <Route element={<Product />} path="/product/:itemId" />
                         <Route element={<BooksCategory/>} path="/books" />
                         <Route element={<ToysCategory/>} path="/toys" />
                         <Route element={<MusicCategory/>} path="/music" />
-                        <Route element={<h1>This is category</h1>} path="/category" />
+                        <Route element={<AboutUs/>} path="/aboutUs" />
                         <Route element={<h1>This is search</h1>} path="/search" />
                         <Route element={<Signin />} path="/signin" />
                         <Route element={<CreateAccount />} path="/createaccount" />

@@ -118,9 +118,10 @@ export const Cart = () => {
     }
 
     return (
-        <div className="container">
-            <h2 className="my-3">Shopping Cart</h2>
+        <div className="container py-5">
+            <h2>Shopping Cart</h2>
             <div className="mt-5">
+
                 {/*Render every item on the cart*/}
                 {cart.map((item) => {
                     let itemInfo = items[0];

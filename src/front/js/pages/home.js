@@ -7,7 +7,7 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="text-center">
+		<div className="container-fluid text-center pb-5">
 			<Link to={"/product/:1"} className="m-2">First Product</Link>
 			<Link to={"/product/:2"} className="m-2">Second Product</Link>
 			<Link to={"/product/:3"} className="m-2">Third Product</Link>

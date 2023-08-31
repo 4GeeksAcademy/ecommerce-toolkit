@@ -2,5 +2,18 @@
     General Styles used on every website (Don't Repeat Yourself)
 */
 
+html{
+    height: 100%;
+}
 
-
+/* #main {
+    position: relative;
+    padding-bottom: 132 px;
+    min-height: 100vh;
+}
+#footer{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+} */

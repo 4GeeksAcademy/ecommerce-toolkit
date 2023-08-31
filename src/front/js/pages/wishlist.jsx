@@ -130,8 +130,8 @@ export const Wishlist = () => {
 
 
     return (
-        <div className="container">
-            <h2 className="my-3">Wish List</h2>
+        <div className="container my-5">
+            <h2>Wish List</h2>
             {/* Map elements in stock */}
             {stockItems.map((item) => (
                 <div className="mt-5" key={item.id}>
