@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export const ItemList = () => {
+    const [sortMethod, setSortMethod] = useState("id");
 
     const [allItems, setAllItems] = useState([]);
     useEffect(() => {
@@ -10,9 +11,18 @@ export const ItemList = () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log("Success:", data);
+                data.sort((a, b) => {
+                    if (a[sortMethod] < b[sortMethod]) {
+                        return -1;
+                    }
+                    if (a[sortMethod] > b[sortMethod]) {
+                        return 1;
+                    }
+                    return 0;
+                });
                 setAllItems(data);
             })
-    }, []);
+    }, [sortMethod]);
 
     return (
         <div className="container">
@@ -24,6 +34,19 @@ export const ItemList = () => {
                     <button type="button" className="btn btn-primary">
                         <Link to={"/admin/item/wizard"} className="text-light text-decoration-none fw-bold">Create Item</Link>
                     </button>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-12">
+                    <select className="form-select" aria-label="Default select example" onChange={(e) => setSortMethod(e.target.value)}>
+                        <option defaultValue="id">Sort by ID</option>
+                        <option value="name">Sort by name</option>
+                        <option value="category">Sort by category</option>
+                        <option value="price">Sort by price</option>
+                        <option value="sale_price">Sort by sale price</option>
+                        <option value="stock">Sort by stock</option>
+                        <option value="visible">Sort by visibility</option>
+                    </select>
                 </div>
             </div>
             <table className="table table-striped">
