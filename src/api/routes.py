@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Item, Costumer, ShoppingCartItem, WishlistItem
+from api.models import db, Item, Costumer, ShoppingCartItem, WishlistItem, TodoList
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -175,3 +175,13 @@ def handle_remove_wishlist_item():
     db.session.delete(wishlist_item)
     db.session.commit()
     return jsonify("The item was removed from the wishlist"), 200
+
+
+@api.route('/newtodo', methods=['POST'])
+def handle_new_todo():
+    body = request.get_json()
+    new_todo = TodoList(category=body["category"], task=body["task"],
+                        costumer_id=body["costumerId"], item_id=body["itemId"], done=False)
+    db.session.add(new_todo)
+    db.session.commit()
+    return jsonify("The new todo was added"), 200
