@@ -14,6 +14,8 @@ import { CostumersList } from "./pages/adminPages/costumersList.jsx";
 import { CreateItem } from "./pages/adminPages/itemWizard.jsx";
 import { ModifyItem } from "./pages/adminPages/modifyWizard.jsx";
 import { CreateUser } from "./pages/adminPages/userWizard.jsx";
+import { TodoList } from "./pages/adminPages/todoList.jsx";
+import { TodoWizard } from "./pages/adminPages/todoWizard.jsx";
 import { Cart } from "./pages/cart.jsx";
 import { Wishlist } from "./pages/wishlist.jsx";
 import { Product } from "./pages/product.jsx";
@@ -49,12 +51,12 @@ const Layout = () => {
                     <Navbar />
 
                     <Routes >
-                        <Route element={<Home />} path="/" />                     
+                        <Route element={<Home />} path="/" />
                         <Route element={<Product />} path="/product/:itemId" />
-                        <Route element={<BooksCategory/>} path="/books" />
-                        <Route element={<ToysCategory/>} path="/toys" />
-                        <Route element={<MusicCategory/>} path="/music" />
-                        <Route element={<AboutUs/>} path="/aboutUs" />
+                        <Route element={<BooksCategory />} path="/books" />
+                        <Route element={<ToysCategory />} path="/toys" />
+                        <Route element={<MusicCategory />} path="/music" />
+                        <Route element={<AboutUs />} path="/aboutUs" />
                         <Route element={<h1>This is search</h1>} path="/search" />
                         <Route element={<Signin />} path="/signin" />
                         <Route element={<CreateAccount />} path="/createaccount" />
@@ -72,7 +74,8 @@ const Layout = () => {
                             <Route element={<CostumersList />} path="costumers" />
                             <Route element={<CreateUser />} path="costumers/wizard" />
                             <Route element={<h1>This is the sales module</h1>} path="sales" />
-                            <Route element={<h1>This is the todo module</h1>} path="todo" />
+                            <Route element={<TodoList />} path="todo" />
+                            <Route element={<TodoWizard />} path="todoWizard" />
                         </Route>
 
                     </Routes>
