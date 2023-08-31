@@ -183,6 +183,13 @@ def handle_remove_wishlist_item():
     return jsonify("The item was removed from the wishlist"), 200
 
 
+@api.route('/todos', methods=['GET'])
+def handle_todos():
+    todos = TodoList.query.all()
+    todos = list(map(lambda x: x.serialize(), todos))
+    return jsonify(todos), 200
+
+
 @api.route('/newtodo', methods=['POST'])
 def handle_new_todo():
     body = request.get_json()
