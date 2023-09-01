@@ -198,3 +198,11 @@ def handle_new_todo():
     db.session.add(new_todo)
     db.session.commit()
     return jsonify("The new todo was added"), 200
+
+
+@api.route('/updatetodo/<int:id>', methods=['PUT'])
+def handle_update_todo(id):
+    todo = TodoList.query.get(id)
+    todo.done = not todo.done
+    db.session.commit()
+    return jsonify("The todo was updated"), 200
