@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const CreateItem = () => {
     const [name, setName] = useState("");
@@ -9,6 +10,7 @@ export const CreateItem = () => {
     const [imageUrl, setImageUrl] = useState("");
     const [isVisible, setIsVisible] = useState(false);
     const [salePrice, setSalePrice] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         let url = "https://random.imagecdn.app/300/300";
@@ -44,6 +46,7 @@ export const CreateItem = () => {
             .then((data) => {
                 console.log("Success:", data);
                 alert("Item created successfully");
+                navigate("/admin/item");
             }
             )
     };

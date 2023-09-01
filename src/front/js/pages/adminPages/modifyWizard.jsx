@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 export const ModifyItem = () => {
     const [name, setName] = useState("");
@@ -10,6 +10,7 @@ export const ModifyItem = () => {
     const [imageUrl, setImageUrl] = useState("");
     const [isVisible, setIsVisible] = useState(false);
     const [salePrice, setSalePrice] = useState("");
+    const navigate = useNavigate();
 
     let params = useParams();
     let itemId = params.itemId.substring(1);
@@ -81,6 +82,7 @@ export const ModifyItem = () => {
             .then((response) => {
                 if (response.status === 200) {
                     alert("Item modified successfully");
+                    navigate("/admin/item");
                 } else {
                     alert("Error modifying item");
                 }

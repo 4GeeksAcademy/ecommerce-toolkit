@@ -2,12 +2,14 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { Context } from "../../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 export const TodoWizard = () => {
     const { store, actions } = useContext(Context);
     const [items, setItems] = useState([]);
     const [costumers, setCostumers] = useState([]);
     const user = store.user;
+    const navigate = useNavigate();
 
     const [category, setCategory] = useState("Other");
     const [task, setTask] = useState("");
@@ -105,6 +107,7 @@ export const TodoWizard = () => {
             .then((data) => {
                 console.log("Success:", data);
                 alert("Todo created successfully");
+                navigate("/admin/todo");
             }
             )
     }
