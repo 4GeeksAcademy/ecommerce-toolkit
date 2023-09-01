@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const CreateAccount = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -30,6 +32,7 @@ export const CreateAccount = () => {
             .then((data) => {
                 console.log("Success:", data);
                 alert("Account created successfully");
+                navigate("/signin");
             })
             .catch((error) => {
                 console.error("Error:", error);
