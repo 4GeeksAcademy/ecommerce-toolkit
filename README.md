@@ -5,20 +5,31 @@
 - Database Schema https://dbdiagram.io/d/64dd6ca902bd1c4a5ee75c9b
 
 API Routes
+- '/newcostumer', method: POST, body: customer info, action: create new costumer
+- '/costumers', method: GET, action: get list of all costumers
+- '/costumeradmin/id', method: PUT, action: change admin status to 'True'
+- '/signin', method:POST, body: email & password, action: check if info is correct to sign in
 - '/newitem', method: POST, body: item info, action: create new item
 - '/items', method: GET, action: get list of all items
-- '/item/item_id', method: 'GET', action: get specific item by id
-- '/item/item_id', method: 'PUT', body: item info, action: modify item
-- '/newcostumer', method: 'POST', body: customer info, action: create new costumer
-- '/costumers', method: 'GET', action: get list of all costumers
-- '/costumeradmin/costumer_id', method: 'PUT', action: give admin status to costumer
-- '/signin', method:'POST', body: email & password, action: check if info is correct to sign in
-- '/addcartitem', method:'POST', body: item and costumer info, action: creates a cart item
+- '/item/item_id', method: GET, action: get specific item by id
+- '/item/item_id', method: PUT, body: item info, action: modify item
+- '/addcartitem', method: POST, body: item and costumer info, action: creates a cart item
+- '/checkcartitem', methods: POST, body: costumerId & itemId, action: find if item is already in cart
+- '/updatecartitem', methods: PUT, body: cart item information, action: changes the quantity value
+- '/removecartitem', methods: PUT, body: cart item information, action: removes cart item
+- '/getcart/id', methods: GET, action: get list of cart items associated with user id
+- '/addwishlist', methods: POST, body: wishlist item information, action: creates wishlist item
+- '/getwishlist/id', methods: GET, action: get list of wishlist items associated with user id
+- '/removewishlisitem', methods: DELETE, body: wishlist item information, action: deletes wishlist item
+- '/todos', methods: GET, action: get list of all todos
+- '/newtodo', methods: POST, body: todo information, action: creates a todo
+- '/updatetodo/id', methods: PUT, action: changes todo status
 
 Flask commands
 - "flask insert-items", action: inserts predefined items
 - "flask insert-costumers", action: inserts predefined costumers
 - "flask insert-cart-items", action: inserts predefined cart items
+- "flask insert-wishlist-items", action: inserts predefined wishlist items
 
 Build web applications using React.js for the front end and python/flask for your backend API.
 
