@@ -80,12 +80,16 @@ class Sale(db.Model):
 
 class SaleItem(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    final_price = db.Column(db.Float, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
     sale_id = db.Column(db.Integer, db.ForeignKey('sale.id'), nullable=False)
     item_id = db.Column(db.Integer, db.ForeignKey('item.id'), nullable=False)
 
     def serialize(self):
         return {
             "id": self.id,
+            "final_price": self.final_price,
+            "quantity": self.quantity,
             "sale_id": self.sale_id,
             "item_id": self.item_id,
         }
