@@ -1,208 +1,294 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 
 export const Checkout = () => {
-    const [name, setName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [number, setNumber] = useState("");
-    const [address, setAddress] = useState("");
-    const [country, setCountry] = useState("");
-    const [city, setCity] = useState("");
-    const [zip, setZip] = useState("");
-    const [email, setEmail] = useState("");
-    const [cardNumber, setCardNumber] = useState("");
-    const [date, setDate] = useState("");
-    const [cvv, setCvv] = useState("");
-    const [promo, setPromo] = useState("");
+    const { store, actions } = useContext(Context);
+    const [checkout, setCheckout] = useState({
+        name: "",
+        email: "",
+        address: "",
+        country: "",
+        city: "",
+        state: "",
+        zip: ""
+    });
+    const [payment, setPayment] = useState({
+        name: "",
+        card: "",
+        expiration: "",
+        cvv: ""
+    });
+    const [cart, setCart] = useState([]);
+    const [items, setItems] = useState([]);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // TODO: Handle form submission
+    useEffect(() => {
+        fetchCart();
+        fetchItems();
+    }, []);
+
+    const fetchItems = async () => {
+        const url = process.env.BACKEND_URL + "api/items";
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+                setItems(data);
+            });
     };
 
-    //logic get number of items from flux
-    return (
-        <div className="container my-5">
-            <form onSubmit={handleSubmit}>
-                <div className="row gx-5">
-                    <div className="col-md-7">
-                        <div className="row mb-4">
-                            <h4 className="mt-3">Delivery Information</h4>
-                            <div>
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <label className="form-label"> Name: </label>
-                                        <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} />
-                                    </div>
-                                    <div className="col-md-6">
-                                        <label className="form-label"> Last Name: </label>
-                                        <input type="text" className="form-control" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <label className="form-label"> Movile Number: </label>
-                                        <input type="text" className="form-control" value={number} onChange={(e) => setNumber(e.target.value)} />
-                                    </div>
-                                    <div className="col-md-6">
-                                        <label className="form-label"> Address: </label>
-                                        <input type="text" className="form-control" value={address} onChange={(e) => setAddress(e.target.value)} />
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-md-4">
-                                        <label className="form-label"> Country: </label>
-                                        <input type="text" className="form-control" value={country} onChange={(e) => setCountry(e.target.value)} />
-                                    </div>
-                                    <div className="col-md-5">
-                                        <label className="form-label"> City: </label>
-                                        <input type="text" className="form-control" value={city} onChange={(e) => setCity(e.target.value)} />
-                                    </div>
-                                    <div className="col-md-3">
-                                        <label className="form-label"> ZIP: </label>
-                                        <input type="text" className="form-control" value={zip} onChange={(e) => setZip(e.target.value)} />
-                                    </div>
-                                </div>
+    const fetchCart = async () => {
+        const url = process.env.BACKEND_URL + "api/getcart/" + store.user;
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+                data.sort((a, b) => a.item_id - b.item_id);
+                setCart(data);
+            });
+    }
+
+    const renderCheckoutAndPayment = () => {
+        return (
+            <div className="container">
+                <div className="row m-2 border-bottom pb-2">
+                    <div className="col">
+                        <h1>Checkout</h1>
+                        <form>
+                            <div className="form-group">
+                                <label htmlFor="name">Name</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="name"
+                                    placeholder="Enter name"
+                                    value={checkout.name}
+                                    onChange={(e) => {
+                                        setCheckout({ ...checkout, name: e.target.value });
+                                    }}
+                                />
                             </div>
-                        </div>
-                        <hr className="mt-0 line"></hr>
-                        <div className="row mb-3">
-                            <h4 className="mt-3">Payment Detail</h4>
-                            <div>
-                                <div className="row">
-                                    <div className="col">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" />
-                                        <label class="form-check-label" for="gridRadios1">
-                                        Credit Card
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2"/>
-                                        <label class="form-check-label" for="gridRadios2">
-                                        Debit Card
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" />
-                                        <label class="form-check-label" for="gridRadios3">
-                                        Paypal
-                                        </label>
-                                    </div>
-                                    </div>
-                                    <div className="row">
-                                    <div className="col">
-                                        <label className="form-label"> Email: </label>
-                                        <input type="text" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} />
-                                    </div>
-
-                                </div>
-                                <div className="row">
-                                    <div className="col">
-                                        <label className="form-label"> Card Number: </label>
-                                        <div className="input-group">
-                                            <span className="input-group-text"><i className="fa fa-credit-card"></i></span>
-                                            <input type="text" className="form-control" value={cardNumber} placeholder="0000 0000 0000 0000" onChange={(e) => setCardNumber(e.target.value)} />
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <label className="form-label"> Expiry Date: </label>
-                                        <div className="input-group">
-                                            <span className="input-group-text"><i className="fa fa-calendar"></i></span>
-                                            <input type="text" className="form-control" value={date} placeholder="MM/YY" onChange={(e) => setDate(e.target.value)} />
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <label className="form-label"> CVV: </label>
-                                        <div className="input-group">
-                                            <span className="input-group-text"><i className="fa fa-lock"></i></span>
-                                            <input type="text" className="form-control" value={cvv} placeholder="000" onChange={(e) => setCvv(e.target.value)} />
-                                        </div>
-                                    </div>
-
-                                </div>
+                            <div className="form-group">
+                                <label htmlFor="email">Email address</label>
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    id="email"
+                                    placeholder="Enter email"
+                                    value={checkout.email}
+                                    onChange={(e) => {
+                                        setCheckout({ ...checkout, email: e.target.value });
+                                    }}
+                                />
                             </div>
-                        </div>
-                                    </div>
-                                    
-
-                    </div>
-                    <div className="col-md-5">
-                        <h4 className="mt-3">Order Summary</h4>
-                        <div className="row mx-2 mb-2 align-items-center">
-                            <div className="col-xl-3 text-center">
-                                <img className="img-fluid" src="//c1.staticflickr.com/1/466/19681864394_c332ae87df_t.jpg" />
+                            <div className="form-group">
+                                <label htmlFor="address">Address</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="address"
+                                    placeholder="1234 Main St"
+                                    value={checkout.address}
+                                    onChange={(e) => {
+                                        setCheckout({ ...checkout, address: e.target.value });
+                                    }}
+                                />
                             </div>
-                            <div className="col-xl-7">
-                                <div className="row mt-3 align-items-center">
-                                    <div className="col-lg-7">
-                                        <div className="col-lg-12 text-wrap">Product name xxxxxxxxxxxxxxxxxx xxxxxxxxxx xxxxxxxxxx</div>
-                                        <div className="col-12 text-primary text-opacity-50"><h6><span>$</span>00.00</h6></div>
-                                    </div>
-                                    <div className="col-xl-5">
-                                        <div className="form-outline" >
-                                            <input min="0" type="number" id="typeNumber" className="form-control text-center" />
-
-                                        </div>
-                                    </div>
-
-                                </div>
+                            <div className="form-group">
+                                <label htmlFor="country">Country</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="country"
+                                    placeholder="Country"
+                                    value={checkout.country}
+                                    onChange={(e) => {
+                                        setCheckout({ ...checkout, country: e.target.value });
+                                    }}
+                                />
                             </div>
-                            <div className="col-xl-2 text-center">
-                                <button type="button" className="btn btn-outline ">
-                                    <i className="fa-solid fa-trash fa-xl"></i>
-                                </button>
+                            <div className="form-group">
+                                <label htmlFor="city">City</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="city"
+                                    placeholder="City"
+                                    value={checkout.city}
+                                    onChange={(e) => {
+                                        setCheckout({ ...checkout, city: e.target.value });
+                                    }}
+                                />
                             </div>
-                        </div>
-                        <hr></hr>
-                        <div className="row mx-2">
-                            <div className="col-6">
-                                <strong>Subtotal</strong>
-                                <br></br>
-                                <small >Shipping</small>
-
+                            <div className="form-group">
+                                <label htmlFor="state">State</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="state"
+                                    placeholder="State"
+                                    value={checkout.state}
+                                    onChange={(e) => {
+                                        setCheckout({ ...checkout, state: e.target.value });
+                                    }
+                                    }
+                                />
                             </div>
-                           
-                            <div className="col-6">
-                                <div className="text-end"><span>$</span><span>00.00</span></div>
-                                <div className="text-end"><span>-</span></div>
+                            <div className="form-group">
+                                <label htmlFor="zip">Zip</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="zip"
+                                    placeholder="Zip"
+                                    value={checkout.zip}
+                                    onChange={(e) => {
+                                        setCheckout({ ...checkout, zip: e.target.value });
+                                    }}
+                                />
                             </div>
-                        </div>
-                        <hr ></hr>
-                        <div className="row">
-                                    <div className="col">
-                                        <label className="form-label"></label>
-                                        <div className="input-group">
-                                            <input type="text" className="form-control" value={cardNumber} placeholder="Promo Code" onChange={(e) => setPromo(e.target.value)} />
-                                            <button className="btn btn-secondary">Redeem</button>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                        <hr ></hr>
-                        <div className="row mx-2">
-                            <div className="col-6">
-                                <strong>Order Total</strong>
-                            </div>
-                            <div className="col-6">
-                                <div className="text-end text-primary text-opacity-50 fw-bold"><span>$</span><span>00.00</span></div>
-                            </div>
-                        </div>
-                        <div className="d-grid my-3">
-                            <button type="submit" className="btn bg-primary-subtle">Confirm Order</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
+                <div className="row m-2">
+                    <div className="col">
+                        <h1>Payment</h1>
+                        <form>
+                            <div className="form-group">
+                                <label htmlFor="name">Name on card</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="name"
+                                    placeholder="Name on card"
+                                    value={payment.name}
+                                    onChange={(e) => {
+                                        setPayment({ ...payment, name: e.target.value });
+                                    }}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="card">Credit card number</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="card"
+                                    placeholder="Credit card number"
+                                    value={payment.card}
+                                    onChange={(e) => {
+                                        setPayment({ ...payment, card: e.target.value });
+                                    }}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="expiration">Expiration</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="expiration"
+                                    placeholder="Expiration"
+                                    value={payment.expiration}
+                                    onChange={(e) => {
+                                        setPayment({ ...payment, expiration: e.target.value });
+                                    }}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="cvv">CVV</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="cvv"
+                                    placeholder="CVV"
+                                    value={payment.cvv}
+                                    onChange={(e) => {
+                                        setPayment({ ...payment, cvv: e.target.value });
+                                    }}
+                                />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div className="row m-2">
+                    <div className="col-6 d-flex justify-content-start">
+                        <Link to="/cart">
+                            <button type="button" className="btn btn-primary">Back to Cart</button>
+                        </Link>
+                    </div>
+                    <div className="col-6 d-flex justify-content-end">
+                        <button type="button" className="btn btn-primary">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
-            </form>
+    const renderSaleItems = () => {
+        if (items.length === 0) return null;
+        let saleItems = [];
+        let total = 0;
+        console.log("cart", cart);
+        for (let i = 0; i < cart.length; i++) {
+            let item = items.find((item) => item.id === cart[i].item_id);
+            let finalPrice = item.price;
+            if (item.sale_price) finalPrice = item.sale_price;
+            console.log("item", item);
+            if (item.stock != 0) {
+                saleItems.push({
+                    item_id: item.id,
+                    quantity: cart[i].quantity,
+                    final_price: finalPrice
+                });
+                total += cart[i].quantity * finalPrice;
+            }
+        }
+        return (
+            <div className="container">
+                <div className="row m-2">
+                    <div className="col-12">
+                        <h1>Items</h1>
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Item</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {saleItems.map((item, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{items.find((i) => i.id === item.item_id).name}</td>
+                                            <td>{item.quantity}</td>
+                                            <td>${item.final_price}</td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div className="row m-2">
+                    <div className="col-12">
+                        <h1>Total</h1>
+                        <h2>${total}</h2>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
-
+    return (
+        <div className="container">
+            <div className="row">
+                <div className="col-7">
+                    {renderCheckoutAndPayment()}
+                </div>
+                <div className="col-5">
+                    {renderSaleItems()}
+                </div>
+            </div>
         </div>
-
     );
-};
+}
