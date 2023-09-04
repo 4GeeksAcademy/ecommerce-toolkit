@@ -13,6 +13,7 @@ import { ItemList } from "./pages/adminPages/itemList.jsx";
 import { CostumersList } from "./pages/adminPages/costumersList.jsx";
 import { CreateItem } from "./pages/adminPages/itemWizard.jsx";
 import { ModifyItem } from "./pages/adminPages/modifyWizard.jsx";
+import { SalesList } from "./pages/adminPages/salesList.jsx";
 import { CreateUser } from "./pages/adminPages/userWizard.jsx";
 import { TodoList } from "./pages/adminPages/todoList.jsx";
 import { TodoWizard } from "./pages/adminPages/todoWizard.jsx";
@@ -75,7 +76,7 @@ const Layout = () => {
                             <Route element={<ModifyItem />} path="item/modify/:itemId" />
                             <Route element={<CostumersList />} path="costumers" />
                             <Route element={<CreateUser />} path="costumers/wizard" />
-                            <Route element={<h1>This is the sales module</h1>} path="sales" />
+                            <Route element={<SalesList />} path="sales" />
                             <Route element={<TodoList />} path="todo" />
                             <Route element={<TodoWizard />} path="todoWizard" />
                             <Route element={<ItemTodo />} path="itemtodo/:itemId" />

@@ -223,3 +223,10 @@ def handle_new_sale():
         db.session.add(new_sale_item)
         db.session.commit()
     return jsonify("The new sale was added"), 200
+
+
+@api.route('/sales', methods=['GET'])
+def handle_sales():
+    sales = Sale.query.all()
+    sales = list(map(lambda x: x.serialize(), sales))
+    return jsonify(sales), 200
