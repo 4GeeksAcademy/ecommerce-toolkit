@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -73,7 +74,7 @@ class Sale(db.Model):
         return {
             "id": self.id,
             "costumer_id": self.costumer_id,
-            "order_date": self.order_date,
+            "order_date": self.order_date.strftime("%Y-%m-%d"),
             "total": self.total
         }
 
