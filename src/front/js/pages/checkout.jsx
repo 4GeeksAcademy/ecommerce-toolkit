@@ -216,7 +216,7 @@ export const Checkout = () => {
                         </Link>
                     </div>
                     <div className="col-6 d-flex justify-content-end">
-                        <button type="button" className="btn btn-primary">Checkout</button>
+                        <button type="button" className="btn btn-primary" onClick={handleSale}>Checkout</button>
                     </div>
                 </div>
             </div>
@@ -278,6 +278,45 @@ export const Checkout = () => {
             </div>
         );
     }
+
+    const handleSale = () => {
+        let soldItems = [];
+        let total = 0;
+        for (let i = 0; i < cart.length; i++) {
+            let item = items.find((item) => item.id === cart[i].item_id);
+            let finalPrice = item.price;
+            if (item.sale_price) finalPrice = item.sale_price;
+            console.log("item", item);
+            if (item.stock != 0) {
+                soldItems.push({
+                    itemId: item.id,
+                    quantity: cart[i].quantity,
+                    finalPrice: finalPrice
+                });
+                total += cart[i].quantity * finalPrice;
+            }
+        }
+        const url = process.env.BACKEND_URL + "api/newsale";
+        const body = {
+            costumerId: store.user,
+            total: total,
+            soldItems: soldItems
+        };
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        };
+        fetch(url, options)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+                alert("Sale completed!");
+            });
+    };
+
 
     return (
         <div className="container">

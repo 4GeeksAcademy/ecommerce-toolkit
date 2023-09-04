@@ -2,8 +2,9 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Item, Costumer, ShoppingCartItem, WishlistItem, TodoList
+from api.models import db, Item, Costumer, ShoppingCartItem, WishlistItem, TodoList, Sale, SaleItem
 from api.utils import generate_sitemap, APIException
+from datetime import date
 
 api = Blueprint('api', __name__)
 
@@ -206,3 +207,19 @@ def handle_update_todo(id):
     todo.done = not todo.done
     db.session.commit()
     return jsonify("The todo was updated"), 200
+
+
+@api.route('/newsale', methods=['POST'])
+def handle_new_sale():
+    body = request.get_json()
+    today = date.today()
+    new_sale = Sale(costumer_id=body["costumerId"],
+                    order_date=today, total=body["total"])
+    db.session.add(new_sale)
+    db.session.commit()
+    for item in body["soldItems"]:
+        new_sale_item = SaleItem(
+            final_price=item["finalPrice"], quantity=item["quantity"], sale_id=new_sale.id, item_id=item["itemId"])
+        db.session.add(new_sale_item)
+        db.session.commit()
+    return jsonify("The new sale was added"), 200
