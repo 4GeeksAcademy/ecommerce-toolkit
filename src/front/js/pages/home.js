@@ -161,6 +161,7 @@ export const Home = () => {
 					<span className="visually-hidden">Next</span>
 				</button>
 			</div>
+			{/* on sale div */}
 			<div className="px-5">
 				<div className="px-5 mt-5 mx-lg-5 position-relative sale">
 					<div className="px-5 position-absolute top-50 start-50 translate-middle w-100">
@@ -175,7 +176,7 @@ export const Home = () => {
 			{/*items*/}
 			{!isloading ? (
 				<div className="row px-5 pt-4 mx-lg-5">
-					<h3 className="text-start text-dark">Get a look to all our products.</h3>
+					<h3 className="text-start text-dark"> Have a look at all our products. </h3>
 					{(items.length > 0 && items != undefined) ? (
 						items.map((item, i) => (
 							<div className="col-md-4 col-lg-3 g-4 pb-3 " key={i}>
