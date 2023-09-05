@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Checkout = () => {
     const { store, actions } = useContext(Context);
@@ -21,6 +21,7 @@ export const Checkout = () => {
     });
     const [cart, setCart] = useState([]);
     const [items, setItems] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchCart();
@@ -319,11 +320,36 @@ export const Checkout = () => {
             })
             .then(() => {
                 clearCart(soldItems);
+            })
+            .then(() => {
+                reduceStock(soldItems);
+            })
+            .then(() => {
+                navigate("/");
             });
     };
 
     const clearCart = (soldItems) => {
         const url = process.env.BACKEND_URL + "api/clearcart/" + store.user;
+        const body = {
+            soldItems: soldItems
+        };
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        };
+        fetch(url, options)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+            });
+    }
+
+    const reduceStock = (soldItems) => {
+        const url = process.env.BACKEND_URL + "api/reducestock";
         const body = {
             soldItems: soldItems
         };
