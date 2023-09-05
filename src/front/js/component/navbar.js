@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
@@ -10,6 +10,22 @@ export const Navbar = () => {
 	const admin = store.admin;
 	console.log(admin);
 	const navigate = useNavigate();
+
+	function setButtonVisibility() {
+		let signInButton = document.getElementById("signInButton");
+		let signOutButton = document.getElementById("signOutButton");
+		if (user === null) {
+			signOutButton.style.display = "none";
+			signInButton.style.display = "block";
+		} else {
+			signOutButton.style.display = "block";
+			signInButton.style.display = "none";
+		}
+	}
+
+	useEffect(() => {
+		setButtonVisibility();
+	}, [user]);
 
 	function handleLogout() {
 		actions.logout();
@@ -79,10 +95,10 @@ export const Navbar = () => {
 							<Link className="nav-link" to={"/cart"}><i className="fa fa-shopping-cart" aria-hidden="true" /></Link>
 						</li>
 						<li className="nav-item">
-							<button type="button" className="btn btn-success ms-2" onClick={handleSignin}>Sign In</button>
+							<button type="button" className="btn btn-success ms-2" onClick={handleSignin} id="signInButton">Sign In</button>
 						</li>
 						<li className="nav-item">
-							<button type="button" className="btn btn-danger ms-2" onClick={handleLogout}>Sign Out</button>
+							<button type="button" className="btn btn-danger ms-2" onClick={handleLogout} id="signOutButton">Sign Out</button>
 						</li>
 						<li className="d-flex align-items-center">
 							{user === null ? "" : <i className="fas fa-user-circle fa-2x text-success ms-2"></i>}
