@@ -253,3 +253,14 @@ def handle_clear_cart(id):
         db.session.delete(cart_item)
         db.session.commit()
     return jsonify("The cart was cleared"), 200
+
+
+@api.route('/reducestock', methods=['POST'])
+def handle_reduce_stock():
+    body = request.get_json()
+    sold_items = body["soldItems"]
+    for item in sold_items:
+        selected_item = Item.query.filter_by(id=item["itemId"]).first()
+        selected_item.stock = selected_item.stock - item["quantity"]
+        db.session.commit()
+    return jsonify("The stock was reduced"), 200
