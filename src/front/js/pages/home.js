@@ -125,31 +125,31 @@ export const Home = () => {
 				</div>
 				<div className="carousel-inner">
 					<div className="carousel-item active">
-						<img src="https://images.unsplash.com/photo-1544716278-e513176f20b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" className="d-block w-100" alt="books"/>
-							<div className="carousel-caption d-none d-md-block">
-								<h3>Books that speak to your soul</h3>	
-								<Link to={"/books"} >
-									<button className="btn btn-outline-dark">Shop Books</button>	
-								</Link>							
-							</div>
+						<img src="https://images.unsplash.com/photo-1544716278-e513176f20b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" className="d-block w-100" alt="books" />
+						<div className="carousel-caption d-none d-md-block">
+							<h3>Books that speak to your soul</h3>
+							<Link to={"/books"} >
+								<button className="btn btn-outline-dark">Shop Books</button>
+							</Link>
+						</div>
 					</div>
 					<div className="carousel-item">
-						<img src="https://images.unsplash.com/photo-1600723367429-aea889fdad45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" className="d-block w-100" alt="toys"/>
-							<div className="carousel-caption d-none d-md-block">
-								<h3>Sometimes music is your best companion</h3>	
-								<Link to={"/music"} >
-									<button className="btn btn-outline-dark">Shop Music </button>		
-								</Link>					
-							</div>
+						<img src="https://images.unsplash.com/photo-1600723367429-aea889fdad45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" className="d-block w-100" alt="toys" />
+						<div className="carousel-caption d-none d-md-block">
+							<h3>Sometimes music is your best companion</h3>
+							<Link to={"/music"} >
+								<button className="btn btn-outline-dark">Shop Music </button>
+							</Link>
+						</div>
 					</div>
 					<div className="carousel-item">
-						<img src="https://images.unsplash.com/photo-1598348341635-33a3f4205d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80 " className="d-block w-100" alt="..."/>
-							<div className="carousel-caption d-none d-md-block">
-								<h3>Play all day long</h3>	
-								<Link to={"/toys"} >
-									<button className="btn btn-outline-dark">Shop Toys</button>	
-								</Link>							
-							</div>
+						<img src="https://images.unsplash.com/photo-1598348341635-33a3f4205d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80 " className="d-block w-100" alt="..." />
+						<div className="carousel-caption d-none d-md-block">
+							<h3>Play all day long</h3>
+							<Link to={"/toys"} >
+								<button className="btn btn-outline-dark">Shop Toys</button>
+							</Link>
+						</div>
 					</div>
 				</div>
 				<button className="carousel-control-prev" type="button" data-bs-target="#carouselCaptions" data-bs-slide="prev">
@@ -161,10 +161,21 @@ export const Home = () => {
 					<span className="visually-hidden">Next</span>
 				</button>
 			</div>
-
+			<div className="px-5">
+				<div className="px-5 mt-5 mx-lg-5 position-relative sale">
+					<div className="px-5 position-absolute top-50 start-50 translate-middle w-100">
+						<h3 className="text-white mb-3 w-100">What is on Sale?</h3>
+						<Link to={"/sales"} >
+							<button className="btn btn-outline-secondary ">Shop Items on Sale</button>
+						</Link>
+					</div>				
+				</div>
+			</div>
+			
 			{/*items*/}
 			{!isloading ? (
 				<div className="row px-5 pt-4 mx-lg-5">
+					<h3 className="text-start text-dark">Get a look to all our products.</h3>
 					{(items.length > 0 && items != undefined) ? (
 						items.map((item, i) => (
 							<div className="col-md-4 col-lg-3 g-4 pb-3 " key={i}>
@@ -209,8 +220,8 @@ export const Home = () => {
 					</div>
 				</div>)
 			}
-
-			<div className="row row-cols-1 row-cols-md-2 g-2" style={{ padding: "15px" }}>
+			{/*Sugestion form */}
+			{/* <div className="row row-cols-1 row-cols-md-2 g-2" style={{ padding: "15px" }}>
 				<div className="col"></div>
 				<div className="col border border-secondary rounded bg-body-tertiary">
 					<h5 className="mt-2">Suggestions</h5>
@@ -230,7 +241,7 @@ export const Home = () => {
 					</div>
 					<input type="submit" className="btn btn-success m-2" value="Submit" />
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 };
