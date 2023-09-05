@@ -9,6 +9,7 @@ export const Product = () => {
     const [category, setCategory] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
+    const [salePrice, setSalePrice] = useState("") 
     const [stock, setStock] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const itemId = useParams().itemId.substring(1);
@@ -17,6 +18,7 @@ export const Product = () => {
     const { store, actions } = useContext(Context);
     const user = store.user;
     const [classWishList, setClassWishList] = useState("fa-regular fa-heart fa-lg");
+    const [isloading, setIsLoading] = useState(false)
 
     useEffect(() => {
         fetchData();
@@ -25,6 +27,7 @@ export const Product = () => {
 
     const fetchData = async () => {
         let url = process.env.BACKEND_URL + "api/item/" + itemId;
+        setIsLoading(true)
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
@@ -35,6 +38,8 @@ export const Product = () => {
                 setPrice(data.price);
                 setStock(data.stock);
                 setImageUrl(data.image_url);
+                setSalePrice(data.sale_price)
+                setIsLoading(false)
             });
     };
 
@@ -154,6 +159,7 @@ export const Product = () => {
 
         <div className="container">
             <div className="mt-5">
+                {!isloading ? (
                 <div className="row mx-2 mb-2">
                     <div className="col-md-7 text-center ">
                         <img src={imageUrl} className="img-fluid mx-auto" />
@@ -170,11 +176,12 @@ export const Product = () => {
                         </div>
 
 
-
-
-
-                        <div className="col-12 text-primary text-opacity-50 mb-3">
-                            <h4><span>$</span>{price}</h4>
+                        <div className="col-12 text-primary text-opacity-50 mb-3">                            
+                            {salePrice == null ?
+                                <h4 className="fw-bold"><span>$</span> {price}</h4>
+                                : <h4 className="fw-bold">
+                                    <span className="text-body-tertiary text-decoration-line-through pe-2 fw-normal">$ {price}</span>${salePrice}
+                                </h4>}
                         </div>
                         <div className="col-md-12">
                             <h5>Stock: {stock} units</h5>
@@ -222,7 +229,12 @@ export const Product = () => {
 
                     </div>
 
-                </div>
+                </div>): (<div className="pt-5 d-flex justify-content-center">
+                            <div className="spinner-border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div>
+                        </div>)
+                }
 
             </div>
             {/* Related products */}
