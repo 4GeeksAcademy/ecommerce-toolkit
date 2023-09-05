@@ -270,10 +270,10 @@ export const BooksCategory = () => {
 
                                                         <h6 className="fw-bolder">{item.name}</h6>
                                                         {item.sale_price == null ?
-                                                            <p>$ {item.price}</p>
-                                                            : <p>
-                                                                <span className="text-muted text-decoration-line-through">$ {item.price}</span>${item.sale_price}
-                                                            </p>}
+                                                            <h6 className="text-primary text-opacity-50 fw-bolder">$ {item.price}</h6>
+                                                            : <h6 className="text-primary text-opacity-50 fw-bolder">
+                                                                <span className="text-body-tertiary text-decoration-line-through pe-2 fw-normal">$ {item.price}</span>${item.sale_price}
+                                                            </h6>}
                                                     </div>
                                                 </div>
 
@@ -291,7 +291,12 @@ export const BooksCategory = () => {
                                             </div>
                                         </div>
                                     ))) : <h2 className="pt-5 text-center"> We don't have these products in stock</h2>}
-                            </div>) : <h2 className="pt-5 text-center"> loading... </h2>}
+                            </div>) : (<div className="pt-5 d-flex justify-content-center">
+                                            <div className="spinner-border" role="status">
+                                                <span className="visually-hidden">Loading...</span>
+                                            </div>
+                                        </div>)
+                            }
                     </div>
 
                 </div>
