@@ -77,7 +77,10 @@ export const Navbar = () => {
 								<li>
 									<Link className="dropdown-item" to={"/toys"}>Toys</Link>
 								</li>
-
+								<li><hr className="dropdown-divider my-0 py-0 mt-1"/></li>
+								<li>
+									<Link className="dropdown-item" to={"/sales"}>Sale</Link>
+								</li>
 
 							</ul>
 						</li>
