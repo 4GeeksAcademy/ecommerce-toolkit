@@ -325,6 +325,9 @@ export const Checkout = () => {
                 reduceStock(soldItems);
             })
             .then(() => {
+                clearWishlist(soldItems);
+            })
+            .then(() => {
                 navigate("/");
             });
     };
@@ -347,6 +350,28 @@ export const Checkout = () => {
                 console.log("Success:", data);
             });
     }
+
+    const clearWishlist = (soldItems) => {
+        console.log("clearWishlist");
+        const url = process.env.BACKEND_URL + "api/clearwishlist/" + store.user;
+        const body = {
+            soldItems: soldItems
+        };
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        };
+        fetch(url, options)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+            });
+    }
+
+
 
     const reduceStock = (soldItems) => {
         const url = process.env.BACKEND_URL + "api/reducestock";

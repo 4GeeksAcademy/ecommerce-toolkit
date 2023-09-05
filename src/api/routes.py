@@ -264,3 +264,15 @@ def handle_reduce_stock():
         selected_item.stock = selected_item.stock - item["quantity"]
         db.session.commit()
     return jsonify("The stock was reduced"), 200
+
+
+@api.route('/clearwishlist/<int:id>', methods=['POST'])
+def handle_clear_wishlist(id):
+    body = request.get_json()
+    sold_items = body["soldItems"]
+    for item in sold_items:
+        wishlist_item = WishlistItem.query.filter_by(
+            costumer_id=id, item_id=item["itemId"]).first()
+        db.session.delete(wishlist_item)
+        db.session.commit()
+    return jsonify("The wishlist was cleared"), 200
