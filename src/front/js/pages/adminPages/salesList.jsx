@@ -59,7 +59,7 @@ export const SalesList = () => {
                                         <th scope="row">{sale.id}</th>
                                         <td>{sale.costumer_id}</td>
                                         <td>{sale.order_date}</td>
-                                        <td>{sale.total}</td>
+                                        <td>$ {sale.total}</td>
                                         <td>
                                             <Link to={'/admin/sale/:' + sale.id} className="text-decoration-none">Details</Link>
                                         </td>

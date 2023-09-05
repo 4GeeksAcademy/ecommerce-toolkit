@@ -61,8 +61,8 @@ export const SaleDetails = () => {
                                         <th scope="row">{saleItem.item_id}</th>
                                         <td>{itemName}</td>
                                         <td>{saleItem.quantity}</td>
-                                        <td>${saleItem.final_price}</td>
-                                        <td>${Math.round(saleItem.quantity * saleItem.final_price * 100) / 100}</td>
+                                        <td>$ {saleItem.final_price}</td>
+                                        <td>$ {Math.round(saleItem.quantity * saleItem.final_price * 100) / 100}</td>
                                     </tr>
                                 );
                             })}
@@ -85,7 +85,7 @@ export const SaleDetails = () => {
                     <p><strong>Sale ID:</strong> {sale.id}</p>
                     <p><strong>Costumer ID:</strong> {sale.costumer_id}</p>
                     <p><strong>Date:</strong> {sale.order_date}</p>
-                    <p><strong>Total:</strong> ${sale.total}</p>
+                    <p><strong>Total:</strong> $ {sale.total}</p>
                 </div>
             </div>
         )

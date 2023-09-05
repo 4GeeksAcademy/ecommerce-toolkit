@@ -72,8 +72,8 @@ export const ItemList = () => {
                             <td>{item.name}</td>
                             <td>{item.category}</td>
                             <td>{item.description}</td>
-                            <td>{item.price}</td>
-                            <td>{item.sale_price}</td>
+                            <td>$ {item.price}</td>
+                            <td>$ {item.sale_price}</td>
                             <td>{item.stock}</td>
                             <td><img src={item.image_url} width={"50px"} className="img-thumbnail" /></td>
                             <td>{String(item.visible)}</td>
