@@ -316,9 +316,30 @@ export const Checkout = () => {
             .then((data) => {
                 console.log("Success:", data);
                 alert("Sale completed!");
+            })
+            .then(() => {
+                clearCart(soldItems);
             });
     };
 
+    const clearCart = (soldItems) => {
+        const url = process.env.BACKEND_URL + "api/clearcart/" + store.user;
+        const body = {
+            soldItems: soldItems
+        };
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        };
+        fetch(url, options)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+            });
+    }
 
     return (
         <div className="container">
