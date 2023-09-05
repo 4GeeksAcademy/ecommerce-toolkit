@@ -1,26 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-//import { useParams } from "react-router-dom";
-import { RelatedProducts } from "../component/relatedProducts.jsx";
 import { Context } from "../store/appContext";
 import "../../styles/toysCategory.css";
 
 export const ToysCategory = () => {
     const [categotyItems, setCategoryItems] = useState([])
     const [originalFetch, setOriginalFetch] = useState([])
-    //const itemId = useParams().itemId.substring(1);
-    //const [change, setChange] = useState(0);
+    const [costumerWishlist, setCostumerWishlist] = useState([])
     const { store, actions } = useContext(Context);
     const user = store.user;
     const [isloading, setIsLoading] = useState(false)
     const [minValue, setMinValue] = useState()
-    const [maxValue, setMaxValue] = useState()
-    const [maxPrice, setMaxPrice] = useState()
+    const [maxValue, setMaxValue] = useState()    
 
     useEffect(() => {
         fetchData();
-        //fetchWhishList();
+        fetchWishList();
     }, []);
 
     const fetchData = async () => {
@@ -41,67 +37,78 @@ export const ToysCategory = () => {
                 setIsLoading(false)
             });
     };
+
+        //get wishlist api;
+        const fetchWishList = async () => {
+            let url = process.env.BACKEND_URL + "api/getwishlist/" + user;
+            fetch(url)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Success wishlist:", data);
+                    setCostumerWishlist(data);             
+                                      
+                });
+        };
+        
+        //change icon when is in wishlist    
+        const wishListIcon = (id) => {
+            let heartclass = "fa-regular fa-heart fa-lg"
+            if (costumerWishlist.length > 0 && !isloading) {            
+                costumerWishlist.map((item)=>{            
+                    if(id == item.item_id){
+                        heartclass= "fa-solid fa-heart fa-lg"
+                    } 
+                })           
+            }  
+            return heartclass      
+        }
+   
     
-    // const fetchWhishList = async () => {
-    //     let url = process.env.BACKEND_URL + "api/getwishlist/" + user;
-    //     fetch(url)
-    //         .then((response) => response.json())
-    //         .then((data) => {
-    //             console.log("Success:", data);
-    //             console.log("data", data);
-    //             for (let i = 0; i < data.length; i++) {
-    //                 if (data[i].item_id == itemId) {
-    //                     setClassWishList("fa-solid fa-heart fa-lg");
-    //                 }
-    //             }
-    //         });
-    // };
-
-    // const handleAddWhish = () => {
-    //     if (user == null) {
-    //         alert("Please login to add items to wishlist");
-    //         return;
-    //     }
-
-    //     //Check if item is already in wishlist
-    //     let url = process.env.BACKEND_URL + "api/getwishlist/" + user;
-    //     fetch(url)
-    //         .then((response) => response.json())
-    //         .then((data) => {
-    //             console.log("Success:", data);
-    //             console.log("data", data);
-    //             for (let i = 0; i < data.length; i++) {
-    //                 if (data[i].item_id == itemId) {
-    //                     alert("Item already in wishlist");
-    //                     return;
-    //                 }
-    //             }
-    //             addToWishList();
-    //         });
-
-    //     const addToWishList = () => {
-    //         url = process.env.BACKEND_URL + "api/addwishlist";
-    //         let data = {
-    //             itemId: itemId,
-    //             costumerId: user
-    //         };
-    //         let options = {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify(data),
-    //         };
-    //         fetch(url, options)
-    //             .then((response) => response.json())
-    //             .then((data) => {
-    //                 console.log("Success:", data);
-    //                 alert("Item added to wishlist");
-    //                 setClassWishList("fa-solid fa-heart fa-lg");
-    //             })
-    //     };
-
-    // };
+        const handleAddWish = (id) => {
+            if (user == null) {
+                alert("Please login to add items to wishlist");
+                return;
+            }
+    
+            //Check if item is already in wishlist
+            let url = process.env.BACKEND_URL + "api/getwishlist/" + user;
+            fetch(url)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Success:", data);
+                    console.log("data", data);
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i].item_id == id) {
+                            alert("Item already in wishlist");
+                            return;
+                        }
+                    }
+                    addToWishList(id);
+                });
+    
+            const addToWishList = (id) => {
+                url = process.env.BACKEND_URL + "api/addwishlist";
+                let data = {
+                    itemId: id,
+                    costumerId: user
+                };
+                let options = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                };
+                fetch(url, options)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log("Success:", data);
+                        alert("Item added to wishlist");
+                        fetchWishList()
+                    })
+            };
+    
+        };
         
     const comparablePrice = originalFetch.map(item => {
         if (item.sale_price === null) {
@@ -267,8 +274,8 @@ export const ToysCategory = () => {
                                                     <button type="button" className="btn bg-primary-subtle mt-auto px-4 mx-3">View Details</button>
                                                 </Link>
 
-                                                <button type="button" className="btn btn-outline mt-auto " onClick={(e) => handleLike()}>
-                                                    <i className="fa-regular fa-heart fa-lg"></i>
+                                                <button type="button" className="btn btn-outline mt-auto " onClick={(e) => handleAddWish(item.id)}>
+                                                    <i className={wishListIcon(item.id)}></i>
                                                 </button>
                                             </div>
                                         </div>
