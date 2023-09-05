@@ -19,6 +19,7 @@ import { TodoList } from "./pages/adminPages/todoList.jsx";
 import { TodoWizard } from "./pages/adminPages/todoWizard.jsx";
 import { ItemTodo } from "./pages/adminPages/itemTodo.jsx";
 import { UserTodo } from "./pages/adminPages/userTodo.jsx";
+import { SaleDetails } from "./pages/adminPages/salesDetails.jsx";
 import { Cart } from "./pages/cart.jsx";
 import { Wishlist } from "./pages/wishlist.jsx";
 import { Product } from "./pages/product.jsx";
@@ -77,6 +78,7 @@ const Layout = () => {
                             <Route element={<CostumersList />} path="costumers" />
                             <Route element={<CreateUser />} path="costumers/wizard" />
                             <Route element={<SalesList />} path="sales" />
+                            <Route element={<SaleDetails />} path="sale/:saleId" />
                             <Route element={<TodoList />} path="todo" />
                             <Route element={<TodoWizard />} path="todoWizard" />
                             <Route element={<ItemTodo />} path="itemtodo/:itemId" />

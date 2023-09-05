@@ -241,6 +241,7 @@ export const Checkout = () => {
                 });
                 total += cart[i].quantity * finalPrice;
             }
+            total = Math.round(total * 100) / 100;
         }
         return (
             <div className="container">
@@ -295,6 +296,7 @@ export const Checkout = () => {
                 });
                 total += cart[i].quantity * finalPrice;
             }
+            total = Math.round(total * 100) / 100;
         }
         const url = process.env.BACKEND_URL + "api/newsale";
         const body = {

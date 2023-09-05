@@ -230,3 +230,14 @@ def handle_sales():
     sales = Sale.query.all()
     sales = list(map(lambda x: x.serialize(), sales))
     return jsonify(sales), 200
+
+
+@api.route('/sale/<int:id>', methods=['GET'])
+def handle_sale(id):
+    sale = Sale.query.get(id)
+    sale_items = SaleItem.query.filter_by(sale_id=id).all()
+    response_body = {
+        "sale": sale.serialize(),
+        "saleItems": list(map(lambda x: x.serialize(), sale_items))
+    }
+    return jsonify(response_body), 200
