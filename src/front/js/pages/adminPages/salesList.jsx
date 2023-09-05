@@ -61,7 +61,7 @@ export const SalesList = () => {
                                         <td>{sale.order_date}</td>
                                         <td>{sale.total}</td>
                                         <td>
-                                            <Link to={'/admin/sale/:${sale.id}'} className="text-decoration-none">Details</Link>
+                                            <Link to={'/admin/sale/:' + sale.id} className="text-decoration-none">Details</Link>
                                         </td>
                                     </tr>
                                 )
