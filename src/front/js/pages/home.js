@@ -1,148 +1,234 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 
 export const Home = () => {
+	const [items, setItems] = useState([])
+	const [costumerWishlist, setCostumerWishlist] = useState([])
 	const { store, actions } = useContext(Context);
+	const user = store.user;
+	const [isloading, setIsLoading] = useState(false)
+
+
+	useEffect(() => {
+		fetchData();
+		fetchWishList();
+	}, []);
+
+	const fetchData = async () => {
+		let url = process.env.BACKEND_URL + "api/items";
+		setIsLoading(true)
+		fetch(url)
+			.then((response) => response.json())
+			.then((data) => {
+				console.log("Success items:", data);
+				setItems(data)
+				setIsLoading(false)
+			});
+	};
+	//get wishlist api;
+	const fetchWishList = async () => {
+		let url = process.env.BACKEND_URL + "api/getwishlist/" + user;
+		fetch(url)
+			.then((response) => response.json())
+			.then((data) => {
+				console.log("Success wishlist:", data);
+				setCostumerWishlist(data);
+
+			});
+	};
+
+	//change icon when is in wishlist    
+	const wishListIcon = (id) => {
+		let heartclass = "fa-regular fa-heart fa-lg"
+		if (costumerWishlist.length > 0 && !isloading) {
+			costumerWishlist.map((item) => {
+				if (id == item.item_id) {
+					heartclass = "fa-solid fa-heart fa-lg"
+				}
+			})
+		}
+		return heartclass
+	}
+
+	const handleAddWish = (id) => {
+		if (user == null) {
+			alert("Please login to add items to wishlist");
+			return;
+		}
+
+		//Check if item is already in wishlist
+		let url = process.env.BACKEND_URL + "api/getwishlist/" + user;
+		fetch(url)
+			.then((response) => response.json())
+			.then((data) => {
+				console.log("Success:", data);
+				console.log("data", data);
+				for (let i = 0; i < data.length; i++) {
+					if (data[i].item_id == id) {
+						alert("Item already in wishlist");
+						return;
+					}
+				}
+				addToWishList(id);
+			});
+
+		const addToWishList = (id) => {
+			url = process.env.BACKEND_URL + "api/addwishlist";
+			let data = {
+				itemId: id,
+				costumerId: user
+			};
+			let options = {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(data),
+			};
+			fetch(url, options)
+				.then((response) => response.json())
+				.then((data) => {
+					console.log("Success:", data);
+					alert("Item added to wishlist");
+					fetchWishList()
+				})
+		};
+
+	};
+
+	const comparablePrice = items.map(item => {
+		if (item.sale_price === null) {
+			return {
+				...item,
+				finalPrice: item.price
+			}
+		} else {
+			return {
+				...item,
+				finalPrice: item.sale_price
+			}
+		}
+	})
+
 
 	return (
-		<div className="container-fluid text-center pb-5">
-			<Link to={"/product/:1"} className="m-2">First Product</Link>
-			<Link to={"/product/:2"} className="m-2">Second Product</Link>
-			<Link to={"/product/:3"} className="m-2">Third Product</Link>
-			<Link to={"/product/:4"} className="m-2">Fourth Product</Link>
-			<Link to={"/product/:5"} className="m-2">Fifth Product</Link>
-			<Link to={"/product/:6"} className="m-2">Sixth Product</Link>
-			<Link to={"/product/:7"} className="m-2">Seventh Product</Link>
-
-			<div id="carouselExample" className="carousel slide">
-				<div class="carousel-indicators">
-					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+		<div className="container-fluid text-center pb-5 px-0 mx-0">
+			{/*Carousel */}
+			<div id="carouselCaptions" className="carousel carousel-dark slide" data-bs-ride="true">
+				<div className="carousel-indicators">
+					<button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+					<button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+					<button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
 				</div>
 				<div className="carousel-inner">
 					<div className="carousel-item active">
-						<img src="https://www.anahuac.mx/mexico/sites/default/files/styles/webp/public/noticias/Los-colores-que-utilizamos-en-la-ropa-dicen-como-somos.jpg.webp?itok=k3GFCGkN" className="d-block w-100 object-fit-cover" style={{ heigth: "50px" }} alt="..." />
+						<img src="https://images.unsplash.com/photo-1544716278-e513176f20b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" className="d-block w-100" alt="books"/>
+							<div className="carousel-caption d-none d-md-block">
+								<h3>Books that speak to your soul</h3>	
+								<Link to={"/books"} >
+									<button className="btn btn-outline-dark">Shop Books</button>	
+								</Link>							
+							</div>
 					</div>
 					<div className="carousel-item">
-						<img src="https://static.eldiario.es/clip/a169422c-b292-4c46-9a1d-082f46b9220e_16-9-discover-aspect-ratio_default_0.jpg" className="d-block w-100 object-fit-cover" style={{ heigth: "50px" }} alt="..." />
+						<img src="https://images.unsplash.com/photo-1600723367429-aea889fdad45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" className="d-block w-100" alt="toys"/>
+							<div className="carousel-caption d-none d-md-block">
+								<h3>Sometimes music is your best companion</h3>	
+								<Link to={"/music"} >
+									<button className="btn btn-outline-dark">Shop Music </button>		
+								</Link>					
+							</div>
 					</div>
 					<div className="carousel-item">
-						<img src="https://www.modalia.es/wp-content/uploads/2021/11/scc-2.jpg" className="d-block w-100 object-fit-cover" style={{ heigth: "50px" }} alt="..." />
+						<img src="https://images.unsplash.com/photo-1598348341635-33a3f4205d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80 " className="d-block w-100" alt="..."/>
+							<div className="carousel-caption d-none d-md-block">
+								<h3>Play all day long</h3>	
+								<Link to={"/toys"} >
+									<button className="btn btn-outline-dark">Shop Toys</button>	
+								</Link>							
+							</div>
 					</div>
 				</div>
-				<button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+				<button className="carousel-control-prev" type="button" data-bs-target="#carouselCaptions" data-bs-slide="prev">
 					<span className="carousel-control-prev-icon" aria-hidden="true"></span>
 					<span className="visually-hidden">Previous</span>
 				</button>
-				<button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+				<button className="carousel-control-next" type="button" data-bs-target="#carouselCaptions" data-bs-slide="next">
 					<span className="carousel-control-next-icon" aria-hidden="true"></span>
 					<span className="visually-hidden">Next</span>
 				</button>
 			</div>
-			<ul className="nav justify-content-center nav-tabs" id="myTab" role="tablist" style={{ paddingTop: "30px" }}>
-				<li className="nav-item" role="presentation">
-					<a className="nav-link active" id="popular-tab" data-bs-toggle="tab" data-bs-target="#popular-tab-pane" type="a" role="tab" aria-controls="popular-tab-pane" aria-selected="true">Popular</a>
-				</li>
-				<li className="nav-item" role="presentation">
-					<a className="nav-link" id="nuevo-tab" data-bs-toggle="tab" data-bs-target="#nuevo-tab-pane" type="a" role="tab" aria-controls="nuevo-tab-pane" aria-selected="false">New</a>
-				</li>
-				<li className="nav-item" role="presentation">
-					<a className="nav-link" id="lastU-tab" data-bs-toggle="tab" data-bs-target="#lastU-tab-pane" type="a" role="tab" aria-controls="lastU-tab-pane" aria-selected="false">Last Unites</a>
-				</li>
-				<li className="nav-item" role="presentation">
-					<a className="nav-link" id="promo-tab" data-bs-toggle="tab" data-bs-target="#promo-tab-pane" type="a" role="tab" aria-controls="promo-tab-pane" aria-selected="false">Promotion</a>
-				</li>
-			</ul>
 
-			<div class="tab-content" id="myTabContent">
-				<div class="tab-pane fade show active" id="popular-tab-pane" role="tabpanel" aria-labelledby="popular-tab" tabindex="0">
-					<div class="row" id="popular-tab-pane">
-						<div class="row row-cols-1 row-cols-md-4 g-4" style={{ padding: "15px" }}>
-							<div class="col">
-								<div class="card">
-									<Link class="text-dark link-underline link-underline-opacity-0" to="/product/theid">
-										<img src="https://estampadosdreamagine.com.co/wp-content/uploads/2019/07/SACOS-WALLIE-Y-EVA-B-1.jpg" class="card-img-top" alt="..." />
-									</Link>
+			{/*items*/}
+			{!isloading ? (
+				<div className="row px-5 pt-4 mx-lg-5">
+					{(items.length > 0 && items != undefined) ? (
+						items.map((item, i) => (
+							<div className="col-md-4 col-lg-3 g-4 pb-3 " key={i}>
+								<div className="card h-100">
+									{/* conditional for sale price */}
+									{item.sale_price == null ?
+										<><img className="card-img-top" src={item.image_url} alt="..." /></>
+										: <>
+											<div className="badge bg-dark position-absolute">Sale </div>
+											<img className="card-img-top" src={item.image_url} alt="..." />
+										</>}
 
-									<div class="card-body">
-										<h5 class="card-title">
-											<Link class="text-dark link-underline link-underline-opacity-0" to="/product/theid">Product name</Link>
-										</h5>
-										<p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-									</div>
-								</div>
-							</div>
-							<div class="col">
-								<div class="card">
-									<Link class="text-dark link-underline link-underline-opacity-0" to="/product/theid">
-										<img src="https://estampadosdreamagine.com.co/wp-content/uploads/2019/07/SACOS-WALLIE-Y-EVA-B-1.jpg" class="card-img-top" alt="..." />
-									</Link>
+									<div className="card-body p-0 pt-2">
+										<div className="text-center">
 
-									<div class="card-body">
-										<h5 class="card-title">
-											<Link class="text-dark link-underline link-underline-opacity-0" to="/product/theid">Product name</Link>
-										</h5>
-										<p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+											<h6 className="fw-bolder">{item.name}</h6>
+											{item.sale_price == null ?
+												<h6 className="text-primary text-opacity-50 fw-bolder">$ {item.price}</h6>
+												: <h6 className="text-primary text-opacity-50 fw-bolder">
+													<span className="text-body-tertiary text-decoration-line-through pe-2 fw-normal">$ {item.price}</span>${item.sale_price}
+												</h6>}
+										</div>
+									</div>
+
+									<div className="card-footer pt-0 pb-3 border-top-0 bg-transparent">
+										<div className="text-center">
+											<Link to={"/product/:" + item.id} >
+												<button type="button" className="btn bg-primary-subtle mt-auto px-4 mx-3">View Details</button>
+											</Link>
+
+											<button type="button" className="btn btn-outline mt-auto " onClick={(e) => handleAddWish(item.id)}>
+												<i className={wishListIcon(item.id)}></i>
+											</button>
+										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col">
-								<div class="card">
-									<Link class="text-dark link-underline link-underline-opacity-0" to="/product/theid">
-										<img src="https://estampadosdreamagine.com.co/wp-content/uploads/2019/07/SACOS-WALLIE-Y-EVA-B-1.jpg" class="card-img-top" alt="..." />
-									</Link>
-									<div class="card-body">
-										<h5 class="card-title">
-											<Link class="text-dark link-underline link-underline-opacity-0" to="/product/theid">Product name</Link>
-										</h5>
-										<p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-									</div>
-								</div>
-							</div>
-							<div class="col">
-								<div class="card">
-									<Link class="text-dark link-underline link-underline-opacity-0" to="/product/theid">
-										<img src="https://estampadosdreamagine.com.co/wp-content/uploads/2019/07/SACOS-WALLIE-Y-EVA-B-1.jpg" class="card-img-top" alt="..." />
-									</Link>
-									<div class="card-body">
-										<h5 class="card-title">
-											<Link class="text-dark link-underline link-underline-opacity-0" to="/product/theid">Product name</Link>
-										</h5>
-										<p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-									</div>
-								</div>
-							</div>
-						</div>
+						))) : <h2 className="pt-5 text-center"> We don't have these products in stock</h2>}
+				</div>) : (<div className="pt-5 d-flex justify-content-center">
+					<div className="spinner-border" role="status">
+						<span className="visually-hidden">Loading...</span>
 					</div>
-				</div>
-			</div>
+				</div>)
+			}
 
-			<div class="tab-pane fade" id="nuevo-tab-pane" role="tabpanel" aria-labelledby="nuevo-tab" tabindex="0">ESTO ES NUEVO</div>
-			<div class="tab-pane fade" id="lastU-tab-pane" role="tabpanel" aria-labelledby="lastU-tab" tabindex="0">Ultimas unidades</div>
-			<div class="tab-pane fade" id="promo-tab-pane" role="tabpanel" aria-labelledby="promo-tab" tabindex="0">Promociones</div>
-
-			<div class="row row-cols-1 row-cols-md-2 g-2" style={{ padding: "15px" }}>
+			<div className="row row-cols-1 row-cols-md-2 g-2" style={{ padding: "15px" }}>
 				<div className="col"></div>
 				<div className="col border border-secondary rounded bg-body-tertiary">
 					<h5 className="mt-2">Suggestions</h5>
-					<div class="mb-3 d-inline-flex p-2 text-center">
-						<label for="exampleFormControlInput1" class="form-label mt-3 mx-2">Name</label>
-						<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name" style={{ width: "10rem", margin: "8px" }} />
-						<label for="exampleFormControlInput1" class="form-label">Last Name</label>
-						<input type="text" class="form-control m-2" id="exampleFormControlInput1" placeholder="Last Name" style={{ width: "10rem" }} />
+					<div className="mb-3 d-inline-flex p-2 text-center">
+						<label for="exampleFormControlInput1" className="form-label mt-3 mx-2">Name</label>
+						<input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Name" style={{ width: "10rem", margin: "8px" }} />
+						<label for="exampleFormControlInput1" className="form-label">Last Name</label>
+						<input type="text" className="form-control m-2" id="exampleFormControlInput1" placeholder="Last Name" style={{ width: "10rem" }} />
 					</div>
-					<div class="mb-3">
-						<label for="exampleFormControlInput1" class="form-label">Email address</label>
-						<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+					<div className="mb-3">
+						<label for="exampleFormControlInput1" className="form-label">Email address</label>
+						<input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
 					</div>
-					<div class="mb-3">
-						<label for="exampleFormControlTextarea1" class="form-label">Comments</label>
-						<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+					<div className="mb-3">
+						<label for="exampleFormControlTextarea1" className="form-label">Comments</label>
+						<textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 					</div>
-					<input type="submit" class="btn btn-success m-2" value="Submit" />
+					<input type="submit" className="btn btn-success m-2" value="Submit" />
 				</div>
 			</div>
 		</div>
