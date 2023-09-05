@@ -241,3 +241,15 @@ def handle_sale(id):
         "saleItems": list(map(lambda x: x.serialize(), sale_items))
     }
     return jsonify(response_body), 200
+
+
+@api.route('/clearcart/<int:id>', methods=['POST'])
+def handle_clear_cart(id):
+    body = request.get_json()
+    sold_items = body["soldItems"]
+    for item in sold_items:
+        cart_item = ShoppingCartItem.query.filter_by(
+            costumer_id=id, item_id=item["itemId"]).first()
+        db.session.delete(cart_item)
+        db.session.commit()
+    return jsonify("The cart was cleared"), 200
