@@ -133,6 +133,166 @@ def setup_commands(app):
                 "image_url": "https://images.unsplash.com/photo-1568201402596-ececfcf0ce4a?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5MjgxMTA4NA&ixlib=rb-4.0.3&q=80&w=300",
                 "visible": True,
                 "sale_price": 8.99
+            },
+            {
+                "name": "The Great Gatsby",
+                "category": "Books",
+                "description": "A classic novel by F. Scott Fitzgerald.",
+                "price": 9.99,
+                "stock": 30,
+                "image_url": "https://images.unsplash.com/photo-1691971943379-5965d3d7f07f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5Mzk1NzA5MA&ixlib=rb-4.0.3&q=80&w=300",
+                "visible": True,
+                "sale_price": None
+            },
+            {
+                "name": "To Kill a Mockingbird",
+                "category": "Books",
+                "description": "Harper Lee's powerful novel on racial injustice.",
+                "price": 11.99,
+                "stock": 40,
+                "image_url": "https://images.unsplash.com/photo-1693147822536-9cddec4ad008?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5Mzk1NzA2Mg&ixlib=rb-4.0.3&q=80&w=300",
+                "visible": True,
+                "sale_price": None
+            },
+            {
+                "name": "1984",
+                "category": "Books",
+                "description": "George Orwell's dystopian masterpiece.",
+                "price": 10.49,
+                "stock": 25,
+                "image_url": "https://plus.unsplash.com/premium_photo-1691030256201-b73e0d0c60e1?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5Mzk1NzA2MQ&ixlib=rb-4.0.3&q=80&w=300",
+                "visible": True,
+                "sale_price": 9.49
+            },
+            {
+                "name": "The Catcher in the Rye",
+                "category": "Books",
+                "description": "J.D. Salinger's iconic coming-of-age novel.",
+                "price": 8.99,
+                "stock": 35,
+                "image_url": "https://plus.unsplash.com/premium_photo-1690487695858-070ba0ef41f0?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5Mzk1NzA3OA&ixlib=rb-4.0.3&q=80&w=300",
+                "visible": True,
+                "sale_price": None
+            },
+            {
+                "name": "Pride and Prejudice",
+                "category": "Books",
+                "description": "Jane Austen's timeless classic.",
+                "price": 7.99,
+                "stock": 45,
+                "image_url": "https://images.unsplash.com/photo-1690914913845-3863dbd15a9a?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5Mzk1NzA4Mg&ixlib=rb-4.0.3&q=80&w=300",
+                "visible": True,
+                "sale_price": 4.19
+            },
+            {
+                "name": "Dinosaur Plush Toy",
+                "category": "Toys",
+                "description": "A cuddly dinosaur plush toy for kids.",
+                "price": 19.99,
+                "stock": 15,
+                "image_url": "https://images.unsplash.com/photo-1692592333941-14791e29fea5?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5Mzk1NzA3NA&ixlib=rb-4.0.3&q=80&w=300",
+                "visible": True,
+                "sale_price": 16.99
+            },
+            {
+                "name": "LEGO Building Set",
+                "category": "Toys",
+                "description": "A creative LEGO building set for kids' imagination.",
+                "price": 49.95,
+                "stock": 8,
+                "image_url": "https://images.unsplash.com/photo-1691137493205-111951566e72?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5Mzk1NzA4Ng&ixlib=rb-4.0.3&q=80&w=300",
+                "visible": True,
+                "sale_price": 9.99
+            },
+            {
+                "name": "Teddy Bear",
+                "category": "Toys",
+                "description": "A cute and cuddly teddy bear for hugging.",
+                "price": 12.99,
+                "stock": 20,
+                "image_url": "https://images.unsplash.com/photo-1691796528137-e0640621939d?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5Mzk1NzA4MA&ixlib=rb-4.0.3&q=80&w=300",
+                "visible": True,
+                "sale_price": None
+            },
+            {
+                "name": "Remote Control Car",
+                "category": "Toys",
+                "description": "A fast and fun remote control car for kids and adults alike.",
+                "price": 39.99,
+                "stock": 10,
+                "image_url": "https://images.unsplash.com/photo-1692607038928-17d0bb79e451?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5Mzk1NzA5Mw&ixlib=rb-4.0.3&q=80&w=300",
+                "visible": True,
+                "sale_price": None
+            },
+            {
+                "name": "Puzzle Game",
+                "category": "Toys",
+                "description": "A challenging puzzle game to test your problem-solving skills.",
+                "price": 14.95,
+                "stock": 18,
+                "image_url": "https://images.unsplash.com/photo-1692733470142-bfa42928dc33?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5Mzk1NzA3MQ&ixlib=rb-4.0.3&q=80&w=300",
+                "visible": True,
+                "sale_price": None
+            },
+            {
+                "name": "Classical Music Collection",
+                "category": "Music",
+                "description": "A compilation of classical music masterpieces.",
+                "price": 19.99,
+                "stock": 10,
+                "image_url": "https://images.unsplash.com/photo-1691349202760-b139b5238a76?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5Mzk1NzA3Ng&ixlib=rb-4.0.3&q=80&w=300",
+                "visible": True,
+                "sale_price": None
+            },
+            {
+                "name": "Rock Legends Vinyl Collection",
+                "category": "Music",
+                "description": "A set of classic rock albums on vinyl.",
+                "price": 49.95,
+                "stock": 5,
+                "image_url": "https://plus.unsplash.com/premium_photo-1673795754005-214e3e1fccba?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5Mzk1NzA4MA&ixlib=rb-4.0.3&q=80&w=300",
+                "visible": True,
+                "sale_price": 39.99
+            },
+            {
+                "name": "Pop Hits CD Collection",
+                "category": "Music",
+                "description": "A collection of popular music hits on CDs.",
+                "price": 29.95,
+                "stock": 8,
+                "image_url": "https://images.unsplash.com/photo-1692358339302-8dfe21d15241?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5Mzk1NzA4NA&ixlib=rb-4.0.3&q=80&w=300",
+                "visible": True,
+                "sale_price": None
+            },
+            {
+                "name": "Jazz Classics CD Set",
+                "category": "Music",
+                "description": "A set of classic jazz music albums on CDs.",
+                "price": 39.99,
+                "stock": 12,
+                "image_url": "https://plus.unsplash.com/premium_photo-1690820317239-7c28827ed9c1?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5Mzk1NzI4OQ&ixlib=rb-4.0.3&q=80&w=300",
+                "visible": True,
+                "sale_price": None
+            },
+            {
+                "name": "Electronic Dance Music (EDM) Mix",
+                "category": "Music",
+                "description": "A high-energy EDM mix for party enthusiasts.",
+                "price": 14.99,
+                "stock": 20,
+                "image_url": "https://images.unsplash.com/photo-1691178879907-f6f1ff57de2e?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5Mzk1NzA5Nw&ixlib=rb-4.0.3&q=80&w=300",
+                "visible": True,
+                "sale_price": 12.99
+            },
+            {
+                "name": "Country Music Hits CD",
+                "category": "Music",
+                "description": "A collection of country music hits on CD.",
+                "price": 19.95,
+                "stock": 15,
+                "image_url": "https://images.unsplash.com/photo-1691495258003-aa698004a721?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5Mzk1NzA5Nw&ixlib=rb-4.0.3&q=80&w=300",
+                "visible": True,
+                "sale_price": None
             }]
 
         for item in items:
