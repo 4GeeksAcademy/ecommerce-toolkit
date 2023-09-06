@@ -151,7 +151,7 @@ export const Cart = () => {
                                         <div className="col-md-12 text-wrap">{itemInfo.name}</div>
                                         <div className="col-12 text-primary"><h6><span>$</span>{finalPrice}</h6></div>
                                         {/*Add special price sign if onSale is true*/}
-                                        {onSale ? <div className="col-12 text-danger text-opacity-50"><h6><span>$</span>{itemInfo.price}</h6></div> : null}
+                                        {onSale ? <div className="col-12 text-decoration-line-through fw-lighter"><h6><span>$</span>{itemInfo.price}</h6></div> : null}
                                     </div>
                                     <div className="col-md-5 px-5">
                                         <div className="form-outline" >

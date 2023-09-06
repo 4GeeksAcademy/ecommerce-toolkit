@@ -147,7 +147,10 @@ export const Wishlist = () => {
                                     <div className="col-md-12 text-wrap">
                                         <Link className="text-dark link-underline link-underline-opacity-0" to={"/product/" + item.id}>{item.name}</Link>
                                     </div>
-                                    <div className="col-12 text-primary text-opacity-50"><h6><span>$</span>{item.price}</h6></div>
+                                    {/*Add special price sign if onSale is true*/}
+                                    {item.sale_price != null ? <div className="col-12 text-primary"><h6><span>$</span>{item.sale_price}</h6></div> : null}
+                                    {item.sale_price != null ? <div className="col-12 text-decoration-line-through"><h6><span>$</span>{item.price}</h6></div> : null}
+                                    {item.sale_price == null ? <div className="col-12 text-primary"><h6><span>$</span>{item.price}</h6></div> : null}
                                 </div>
                                 <div className="col-md-3 px-5">
                                     <div className="text-secondary" >
