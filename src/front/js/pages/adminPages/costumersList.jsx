@@ -27,6 +27,8 @@ export const CostumersList = () => {
 
     function makeAdmin(event) {
         let id = event.target.id;
+        let htmlElement = document.getElementById(id);
+        htmlElement.innerHTML = "true";
         console.log(id);
         let url = String(process.env.BACKEND_URL + "api/costumeradmin/" + id);
         fetch(url, {
@@ -79,7 +81,7 @@ export const CostumersList = () => {
                             <th scope="row">{costumer.id}</th>
                             <td>{costumer.name}</td>
                             <td>{costumer.email}</td>
-                            <td>{String(costumer.is_admin)}</td>
+                            <td id={costumer.id}>{String(costumer.is_admin)}</td>
                             <td><button type="button" id={costumer.id} className="btn btn-success btn-sm" onClick={makeAdmin} >X</button></td>
                             {/*Link to email customers*/}
                             <td><a href={"mailto:" + costumer.email + "?subject=Alo%20from%20ecommerce%20toolkit"} className="btn btn-primary btn-sm">Send Email</a></td>
