@@ -37,17 +37,21 @@ export const Footer = () => (
 			</div>
 			<div className="col">
 				<div className="row">
+
 				<div className="col">
 					<div>
-						<Link className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to={"/"}>Home</Link>
+
+					 </div>
+						<div>
+							<Link className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to={"/aboutus"}>About us</Link>
+						</div>
+						<div>
+							<Link className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to={"/sales"}>Sales</Link>
+						</div>
+
 					</div>
-					<div>
-						<Link className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to={"/aboutus"}>About us</Link>	
-					</div>
-					<div>
-						<Link className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to={"/sales"}>Sales</Link>
-					</div>										
-				</div>
+					
+
 				<div className="col">
 					<div>
 						<Link className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to={"/books"}>Books</Link>
@@ -60,6 +64,7 @@ export const Footer = () => (
 					</div>
 				</div>
 				</div>			
+
 			</div>
 		</div>
 	</div>
