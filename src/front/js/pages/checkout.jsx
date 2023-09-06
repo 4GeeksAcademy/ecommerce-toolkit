@@ -296,6 +296,7 @@ export const Checkout = () => {
                     finalPrice: finalPrice
                 });
                 total += cart[i].quantity * finalPrice;
+                actions.decrementCartItemsNumber();
             }
             total = Math.round(total * 100) / 100;
         }
@@ -368,6 +369,9 @@ export const Checkout = () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log("Success:", data);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
             });
     }
 

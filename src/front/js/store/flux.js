@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			
+
 			message: null,
 			demo: [
 				{
@@ -16,7 +16,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			user: null,
-			admin: false
+			admin: false,
+			cartItemsNumber: 0,
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -55,7 +56,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			logout: () => {
 				setStore({ user: null, admin: false })
-			}
+			},
+			incrementCartItemsNumber: () => {
+				const store = getStore();
+				setStore({ cartItemsNumber: store.cartItemsNumber + 1 })
+			},
+			decrementCartItemsNumber: () => {
+				const store = getStore();
+				setStore({ cartItemsNumber: store.cartItemsNumber - 1 })
+			},
+			resetCartItemsNumber: () => {
+				setStore({ cartItemsNumber: 0 })
+			},
 		}
 	};
 };
