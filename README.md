@@ -24,12 +24,20 @@ API Routes
 - '/todos', methods: GET, action: get list of all todos
 - '/newtodo', methods: POST, body: todo information, action: creates a todo
 - '/updatetodo/id', methods: PUT, action: changes todo status
+- '/newsale', methods: POST, body: sale infomation, action: create new sale and sale items
+- '/sales', methods: GET, action: get list of all sales
+- '/sale/sale_id', methods: GET, action: get specific sale information and sale items linked
+- '/clearcart/user_id', method: POST, body: sold items, action: removes sold items from cart
+- '/reducestock', method: POST, body: sold items, action: reduces sold items stock
+- '/clearwishlist/user_id', method: POST, body: sold items, action: removes sold items from wishlist
 
 Flask commands
 - "flask insert-items", action: inserts predefined items
 - "flask insert-costumers", action: inserts predefined costumers
 - "flask insert-cart-items", action: inserts predefined cart items
 - "flask insert-wishlist-items", action: inserts predefined wishlist items
+- "flask insert-todos", action: inserts predefined todos
+- "flask insert-sales", action: inserts predefined sales
 
 Build web applications using React.js for the front end and python/flask for your backend API.
 
