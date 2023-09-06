@@ -12,9 +12,8 @@ export const Product = () => {
     const [salePrice, setSalePrice] = useState("")
     const [stock, setStock] = useState("");
     const [imageUrl, setImageUrl] = useState("");
-    const itemId = useParams().itemId.substring(1);
+    let itemId = useParams().itemId.substring(1);
     const [quantity, setQuantity] = useState(1);
-    const [change, setChange] = useState(0);
     const { store, actions } = useContext(Context);
     const user = store.user;
     const [classWishList, setClassWishList] = useState("fa-regular fa-heart fa-lg");
@@ -23,10 +22,11 @@ export const Product = () => {
     useEffect(() => {
         fetchData();
         fetchWhishList();
-    }, []);
+    }, [itemId]);
 
     const fetchData = async () => {
         let url = process.env.BACKEND_URL + "api/item/" + itemId;
+        console.log("itemId", itemId);
         setIsLoading(true)
         fetch(url)
             .then((response) => response.json())
@@ -240,7 +240,7 @@ export const Product = () => {
             </div>
             {/* Related products */}
             <div className="py-5">
-                <RelatedProducts />
+                <RelatedProducts category={category} />
             </div>
 
 
