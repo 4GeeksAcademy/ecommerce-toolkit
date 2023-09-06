@@ -6,14 +6,6 @@ html{
     height: 100%;
 }
 
-/* #main {
-    position: relative;
-    padding-bottom: 132 px;
-    min-height: 100vh;
+.h-screen {
+    min-height: 70vh;
 }
-#footer{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-} */

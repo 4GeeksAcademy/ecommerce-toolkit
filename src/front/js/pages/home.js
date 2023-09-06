@@ -99,21 +99,6 @@ export const Home = () => {
 
 	};
 
-	const comparablePrice = items.map(item => {
-		if (item.sale_price === null) {
-			return {
-				...item,
-				finalPrice: item.price
-			}
-		} else {
-			return {
-				...item,
-				finalPrice: item.sale_price
-			}
-		}
-	})
-
-
 	return (
 		<div className="container-fluid text-center pb-5 px-0 mx-0">
 			{/*Carousel */}

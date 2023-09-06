@@ -34,6 +34,7 @@ import { Navbar } from "./component/navbar";
 import { AdminNavtabs } from "./component/adminNavtabs.jsx";
 import { Footer } from "./component/footer";
 import { Sales } from "./pages/Sales.jsx";
+import { Search } from "./pages/search.jsx";
 
 //create your first component
 const Layout = () => {
@@ -61,7 +62,7 @@ const Layout = () => {
                         <Route element={<ToysCategory />} path="/toys" />
                         <Route element={<MusicCategory />} path="/music" />
                         <Route element={<AboutUs />} path="/aboutUs" />
-                        <Route element={<h1>This is search</h1>} path="/search" />
+                        <Route element={<Search/>} path="/search" />
                         <Route element={<Sales/>} path="/sales" />
                         <Route element={<Signin />} path="/signin" />
                         <Route element={<CreateAccount />} path="/createaccount" />
