@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => (
 
-	<div class="container-fluid border-top pt-1" id="footer">
-		<div class="row align-items-center m-2">
-			<div class="col">
+	<div className="container-fluid border-top pt-1" id="footer">
+		<div className="row align-items-center m-2">
+			<div className="col">
 				<h6 className="fw-bold">FIND US ON</h6>
 				<div className="d-flex flex-row my-3">
 					<div className="me-3">
@@ -30,14 +30,14 @@ export const Footer = () => (
 					</div>
 				</div>
 				<div>
-					<p class="text-secondary fs-6 text">
-						©2023 VRN | <i class="fa fa-envelope" aria-hidden="true"></i> support@vrn.com
+					<p className="text-secondary fs-6 text">
+						©2023 VRN | <i className="fa fa-envelope" aria-hidden="true"></i> support@vrn.com
 					</p>
 				</div>
 			</div>
-			<div class="col">
+			<div className="col">
 				<div className="row">
-				<div class="col">
+				<div className="col">
 					<div>
 						<Link className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to={"/"}>Home</Link>
 					</div>
@@ -48,7 +48,7 @@ export const Footer = () => (
 						<Link className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to={"/sales"}>Sales</Link>
 					</div>										
 				</div>
-				<div class="col">
+				<div className="col">
 					<div>
 						<Link className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to={"/books"}>Books</Link>
 					</div>

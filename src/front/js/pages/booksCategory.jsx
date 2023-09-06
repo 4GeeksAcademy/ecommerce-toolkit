@@ -290,7 +290,7 @@ export const BooksCategory = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    ))) : <h2 className="pt-5 text-center"> We don't have these products in stock</h2>}
+                                    ))) : <h2 className="pt-5 text-center"> At the moment don't have these product </h2>}
                             </div>) : (<div className="pt-5 d-flex justify-content-center">
                                             <div className="spinner-border" role="status">
                                                 <span className="visually-hidden">Loading...</span>
