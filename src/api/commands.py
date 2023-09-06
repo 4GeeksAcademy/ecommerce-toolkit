@@ -1,6 +1,8 @@
 
+import datetime
+import random
 import click
-from api.models import db, Item, Costumer, ShoppingCartItem, WishlistItem, TodoList
+from api.models import db, Item, Costumer, ShoppingCartItem, WishlistItem, TodoList, Sale, SaleItem
 
 """
 In this file, you can add as many commands as you want using the @app.cli.command decorator
@@ -434,17 +436,28 @@ def setup_commands(app):
     @app.cli.command("insert-todos")
     def insert_todos_data():
         todos = [
-            {"category": "Other", "task": "Clean store", "costumer_id": None, "item_id": None, "done": True},
-            {"category": "Costumer", "task": "Send email to costumer", "costumer_id": 3, "item_id": None, "done": False},
-            {"category": "Item", "task": "Create new order", "costumer_id": None, "item_id": 1, "done": False},
-            {"category": "Other", "task": "Update inventory", "costumer_id": None, "item_id": None, "done": False},
-            {"category": "Costumer", "task": "Ask for a review", "costumer_id": 2, "item_id": None, "done": True},
-            {"category": "Item", "task": "Change sale price", "costumer_id": None, "item_id": 2, "done": False},
-            {"category": "Other", "task": "Update website", "costumer_id": None, "item_id": None, "done": True},
-            {"category": "Costumer", "task": "Send reminder email", "costumer_id": 5, "item_id": None, "done": False},
-            {"category": "Item", "task": "Change item image", "costumer_id": None, "item_id": 3, "done": False},
-            {"category": "Other", "task": "Update inventory", "costumer_id": None, "item_id": None, "done": False},
-            {"category": "Costumer", "task": "Send email to costumer", "costumer_id": 4, "item_id": None, "done": False},
+            {"category": "Other", "task": "Clean store",
+                "costumer_id": None, "item_id": None, "done": True},
+            {"category": "Costumer", "task": "Send email to costumer",
+                "costumer_id": 3, "item_id": None, "done": False},
+            {"category": "Item", "task": "Create new order",
+                "costumer_id": None, "item_id": 1, "done": False},
+            {"category": "Other", "task": "Update inventory",
+                "costumer_id": None, "item_id": None, "done": False},
+            {"category": "Costumer", "task": "Ask for a review",
+                "costumer_id": 2, "item_id": None, "done": True},
+            {"category": "Item", "task": "Change sale price",
+                "costumer_id": None, "item_id": 2, "done": False},
+            {"category": "Other", "task": "Update website",
+                "costumer_id": None, "item_id": None, "done": True},
+            {"category": "Costumer", "task": "Send reminder email",
+                "costumer_id": 5, "item_id": None, "done": False},
+            {"category": "Item", "task": "Change item image",
+                "costumer_id": None, "item_id": 3, "done": False},
+            {"category": "Other", "task": "Update inventory",
+                "costumer_id": None, "item_id": None, "done": False},
+            {"category": "Costumer", "task": "Send email to costumer",
+                "costumer_id": 4, "item_id": None, "done": False},
             {"category": "Item", "task": "Create new order", "costumer_id": None, "item_id": 4, "done": True},]
         for todo in todos:
             new_todo = TodoList()
@@ -456,3 +469,63 @@ def setup_commands(app):
             db.session.add(new_todo)
             db.session.commit()
             print("Todo: ", new_todo.id, " created.")
+
+    @app.cli.command("insert-sales")
+    def insert_sales_data():
+        sale_items = [
+            {"final_price": 9.99, "quantity": 1, "sale_id": 1, "item_id": 1},
+            {"final_price": 29.95, "quantity": 3, "sale_id": 1, "item_id": 3},
+            {"final_price": 13.49, "quantity": 2, "sale_id": 1, "item_id": 5},
+            {"final_price": 7.99, "quantity": 10, "sale_id": 2, "item_id": 2},
+            {"final_price": 5.99, "quantity": 5, "sale_id": 2, "item_id": 4},
+            {"final_price": 12.99, "quantity": 7, "sale_id": 3, "item_id": 1},
+            {"final_price": 8.39, "quantity": 8, "sale_id": 4, "item_id": 7},
+            {"final_price": 11.49, "quantity": 1, "sale_id": 4, "item_id": 9},
+            {"final_price": 9.99, "quantity": 2, "sale_id": 4, "item_id": 11},
+            {"final_price": 8.99, "quantity": 3, "sale_id": 5, "item_id": 2},
+            {"final_price": 11.99, "quantity": 4, "sale_id": 5, "item_id": 12},
+            {"final_price": 5.99, "quantity": 7, "sale_id": 6, "item_id": 4},
+            {"final_price": 21.95, "quantity": 1, "sale_id": 7, "item_id": 6},
+            {"final_price": 17.49, "quantity": 1, "sale_id": 7, "item_id": 8},
+            {"final_price": 9.99, "quantity": 1, "sale_id": 7, "item_id": 1},
+            {"final_price": 9.49, "quantity": 2, "sale_id": 8, "item_id": 13},
+            {"final_price": 11.99, "quantity": 8, "sale_id": 8, "item_id": 12},
+            {"final_price": 7.99, "quantity": 1, "sale_id": 9, "item_id": 11},
+            {"final_price": 13.00, "quantity": 12, "sale_id": 10, "item_id": 10},
+            {"final_price": 18.95, "quantity": 11, "sale_id": 10, "item_id": 8},
+            {"final_price": 8.49, "quantity": 7, "sale_id": 10, "item_id": 4},
+            {"final_price": 12.99, "quantity": 7, "sale_id": 11, "item_id": 1},
+            {"final_price": 21.95, "quantity": 9, "sale_id": 11, "item_id": 6},
+            {"final_price": 18.95, "quantity": 2, "sale_id": 12, "item_id": 8},
+            {"final_price": 10.29, "quantity": 2, "sale_id": 12, "item_id": 9},
+            {"final_price": 9.99, "quantity": 3, "sale_id": 12, "item_id": 11},
+            {"final_price": 7.99, "quantity": 1, "sale_id": 13, "item_id": 2},
+            {"final_price": 8.49, "quantity": 7, "sale_id": 14, "item_id": 4}
+        ]
+        for index in range(1, 15):
+            new_sale = Sale()
+            total = 0
+            costumer_id = random.randint(1, 9)
+            order_date = datetime.datetime.now()
+            day = random.randint(1, 30)
+            month = random.randint(1, 12)
+            dt = order_date.replace(day=day, month=month)
+            for sale_item in sale_items:
+                if sale_item["sale_id"] == index:
+                    total += sale_item["final_price"] * sale_item["quantity"]
+            total = round(total, 2)
+            new_sale.total = total
+            new_sale.costumer_id = costumer_id
+            new_sale.order_date = dt
+            db.session.add(new_sale)
+            db.session.commit()
+            print("Sale: ", new_sale.id, " created.")
+        for sale_item in sale_items:
+            new_sale_item = SaleItem()
+            new_sale_item.final_price = sale_item["final_price"]
+            new_sale_item.quantity = sale_item["quantity"]
+            new_sale_item.sale_id = sale_item["sale_id"]
+            new_sale_item.item_id = sale_item["item_id"]
+            db.session.add(new_sale_item)
+            db.session.commit()
+            print("Sale item: ", new_sale_item.id, " created.")
