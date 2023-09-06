@@ -9,7 +9,7 @@ export const Product = () => {
     const [category, setCategory] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
-    const [salePrice, setSalePrice] = useState("") 
+    const [salePrice, setSalePrice] = useState("")
     const [stock, setStock] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const itemId = useParams().itemId.substring(1);
@@ -102,6 +102,7 @@ export const Product = () => {
                         .then((data) => {
                             console.log("Success:", data);
                             alert("Item added to cart");
+                            actions.incrementCartItemsNumber();
                         }
                         );
                 }
@@ -160,80 +161,80 @@ export const Product = () => {
         <div className="container">
             <div className="mt-5">
                 {!isloading ? (
-                <div className="row mx-2 mb-2">
-                    <div className="col-md-7 text-center ">
-                        <img src={imageUrl} className="img-fluid mx-auto" />
-                    </div>
-                    <div className="col-md-5">
-
-
-                        <div className="col-md-12 text-wrap mb-3">
-                            <h3 className="fw-bolder">{name}</h3>
+                    <div className="row mx-2 mb-2">
+                        <div className="col-md-7 text-center ">
+                            <img src={imageUrl} className="img-fluid mx-auto" />
                         </div>
-
-                        <div className="d-flex justify-content-start small mb-2">
-                            <h5 className="fw-bolder">{category}</h5>
-                        </div>
+                        <div className="col-md-5">
 
 
-                        <div className="col-12 text-primary text-opacity-50 mb-3">                            
-                            {salePrice == null ?
-                                <h4 className="fw-bold"><span>$</span> {price}</h4>
-                                : <h4 className="fw-bold">
-                                    <span className="text-body-tertiary text-decoration-line-through pe-2 fw-normal">$ {price}</span>${salePrice}
-                                </h4>}
-                        </div>
-                        <div className="col-md-12">
-                            <h5>Stock: {stock} units</h5>
-                        </div>
-                        <div className="col-md-12">
-                            <h6>Details </h6>
-                        </div>
-                        <div className="col-md-12">
+                            <div className="col-md-12 text-wrap mb-3">
+                                <h3 className="fw-bolder">{name}</h3>
+                            </div>
 
-                            <p>{description}</p>
+                            <div className="d-flex justify-content-start small mb-2">
+                                <h5 className="fw-bolder">{category}</h5>
+                            </div>
 
-                        </div>
-                        <div className="col-md-12 d-flex flex-row mb-3">
 
-                            <p className="my-auto mx-2">Qty:</p>
-                            <input type="number" className="form-control" min="1" max={stock} value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+                            <div className="col-12 text-primary text-opacity-50 mb-3">
+                                {salePrice == null ?
+                                    <h4 className="fw-bold"><span>$</span> {price}</h4>
+                                    : <h4 className="fw-bold">
+                                        <span className="text-body-tertiary text-decoration-line-through pe-2 fw-normal">$ {price}</span>${salePrice}
+                                    </h4>}
+                            </div>
+                            <div className="col-md-12">
+                                <h5>Stock: {stock} units</h5>
+                            </div>
+                            <div className="col-md-12">
+                                <h6>Details </h6>
+                            </div>
+                            <div className="col-md-12">
 
-                        </div>
+                                <p>{description}</p>
 
-                        <div className="row p-4">
-                            <div className="col-md-9 px-5 d-grid">
+                            </div>
+                            <div className="col-md-12 d-flex flex-row mb-3">
 
-                                {stock > 0 &&
-                                    <button type="button" className="btn bg-primary-subtle " onClick={addToCart}>
-                                        <i className="fa-solid fa-cart-shopping me-1"></i>
+                                <p className="my-auto mx-2">Qty:</p>
+                                <input type="number" className="form-control" min="1" max={stock} value={quantity} onChange={(e) => setQuantity(e.target.value)} />
 
-                                        Add to cart
+                            </div>
+
+                            <div className="row p-4">
+                                <div className="col-md-9 px-5 d-grid">
+
+                                    {stock > 0 &&
+                                        <button type="button" className="btn bg-primary-subtle " onClick={addToCart}>
+                                            <i className="fa-solid fa-cart-shopping me-1"></i>
+
+                                            Add to cart
+                                        </button>
+                                    }
+                                    {/*add button for when stock is none*/}
+                                    {stock == 0 &&
+                                        <button type="button" className="btn bg-danger-subtle " disabled>
+                                            Item out of stock
+                                        </button>
+                                    }
+                                </div>
+                                <div className="col-md-3 text-center">
+
+                                    <button type="button" className="btn btn-outline " onClick={handleAddWhish}>
+                                        <i id="whishItem" className={classWishList}></i>
+
                                     </button>
-                                }
-                                {/*add button for when stock is none*/}
-                                {stock == 0 &&
-                                    <button type="button" className="btn bg-danger-subtle " disabled>
-                                        Item out of stock
-                                    </button>
-                                }
+                                </div>
                             </div>
-                            <div className="col-md-3 text-center">
 
-                                <button type="button" className="btn btn-outline " onClick={handleAddWhish}>
-                                    <i id="whishItem" className={classWishList}></i>
-
-                                </button>
-                            </div>
                         </div>
 
-                    </div>
-
-                </div>): (<div className="pt-5 d-flex justify-content-center">
-                            <div className="spinner-border" role="status">
-                                <span className="visually-hidden">Loading...</span>
-                            </div>
-                        </div>)
+                    </div>) : (<div className="pt-5 d-flex justify-content-center">
+                        <div className="spinner-border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                    </div>)
                 }
 
             </div>

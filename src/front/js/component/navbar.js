@@ -25,12 +25,14 @@ export const Navbar = () => {
 
 	useEffect(() => {
 		setButtonVisibility();
+		calculateCartItemsNumber();
 	}, [user]);
 
 	function handleLogout() {
 		actions.logout();
 		if (user !== null) {
 			alert("You have been logged out.");
+			actions.resetCartItemsNumber();
 			navigate("/");
 		} else {
 			alert("You are not logged in.");
@@ -50,6 +52,19 @@ export const Navbar = () => {
 			navigate("/admin");
 		} else {
 			alert("You not logged in as admin.");
+		}
+	}
+
+	function calculateCartItemsNumber() {
+		if (user !== null) {
+			const url = process.env.BACKEND_URL + "/api/getcart/" + user;
+			fetch(url)
+				.then((response) => response.json())
+				.then((data) => {
+					for (let i = 0; i < data.length; i++) {
+						actions.incrementCartItemsNumber();
+					}
+				});
 		}
 	}
 
@@ -77,7 +92,7 @@ export const Navbar = () => {
 								<li>
 									<Link className="dropdown-item" to={"/toys"}>Toys</Link>
 								</li>
-								<li><hr className="dropdown-divider my-0 py-0 mt-1"/></li>
+								<li><hr className="dropdown-divider my-0 py-0 mt-1" /></li>
 								<li>
 									<Link className="dropdown-item" to={"/sales"}>Sale</Link>
 								</li>
@@ -95,7 +110,7 @@ export const Navbar = () => {
 							<Link className="nav-link" to={"/search"}>Search</Link>
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link" to={"/cart"}><i className="fa fa-shopping-cart" aria-hidden="true" /></Link>
+							<Link className="nav-link" to={"/cart"}><i className="fa fa-shopping-cart" aria-hidden="true" /> - <span>{store.cartItemsNumber}</span></Link>
 						</li>
 						<li className="nav-item">
 							<button type="button" className="btn btn-success ms-2" onClick={handleSignin} id="signInButton">Sign In</button>

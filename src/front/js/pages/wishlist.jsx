@@ -83,6 +83,7 @@ export const Wishlist = () => {
                         .then((data) => {
                             console.log("Success:", data);
                             alert("Item added to cart");
+                            actions.incrementCartItemsNumber();
                         }
                         );
                 }

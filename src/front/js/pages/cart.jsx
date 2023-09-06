@@ -74,6 +74,8 @@ export const Cart = () => {
             .then((data) => {
                 console.log("Success:", data);
                 fetchCart();
+                actions.decrementCartItemsNumber();
+                actions.calculateCartItemsNumber();
             });
     };
 
