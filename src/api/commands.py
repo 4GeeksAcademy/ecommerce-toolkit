@@ -1,6 +1,6 @@
 
 import click
-from api.models import db, Item, Costumer, ShoppingCartItem, WishlistItem
+from api.models import db, Item, Costumer, ShoppingCartItem, WishlistItem, TodoList
 
 """
 In this file, you can add as many commands as you want using the @app.cli.command decorator
@@ -430,3 +430,29 @@ def setup_commands(app):
             db.session.add(new_wish)
             db.session.commit()
             print("Wish: ", new_wish.id, " created.")
+
+    @app.cli.command("insert-todos")
+    def insert_todos_data():
+        todos = [
+            {"category": "Other", "task": "Clean store", "costumer_id": None, "item_id": None, "done": True},
+            {"category": "Costumer", "task": "Send email to costumer", "costumer_id": 3, "item_id": None, "done": False},
+            {"category": "Item", "task": "Create new order", "costumer_id": None, "item_id": 1, "done": False},
+            {"category": "Other", "task": "Update inventory", "costumer_id": None, "item_id": None, "done": False},
+            {"category": "Costumer", "task": "Ask for a review", "costumer_id": 2, "item_id": None, "done": True},
+            {"category": "Item", "task": "Change sale price", "costumer_id": None, "item_id": 2, "done": False},
+            {"category": "Other", "task": "Update website", "costumer_id": None, "item_id": None, "done": True},
+            {"category": "Costumer", "task": "Send reminder email", "costumer_id": 5, "item_id": None, "done": False},
+            {"category": "Item", "task": "Change item image", "costumer_id": None, "item_id": 3, "done": False},
+            {"category": "Other", "task": "Update inventory", "costumer_id": None, "item_id": None, "done": False},
+            {"category": "Costumer", "task": "Send email to costumer", "costumer_id": 4, "item_id": None, "done": False},
+            {"category": "Item", "task": "Create new order", "costumer_id": None, "item_id": 4, "done": True},]
+        for todo in todos:
+            new_todo = TodoList()
+            new_todo.category = todo["category"]
+            new_todo.task = todo["task"]
+            new_todo.costumer_id = todo["costumer_id"]
+            new_todo.item_id = todo["item_id"]
+            new_todo.done = todo["done"]
+            db.session.add(new_todo)
+            db.session.commit()
+            print("Todo: ", new_todo.id, " created.")
