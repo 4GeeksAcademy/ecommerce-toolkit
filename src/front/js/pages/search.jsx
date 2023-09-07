@@ -115,7 +115,7 @@ export const Search = () => {
 			<div className="px-lg-5 pt-5 mx-lg-5">
 				<h2 className="pb-5">What are you looking for?</h2>
 				<div className="input-group rounded px-sm-5 mx-auto w-75">
-					<input type="search" className="form-control rounded" value={search} onChange={(e) => setSearch(e.target.value)} onKeyDown={(e) => {
+					<input type="search" className="form-control rounded" placeholder="Search for Title or Category (ex: The Great Gatsby or books)" value={search} onChange={(e) => setSearch(e.target.value)} onKeyDown={(e) => {
 						if(e.key === "Enter")
 						{
 							handleSearch()
