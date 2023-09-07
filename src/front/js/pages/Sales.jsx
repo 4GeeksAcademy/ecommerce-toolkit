@@ -12,7 +12,7 @@ export const Sales = () => {
     const user = store.user;
     const [isloading, setIsLoading] = useState(false)
     const [minValue, setMinValue] = useState()
-    const [maxValue, setMaxValue] = useState()    
+    const [maxValue, setMaxValue] = useState()
 
     useEffect(() => {
         fetchData();
@@ -38,131 +38,136 @@ export const Sales = () => {
             });
     };
 
-        //get wishlist api;
-        const fetchWishList = async () => {
-            let url = process.env.BACKEND_URL + "api/getwishlist/" + user;
-            fetch(url)
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log("Success wishlist:", data);
-                    setCostumerWishlist(data);             
-                                      
-                });
-        };
-        
-        //change icon when is in wishlist    
-        const wishListIcon = (id) => {
-            let heartclass = "fa-regular fa-heart fa-lg"
-            if (costumerWishlist.length > 0 && !isloading) {            
-                costumerWishlist.map((item)=>{            
-                    if(id == item.item_id){
-                        heartclass= "fa-solid fa-heart fa-lg"
-                    } 
-                })           
-            }  
-            return heartclass      
+    //get wishlist api;
+    const fetchWishList = async () => {
+        let url = process.env.BACKEND_URL + "api/getwishlist/" + user;
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success wishlist:", data);
+                setCostumerWishlist(data);
+
+            });
+    };
+
+    //change icon when is in wishlist    
+    const wishListIcon = (id) => {
+        let heartclass = "fa-regular fa-heart fa-lg"
+        if (costumerWishlist.length > 0 && !isloading) {
+            costumerWishlist.map((item) => {
+                if (id == item.item_id) {
+                    heartclass = "fa-solid fa-heart fa-lg"
+                }
+            })
         }
-   
-    
-        const handleAddWish = (id) => {
-            if (user == null) {
-                alert("Please login to add items to wishlist");
-                return;
-            }
-    
-            //Check if item is already in wishlist
-            let url = process.env.BACKEND_URL + "api/getwishlist/" + user;
-            fetch(url)
+        return heartclass
+    }
+
+
+    const handleAddWish = (id) => {
+        if (user == null) {
+            alert("Please login to add items to wishlist");
+            return;
+        }
+
+        //Check if item is already in wishlist
+        let url = process.env.BACKEND_URL + "api/getwishlist/" + user;
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+                console.log("data", data);
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].item_id == id) {
+                        alert("Item already in wishlist");
+                        return;
+                    }
+                }
+                addToWishList(id);
+            });
+
+        const addToWishList = (id) => {
+            url = process.env.BACKEND_URL + "api/addwishlist";
+            let data = {
+                itemId: id,
+                costumerId: user
+            };
+            let options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            };
+            fetch(url, options)
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data);
-                    console.log("data", data);
-                    for (let i = 0; i < data.length; i++) {
-                        if (data[i].item_id == id) {
-                            alert("Item already in wishlist");
-                            return;
-                        }
-                    }
-                    addToWishList(id);
-                });
-    
-            const addToWishList = (id) => {
-                url = process.env.BACKEND_URL + "api/addwishlist";
-                let data = {
-                    itemId: id,
-                    costumerId: user
-                };
-                let options = {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(data),
-                };
-                fetch(url, options)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log("Success:", data);
-                        alert("Item added to wishlist");
-                        fetchWishList()
-                    })
-            };
-    
+                    alert("Item added to wishlist");
+                    fetchWishList()
+                })
         };
-        
+
+    };
+
     const comparablePrice = originalFetch.map(item => {
         if (item.sale_price === null) {
-            return {...item,
-                finalPrice : item.price}
+            return {
+                ...item,
+                finalPrice: item.price
+            }
         } else {
-        return {...item,
-            finalPrice : item.sale_price}
-        }             
-    })         
-        
+            return {
+                ...item,
+                finalPrice: item.sale_price
+            }
+        }
+    })
+
     const ascendingEvent = () => {
         let data = [...comparablePrice]
-        if(data.length > 0) {
-            let result = data.sort((a,b) => a.finalPrice - b.finalPrice)
+        if (data.length > 0) {
+            let result = data.sort((a, b) => a.finalPrice - b.finalPrice)
             setSaleItems(result)
         }
     }
     const descendingEvent = () => {
         let data = [...comparablePrice]
-        if(data.length > 0) {
-            let result = data.sort((a,b) => b.finalPrice - a.finalPrice)
+        if (data.length > 0) {
+            let result = data.sort((a, b) => b.finalPrice - a.finalPrice)
             setSaleItems(result)
         }
     }
 
-   
+
     const minValueEvent = (e) => {
-		setMinValue(e.target.value);
-	};
-    
-    
+        setMinValue(e.target.value);
+    };
+
+
     const maxValueEvent = (e) => {
-		setMaxValue(e.target.value);
-	};
-        
-         
+        setMaxValue(e.target.value);
+    };
+
+
     const rangePriceEvent = () => {
-        let priceRange = comparablePrice.filter( item => {
+        let priceRange = comparablePrice.filter(item => {
             if (item.finalPrice >= minValue && item.finalPrice <= maxValue) {
                 return true
-            } else {return false}} )
-        setSaleItems(priceRange)        
+            } else { return false }
+        })
+        setSaleItems(priceRange)
     }
-     
-     
-    
+
+
+
     let Prices = [];
-         for (var i=0; i < comparablePrice.length ; ++i){
-             Prices.push(comparablePrice[i].finalPrice);
-        };         
-    let maximunPrice = Math.max(...Prices)    
-    
-       
+    for (var i = 0; i < comparablePrice.length; ++i) {
+        Prices.push(comparablePrice[i].finalPrice);
+    };
+    let maximunPrice = Math.max(...Prices)
+
+
     return (
 
         <div className="container-fluid mb-0">
@@ -180,10 +185,10 @@ export const Sales = () => {
                                     </button>
                                 </div>
                                 <div className="collapse show" id="price-collapse">
-                                    <div className="btn-toggle-nav pb-1 ">                                                                                   
+                                    <div className="btn-toggle-nav pb-1 ">
                                         <button className="btn btn-outline-secondary btn-sm ms-3 mb-2 px-2" onClick={ascendingEvent}>
                                             Price: Low to High
-                                        </button>                                       
+                                        </button>
                                         <button className="btn btn-outline-secondary btn-sm ms-3 mb-2 px-2" onClick={descendingEvent}>
                                             Price: High to Low
                                         </button>
@@ -208,10 +213,10 @@ export const Sales = () => {
                                     <div className="btn-toggle-nav list-unstyled row ">
                                         <small className="text-secondary fw-small">Maximun price is: ${maximunPrice}</small>
                                         <div className="col m-0 p-1">
-                                            <input type="text" className="form-control fs-6 fw-light" placeholder="Min" aria-label="Min" onChange={minValueEvent}/>
+                                            <input type="text" className="form-control fs-6 fw-light" placeholder="Min" aria-label="Min" onChange={minValueEvent} />
                                         </div>
                                         <div className="col m-0 p-1">
-                                            <input type="text" className="form-control fs-6 fw-light" placeholder="Max" aria-label="Max" onChange={maxValueEvent}/>
+                                            <input type="text" className="form-control fs-6 fw-light" placeholder="Max" aria-label="Max" onChange={maxValueEvent} />
                                         </div>
                                         <a
                                             href="#" className="col-12 text-secondary ms-3" onClick={rangePriceEvent}>
@@ -231,8 +236,8 @@ export const Sales = () => {
 
                     </div>
                 </div>
-                
-                
+
+
                 <div className="col py-4 pe-lg-5 pe-md-0">
                     <div className="mx-3">
                         <div id="title-image-sales" className="d-flex align-content-center flex-wrap">
@@ -243,52 +248,69 @@ export const Sales = () => {
 
                         {/* map card item with conditional of loading with fetch and range conditional*/}
                         {!isloading ? (
-                        <div className="row ">
-                            {(saleItems.length>0 && saleItems != undefined) ? (
-                            saleItems.map((item, i) => (
-                                <div className="col-md-4 g-4" key={i}>
-                                    <div className="card h-100">
-                                        {/* conditional for sale price */}
-                                        {item.sale_price == null ?
-                                            <><img className="card-img-top" src={item.image_url} alt="..." /></>
-                                            : <>
-                                                <div className="badge bg-dark position-absolute">Sale </div>
-                                                <img className="card-img-top" src={item.image_url} alt="..." />
-                                            </>}
-
-                                        <div className="card-body p-0 pt-2">
-                                            <div className="text-center">
-
-                                                <h6 className="fw-bolder">{item.name}</h6>
+                            <div className="row ">
+                                {(saleItems.length > 0 && saleItems != undefined) ? (
+                                    saleItems.map((item, i) => (
+                                        <div className="col-md-4 g-4" key={i}>
+                                            <div className="card h-100">
+                                                {/* conditional for sale price */}
                                                 {item.sale_price == null ?
-                                                    <h6 className="text-primary text-opacity-50 fw-bolder">$ {item.price}</h6>
-                                                    : <h6 className="text-primary text-opacity-50 fw-bolder">
-                                                        <span className="text-body-tertiary text-decoration-line-through pe-2 fw-normal">$ {item.price}</span>${item.sale_price}
-                                                    </h6>}
+                                                    <>
+                                                        {item.stock == 0 ?
+                                                            <>
+                                                                <div className="badge bg-dark position-absolute top-0 end-0 p-2 border">Out of Stock </div>
+                                                                <img className="card-img-top" src={item.image_url} alt="..." />
+                                                            </>
+                                                            : <>
+                                                                <img className="card-img-top" src={item.image_url} alt="..." />
+                                                            </>}
+                                                    </>
+                                                    : <>
+                                                        {item.stock == 0 ?
+                                                            <>
+                                                                <div className="badge bg-danger position-absolute top-0 start-0 p-2">Sale </div>
+                                                                <div className="badge bg-dark position-absolute top-0 end-0 p-2 border">Out of Stock </div>
+                                                                <img className="card-img-top" src={item.image_url} alt="..." />
+                                                            </>
+                                                            : <>
+                                                                <div className="badge bg-danger position-absolute top-0 start-0 p-2">Sale </div>
+                                                                <img className="card-img-top" src={item.image_url} alt="..." />
+                                                            </>}
+                                                    </>}
+
+                                                <div className="card-body p-0 pt-2">
+                                                    <div className="text-center">
+
+                                                        <h6 className="fw-bolder">{item.name}</h6>
+                                                        {item.sale_price == null ?
+                                                            <h6 className="text-primary text-opacity-50 fw-bolder">$ {item.price}</h6>
+                                                            : <h6 className="text-primary text-opacity-50 fw-bolder">
+                                                                <span className="text-body-tertiary text-decoration-line-through pe-2 fw-normal">$ {item.price}</span>${item.sale_price}
+                                                            </h6>}
+                                                    </div>
+                                                </div>
+
+                                                <div className="card-footer pt-0 pb-3 border-top-0 bg-transparent">
+                                                    <div className="text-center">
+                                                        <Link to={"/product/:" + item.id} >
+                                                            <button type="button" className="btn bg-primary-subtle mt-auto px-4 mx-3">View Details</button>
+                                                        </Link>
+
+                                                        <button type="button" className="btn btn-outline mt-auto " onClick={(e) => handleAddWish(item.id)}>
+                                                            <i className={wishListIcon(item.id)}></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <div className="card-footer pt-0 pb-3 border-top-0 bg-transparent">
-                                            <div className="text-center">
-                                                <Link to={"/product/:" + item.id} >
-                                                    <button type="button" className="btn bg-primary-subtle mt-auto px-4 mx-3">View Details</button>
-                                                </Link>
-
-                                                <button type="button" className="btn btn-outline mt-auto " onClick={(e) => handleAddWish(item.id)}>
-                                                    <i className={wishListIcon(item.id)}></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    ))) : <h2 className="pt-5 text-center"> We don't have these products in stock</h2>}
+                            </div>) : (<div className="pt-5 d-flex justify-content-center">
+                                <div className="spinner-border" role="status">
+                                    <span className="visually-hidden">Loading...</span>
                                 </div>
-                            )) ) : <h2 className="pt-5 text-center"> We don't have these products in stock</h2>}
-                        </div>): (<div className="pt-5 d-flex justify-content-center">
-                                    <div className="spinner-border" role="status">
-                                        <span className="visually-hidden">Loading...</span>
-                                    </div>
-                                </div>)
+                            </div>)
                         }
-                    </div> 
+                    </div>
 
                 </div>
             </div>

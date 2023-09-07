@@ -258,11 +258,28 @@ export const BooksCategory = () => {
                                         <div className="col-md-4 g-4" key={i}>
                                             <div className="card h-100">
                                                 {/* conditional for sale price */}
-                                                {item.sale_price == null ?
-                                                    <><img className="card-img-top" src={item.image_url} alt="..." /></>
-                                                    : <>
-                                                        <div className="badge bg-dark position-absolute">Sale </div>
+                                                {item.sale_price == null ? 
+                                                    <>
+                                                        {item.stock == 0 ?
+                                                        <>
+                                                        <div className="badge bg-dark position-absolute top-0 end-0 p-2 border">Out of Stock </div>
                                                         <img className="card-img-top" src={item.image_url} alt="..." />
+                                                        </>
+                                                        : <>                                                  
+                                                            <img className="card-img-top" src={item.image_url} alt="..." />
+                                                        </>}
+                                                    </>
+                                                    : <>
+                                                        {item.stock == 0 ?
+                                                        <>
+                                                        <div className="badge bg-danger position-absolute top-0 start-0 p-2">Sale </div>
+                                                        <div className="badge bg-dark position-absolute top-0 end-0 p-2 border">Out of Stock </div>
+                                                        <img className="card-img-top" src={item.image_url} alt="..." />
+                                                        </>
+                                                        : <>
+                                                            <div className="badge bg-danger position-absolute top-0 start-0 p-2">Sale </div>
+                                                            <img className="card-img-top" src={item.image_url} alt="..." />
+                                                        </>}
                                                     </>}
 
                                                 <div className="card-body p-0 pt-2">

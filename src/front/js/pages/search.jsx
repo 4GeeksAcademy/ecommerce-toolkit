@@ -99,7 +99,7 @@ export const Search = () => {
 		};
 
 	};
-	
+
 	const handleSearch = (e) => {
 		let searchOutput = items.filter((item) => (
 			(search && item && item.name && item.name.toLowerCase().includes(search.toLowerCase())) ||
@@ -111,16 +111,15 @@ export const Search = () => {
 
 	return (
 		<div className="container-fluid text-center py-5 h-screen" >
-			{/*search bar*/}			
+			{/*search bar*/}
 			<div className="px-lg-5 pt-5 mx-lg-5">
 				<h2 className="pb-5">What are you looking for?</h2>
 				<div className="input-group rounded px-sm-5 mx-auto w-75">
 					<input type="search" className="form-control rounded" placeholder="Search for Title or Category (ex: The Great Gatsby or books)" value={search} onChange={(e) => setSearch(e.target.value)} onKeyDown={(e) => {
-						if(e.key === "Enter")
-						{
+						if (e.key === "Enter") {
 							handleSearch()
 						}
-					}}/>
+					}} />
 					<button type="submit" className="btn" onClick={(e) => handleSearch()}>
 						<i className="fas fa-search"></i>
 					</button>
@@ -135,10 +134,27 @@ export const Search = () => {
 							<div className="card h-100">
 								{/* conditional for sale price */}
 								{item.sale_price == null ?
-									<><img className="card-img-top" src={item.image_url} alt="..." /></>
+									<>
+										{item.stock == 0 ?
+											<>
+												<div className="badge bg-dark position-absolute top-0 end-0 p-2 border">Out of Stock </div>
+												<img className="card-img-top" src={item.image_url} alt="..." />
+											</>
+											: <>
+												<img className="card-img-top" src={item.image_url} alt="..." />
+											</>}
+									</>
 									: <>
-										<div className="badge bg-dark position-absolute">Sale </div>
-										<img className="card-img-top" src={item.image_url} alt="..." />
+										{item.stock == 0 ?
+											<>
+												<div className="badge bg-danger position-absolute top-0 start-0 p-2">Sale </div>
+												<div className="badge bg-dark position-absolute top-0 end-0 p-2 border">Out of Stock </div>
+												<img className="card-img-top" src={item.image_url} alt="..." />
+											</>
+											: <>
+												<div className="badge bg-danger position-absolute top-0 start-0 p-2">Sale </div>
+												<img className="card-img-top" src={item.image_url} alt="..." />
+											</>}
 									</>}
 
 								<div className="card-body p-0 pt-2">

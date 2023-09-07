@@ -154,10 +154,10 @@ export const Home = () => {
 						<Link to={"/sales"} >
 							<button className="btn btn-outline-secondary ">Shop Items on Sale</button>
 						</Link>
-					</div>				
+					</div>
 				</div>
 			</div>
-			
+
 			{/*items*/}
 			{!isloading ? (
 				<div className="row px-5 pt-4 mx-lg-5">
@@ -168,10 +168,27 @@ export const Home = () => {
 								<div className="card h-100">
 									{/* conditional for sale price */}
 									{item.sale_price == null ?
-										<><img className="card-img-top" src={item.image_url} alt="..." /></>
+										<>
+											{item.stock == 0 ?
+												<>
+													<div className="badge bg-dark position-absolute top-0 end-0 p-2 border">Out of Stock </div>
+													<img className="card-img-top" src={item.image_url} alt="..." />
+												</>
+												: <>
+													<img className="card-img-top" src={item.image_url} alt="..." />
+												</>}
+										</>
 										: <>
-											<div className="badge bg-dark position-absolute">Sale </div>
-											<img className="card-img-top" src={item.image_url} alt="..." />
+											{item.stock == 0 ?
+												<>
+													<div className="badge bg-danger position-absolute top-0 start-0 p-2">Sale </div>
+													<div className="badge bg-dark position-absolute top-0 end-0 p-2 border">Out of Stock </div>
+													<img className="card-img-top" src={item.image_url} alt="..." />
+												</>
+												: <>
+													<div className="badge bg-danger position-absolute top-0 start-0 p-2">Sale </div>
+													<img className="card-img-top" src={item.image_url} alt="..." />
+												</>}
 										</>}
 
 									<div className="card-body p-0 pt-2">
